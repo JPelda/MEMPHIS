@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Data_IO module &#8212; MEMPHIS 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Data_IO">
+<span id="data-io-module"></span><h1>Data_IO module<a class="headerlink" href="#module-Data_IO" title="Permalink to this headline">¶</a></h1>
+<p>Created on Wed Feb 21 10:40:53 2018</p>
+<p>&#64;author: jpelda</p>
+<dl class="class">
+<dt id="Data_IO.Data_IO">
+<em class="property">class </em><code class="descclassname">Data_IO.</code><code class="descname">Data_IO</code><span class="sig-paren">(</span><em>fname_config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Access to all sql queries. Initialised by config.ini.</p>
+<p>fname_config: str, the config filename</p>
+<dl class="method">
+<dt id="Data_IO.Data_IO.dict_of_nested_lists_to_list">
+<code class="descname">dict_of_nested_lists_to_list</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.dict_of_nested_lists_to_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.dict_of_nested_lists_to_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.read_from_graphml">
+<code class="descname">read_from_graphml</code><span class="sig-paren">(</span><em>name</em>, <em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_graphml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_graphml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads File into pandas dataframe.
+Args:</p>
+<blockquote>
+<div>name: str, name of file in section Files in config</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>nx.Graph</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.read_from_shp">
+<code class="descname">read_from_shp</code><span class="sig-paren">(</span><em>name</em>, <em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_shp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_shp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads File into pandas dataframe.
+Args:</p>
+<blockquote>
+<div>name: str, name of file in section Files in config</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>geopandas.DataFrame(fname)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.read_from_sqlServer">
+<code class="descname">read_from_sqlServer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_sqlServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_sqlServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads SQL-Database into pandas dataframe.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sql_query: str, name of sql-query in section SQL_QUERIES</dt>
+<dd>in config-file</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>pandas.DataFrame(sql-db)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.select_from">
+<code class="descname">select_from</code><span class="sig-paren">(</span><em>col</em>, <em>table</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.select_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.select_from" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.select_from_where_between">
+<code class="descname">select_from_where_between</code><span class="sig-paren">(</span><em>col</em>, <em>table</em>, <em>bbox</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.select_from_where_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.select_from_where_between" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.select_from_where_mbrContains">
+<code class="descname">select_from_where_mbrContains</code><span class="sig-paren">(</span><em>col</em>, <em>table</em>, <em>bbox</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.select_from_where_mbrContains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.select_from_where_mbrContains" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.st_geofromtext_geometry">
+<code class="descname">st_geofromtext_geometry</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.st_geofromtext_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.st_geofromtext_geometry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.write_gdf_to_file">
+<code class="descname">write_gdf_to_file</code><span class="sig-paren">(</span><em>gdf</em>, <em>fname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.write_gdf_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.write_gdf_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes to File.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>fname: str, filename can be set in Data_IO.__init__.city
+gdf: geopandas.GeoDataFrame(), which values are written to file</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Data_IO.Data_IO.write_to_sqlServer">
+<code class="descname">write_to_sqlServer</code><span class="sig-paren">(</span><em>table_name</em>, <em>df</em>, <em>dtype={}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.write_to_sqlServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.write_to_sqlServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes to SQL-Database.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>table_name: str, name of table to write to
+df: pandas.DataFrame(), which values are written to table</dd>
+<dt>Kwargs:</dt>
+<dd>dtype: dict, {col: type} type is of int, float, or geometry etc.</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Data_IO.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Johannes Pelda.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Data_IO.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Evaluation &#8212; MEMPHIS 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for Evaluation</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Thu May 31 11:46:47 2018</span>
+
+<span class="sd">@author: jpelda</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Clustering.count_val_over_key"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering.count_val_over_key">[docs]</a>    <span class="k">def</span> <span class="nf">count_val_over_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">keys_name</span><span class="o">=</span><span class="s1">&#39;inhabs&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Clusters points to -1, 0, 5, 10, 15... by its inhabs as gdf.keys()</span>
+
+<span class="sd">        ARGS:</span>
+
+<span class="sd">        gdf: geopandas.DataFrame()</span>
+<span class="sd">            Data that are clustered by keys</span>
+<span class="sd">        keys: set</span>
+<span class="sd">            Are the keys the gdf is clustered by.</span>
+
+<span class="sd">        KWARGS:</span>
+
+<span class="sd">        keys_name: str</span>
+<span class="sd">            The name of values of keys. Must also be given as col name in gdf.</span>
+
+<span class="sd">        RETURNS:</span>
+
+<span class="sd">        rang: dict</span>
+<span class="sd">            dict.keys == cluster_keys, dict.values == len(items of gdfs) per</span>
+<span class="sd">            cluter_key</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">maxi_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+        <span class="n">mini_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mini_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">maxi_val</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">rang</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">rang</span><span class="p">}</span>
+
+        <span class="n">cluster</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="n">keys_name</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cluster</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="n">keys_name</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">rang</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rang</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">key</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">rang</span></div>
+
+<div class="viewcode-block" id="Clustering.best_pts_within_overlay_pts"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering.best_pts_within_overlay_pts">[docs]</a>    <span class="k">def</span> <span class="nf">best_pts_within_overlay_pts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_val</span><span class="p">,</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">gdf_orig</span><span class="p">,</span> <span class="n">buffer</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Selects pts in gdf, that match to pts in gdf_orig,</span>
+<span class="sd">        clustered to 0.25, 0.5, 0.75, 1....</span>
+
+<span class="sd">        ARGS:</span>
+
+<span class="sd">        comp_val: str</span>
+<span class="sd">            the col_name by which the best point is compared to gdf_orig</span>
+<span class="sd">        gdf: geopandas.DataFrame()</span>
+<span class="sd">            gdf with col &#39;geometry&#39; that is matched with gdf_orig.</span>
+<span class="sd">        gdf_orig: geopandas.DataFrame()</span>
+<span class="sd">            gdf with col &#39;geometry&#39; gdf is matched to.</span>
+<span class="sd">        buffer: float</span>
+<span class="sd">            Buffer around gdf_orig[&#39;geometry&#39;] in [m].</span>
+
+<span class="sd">        RETURNS:</span>
+
+<span class="sd">        rang: dict</span>
+<span class="sd">            dictionary of gdf&#39;s</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># TODO mark keys, where no V of sewage system exists.</span>
+        <span class="n">maxi_val</span> <span class="o">=</span> <span class="mf">0.25</span>
+        <span class="n">mini_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mini_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">maxi_val</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+                         <span class="mf">0.01</span><span class="p">)</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">rang</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rang</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">rang</span><span class="p">}</span>
+
+        <span class="n">gdf_o</span> <span class="o">=</span> <span class="n">gdf_orig</span><span class="p">[</span><span class="n">gdf_orig</span><span class="p">[</span><span class="s1">&#39;inhabs&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">gdf_</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;inhabs&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">geos</span> <span class="o">=</span> <span class="n">gdf_o</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+
+        <span class="n">sindex</span> <span class="o">=</span> <span class="n">gdf_</span><span class="o">.</span><span class="n">sindex</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">geos</span><span class="p">,</span> <span class="n">gdf_o</span><span class="p">[</span><span class="n">comp_val</span><span class="p">])):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">Left:</span><span class="si">{:&gt;10}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">geos</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span> <span class="ow">and</span> <span class="n">val</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>\
+                    <span class="ow">and</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">maxi_val</span><span class="p">:</span>
+                <span class="n">poss_matches_i</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sindex</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">geo</span><span class="o">.</span><span class="n">bounds</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="n">poss_matches_i</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="n">poss_matches</span> <span class="o">=</span> <span class="n">gdf_</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">poss_matches_i</span><span class="p">]</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">poss_matches</span><span class="p">[</span><span class="n">comp_val</span><span class="p">]</span>
+                                 <span class="o">-</span> <span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+                    <span class="n">rang</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">poss_matches</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">rang</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Johannes Pelda.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
