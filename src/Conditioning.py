@@ -6,12 +6,7 @@ Created on Wed Feb 21 14:47:54 2018
 """
 
 
-import pandas as pd
-import pyproj as pp
-from osgeo import ogr
-from osgeo import osr
-import osgeo
-import shapely
+
 
 class Conditioning:
     def __init__(self, df):

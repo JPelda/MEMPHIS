@@ -12,21 +12,26 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'sim_dhs'
-DESCRIPTION = 'This package enables you to simulate district heating systems in steady state.'
-URL = 'https://github.com/JPelda/sim_dhs'
+NAME = ''MEMPHIS'
+DESCRIPTION = 'This package enables you to draw a generic sewage system.'
+URL = 'https://github.com/JPelda/memphis'
 EMAIL = 'johannes.pelda@hawk.de'
 AUTHOR = 'Johannes Pelda'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = None
+LICENSE = 'GNU GENERAL PUBLIC LICENSE Version 3'
 
 # What packages are required for this module to be executed?
 REQUIRED = ['numpy>=1.14.0',
 			'networkx>=2.1.0',
 			'pandas>=0.22.0',
-			'scipy>=1.0.0',
+			'geopandas>=0.3.0',
+			'shapely>=1.6.4',
 			'osmnx>=0.8',
-			'matplotlib>=2.2.2']
+			'matplotlib>=2.2.2'],
+			'pyproj>=1.9.5.1',
+			'sqlalchemy>=1.2.1',
+			'osgeo>=2.6.0']
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
@@ -106,7 +111,7 @@ setup(
     # },
     install_requires=REQUIRED,
     include_package_data=True,
-    license='GNU GENERAL PUBLIC LICENSE Version 3',
+    license=LICENSE,
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
