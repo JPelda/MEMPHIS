@@ -15,7 +15,7 @@ memphis 0.0.1 requires
 
 * Python >= 3.5
 
-MEMPHIS was developed by using anaconda as python distribution `<https://www.anaconda.com/distribution/>`
+MEMPHIS was developed by using `anaconda <https://www.anaconda.com/distribution/>`__ as python distribution 
 
 Clone the repository and run the setup.py via 
 
@@ -34,7 +34,7 @@ See also the list of `contributors <https://github.com/JPelda/memphis/contributo
 License
 =======
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under GNU General Public License v3.0 - see the LICENSE.txt file for details
 
 Acknowledgments
 ===============
