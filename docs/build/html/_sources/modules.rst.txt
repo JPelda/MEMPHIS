@@ -11,3 +11,4 @@ src
    Evaluation
    Visualisation
    wcPERinhab
+   testfile_for_doc
