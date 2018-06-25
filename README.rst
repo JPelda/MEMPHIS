@@ -15,7 +15,7 @@ memphis 0.0.1 requires
 
 * Python >= 3.5
 
-* `Used python distribution <https://www.anaconda.com/distribution/>`__
+MEMPHIS was developed by using anaconda as python distribution `<https://www.anaconda.com/distribution/>`
 
 Clone the repository and run the setup.py via 
 
@@ -24,17 +24,20 @@ Clone the repository and run the setup.py via
 	$ python setup.py
 
 
-## Authors
+Authors
+=======
 
-* **Johannes Pelda** - *Initial work* - [on github](https://github.com/JPelda)
+* **Johannes Pelda** - *Initial work* - `on github <https://github.com/JPelda>`__
 
-See also the list of [contributors](https://github.com/JPelda/memphis/contributors) who participated in this project.
+See also the list of `contributors <https://github.com/JPelda/memphis/contributors>`__ who participated in this project.
 
-## License
+License
+=======
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+Acknowledgments
+===============
 
 * Many thanks to the International Energy Agency (IEA) who are funding this research within the Technology Collaboration Programme on District Heating and Cooling including Combined Heat and Power named ANNEX XII. The research is about a methodology to evaluate and map the potential of waste heat from sewage water by using internationally available open data (MEMPHIS). It focuses on waste heat from small and medium industries as well as sewage networks and elaborates a tool to map potentials spatially. The project team consists of AIT Austrian Institute of Technology GmbH, Building Research Establishment Limited (BRE) and the University of Applied Sciences and Arts (HAWK) in Göttingen. The project is led by HAWK.
 * In addition, many thanks to the Göttinger Entsorgungsbetriebe (GEB) for supporting the project with their technical knowledge and providing their GIS data.
