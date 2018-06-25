@@ -7,7 +7,7 @@ Welcome to MEMPHIS's documentation!
 ===================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:
 
 

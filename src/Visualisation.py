@@ -8,6 +8,8 @@ import os
 import sys
 import matplotlib.lines as mlines
 import matplotlib.pyplot as plt
+from matplotlib import use as mplu
+mplu("Qt5Agg")
 from matplotlib.colors import from_levels_and_colors
 from matplotlib.ticker import FormatStrFormatter
 import numpy as np
@@ -132,12 +134,10 @@ class Graphen:
                         [], [], color=gdf_paths_colors[0],
                         linestyle='-',
                         label="Generic sewage network {:1.2f} "
-                        " $\\unitfrac{{m^3}}{{s}} "
-                        " \\leq \\dot{{V}}   \\leq$  {:10.2f}"
-                        " $\\unitfrac{{m^3}}{{s}}$"
-                        "".format(
-                                  gdf_paths_levels[0],
-                                  gdf_paths_levels[1])))
+                        " $\\unitfrac{{m^3}}{{s}} \\leq \\dot{{V}} \\leq$ "
+                        " {:10.2f} $\\unitfrac{{m^3}}{{s}}$".format(
+                                                     gdf_paths_levels[0],
+                                                     gdf_paths_levels[1])))
         # gdf_path_legend.append(mlines.Line2D([], [], color=gdf_paths_colors[1],
         #                                linestyle='-',
         #                                label=

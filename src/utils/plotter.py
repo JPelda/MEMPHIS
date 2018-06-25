@@ -5,6 +5,9 @@ Created on Sat Apr 28 08:31:36 2018
 @author: jpelda
 """
 from matplotlib import rc
+from matplotlib import use as mpl_use
+mpl_use('Qt5Agg')
+
 from matplotlib import verbose
 
 def plot_format(xtick_direction='in', ytick_direction='in'):
@@ -17,7 +20,7 @@ def plot_format(xtick_direction='in', ytick_direction='in'):
 #    rc('font', **{'family': 'CMU Sans Serif'})
 #            rc('font', serif='malgunbd')
 
-    rc('text.latex', preamble=r'\usepackage{units},\usepackage{cmbright}')
+    rc('text.latex', preamble=r"\usepackage{units},\usepackage{cmbright}")
 #    \usepackage{helvet}')
     verbose.level = 'debug-annoying'
     rc('ps', usedistiller='xpdf')

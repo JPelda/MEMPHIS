@@ -44,9 +44,11 @@
 <dd><p>Allocates inhabitans to nodes. Nodes in same raster field will get
 raster’s inhabitans divided by amout of nodes within raster. Raster
 fields without nodes are allocated to nearest node.</p>
+<p>Args:
+gdf_raster(geopandas.GeoDataFrame()):</p>
+<blockquote>
+<div>gdf[‘SHAPE’], gdf[‘SHAPE_b’], gdf[‘inhabs’]</div></blockquote>
 <dl class="docutils">
-<dt>gdf_raster <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd>gdf[‘SHAPE’], gdf[‘SHAPE_b’], gdf[‘inhabs’]</dd>
 <dt>gdf_nodes <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
 <dd>gdf[‘osmid’], gdf[‘geometry’]</dd>
 </dl>

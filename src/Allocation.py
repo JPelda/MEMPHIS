@@ -17,9 +17,8 @@ class Allocation:
         raster's inhabitans divided by amout of nodes within raster. Raster
         fields without nodes are allocated to nearest node.
 
-        ARGS:
-        -----
-        gdf_raster : geopandas.GeoDataFrame()
+        Args:
+        gdf_raster(geopandas.GeoDataFrame()):
             gdf['SHAPE'], gdf['SHAPE_b'], gdf['inhabs']
         gdf_nodes : geopandas.GeoDataFrame()
             gdf['osmid'], gdf['geometry']

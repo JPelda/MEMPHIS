@@ -19,7 +19,7 @@ from shapely.geometry import MultiPoint, MultiLineString, Polygon
 path = os.path.dirname(os.getcwd())
 sys.path.append(path + os.sep + 'src')
 sys.path.append(path + os.sep + 'src' + os.sep + 'utils')
-
+print(path)
 from Data_IO import Data_IO
 from Allocation import Allocation
 from transformations_of_crs_values import transform_coords, transform_length,\
