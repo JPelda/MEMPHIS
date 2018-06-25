@@ -4,9 +4,9 @@ MEMPHIS
 
 Methodology to evaluate and map the potential of waste heat from sewage water by using internationally available open data. MEMPHIS enables you to build up a sewage system generically by using open data. The algorithm shall help to ease the implementation of waste heat from sewage systems identifying suitable locations for waste heat exploitation from sewer.
 
-* 'http://blogs.hawk-hhg.de/memphis/'
-* 'https://github.com/JPelda/memphis'
-* 'https://memphis.readthedocs.io/en/latest/'
+* `Blog <http://blogs.hawk-hhg.de/memphis/>`
+* `MEMPHIS GitHub repository <https://github.com/JPelda/memphis>`
+* `MEMPHIS documentation and manual <https://memphis.readthedocs.io/en/latest/>`
 
 Requirements
 ============
@@ -15,11 +15,12 @@ memphis 0.0.1 requires
 
 * Python >= 3.5
 
-* 'https://www.anaconda.com/distribution/'
+* `Used python distribution <https://www.anaconda.com/distribution/>`
 
 Clone the repository and 
 
 .. code-block:: console
+
 	$ python setup.py
 
 
