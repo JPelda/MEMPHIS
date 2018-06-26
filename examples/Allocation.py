@@ -12,21 +12,18 @@ def alloc_inhabs_to_nodes(gdf_raster, gdf_nodes, graph):
     raster's inhabitans divided by amout of nodes within raster. Raster
     fields without nodes are allocated to nearest node.
 
-    Parameters
-    ----------
-    gdf_raster : geopandas.GeoDataFrame()
-        * gdf['SHAPE']
-        * gdf['SHAPE_b']
-        * gdf['inhabs']
-    gdf_nodes : geopandas.GeoDataFrame()
-        * gdf['osmid'], gdf['geometry']
-    graph : nx.Graph()
-        edges  and nodes from graph of streetnetwork
+    :param geopandas.GeoDataFrame() gdf_raster:
+            * gdf['SHAPE']
+            * gdf['SHAPE_b']
+            * gdf['inhabs']
+    :param geopandas.GeoDataFrame() gdf_nodes:
+            * gdf['osmid'], gdf['geometry']
+    :param nx.Graph() graph:
+            * edges and nodes from graph of streetnetwork
+    :return:
+            * list of inhabitants in order of gdf_nodes
+    :rtype: list(float)
 
-    Returns
-    -------
-    list(float)
-        list of inhabitants in order of gdf_nodes
     """
 
     gdf_nodes_spatial_index = gdf_nodes.sindex
@@ -53,22 +50,47 @@ def alloc_inhabs_to_nodes(gdf_raster, gdf_nodes, graph):
     list_of_inhabs = [dic[key] for key, item in gdf_nodes.iterrows()]
     return list_of_inhabs
 
+
+def test():
+    """
+        Switch minor tick labeling on or off.
+
+        Parameters
+        ----------
+        labelOnlyBase : bool
+            If True, label ticks only at integer powers of base.
+        test_test : str
+            What else
+    """
+    pass
+
+def test_google():
+    """
+        Switch minor tick labeling on or off.
+
+        Args:
+        
+            labelOnlyBase : bool  
+                If True, label ticks only at integer powers of base. und noch ganz viel weiteren Text anfüge was passiert dann mit dem umbruch?
+            
+            test_test (str) : What else is back
+    """
+    pass
+
 def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     """Allocates the water consumption of each building in GIS-Data to
     nearest node of graph.
 
-    Parameters
-    ----------
-    gdf_gis_b : geopandas.GeoDataFrame()
-        * gdf_gis_b['geometry']: the geometry
-        * gdf_gis_b['wc']: the water consumption
-        * gdf_gis_b['area']: the area of the building
-    graph : nx.Graph()
-        edges and nodes from graph of streetnetwork
-    Returns
-    -------
-    list(float)
+    :param geopandas.GeoDataFrame() gdf_gis_b:
+            * gdf_gis_b['geometry']: the geometry
+            * gdf_gis_b['wc']: the water consumption
+            * gdf_gis_b['area']: the area of the building
+    :param nx.Graph() graph:
+            * edges and nodes from graph of streetnetwork
+    :return:
         list of water consumption of each node in order of gdf_nodes
+    :rtype: list(float)
+
     """
 
     dic = {key: 0 for key in gdf_nodes.index}
@@ -85,19 +107,16 @@ def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
 def alloc_nodes_to_inhabs(gdf_raster, gdf_nodes):
     """Allocates nodes of gdf to fields of gdf_census.
 
-    Parameters
-    ----------
-    gdf_raster : geopandas.GeoDataFrame()
-        * gdf_raster['inhabs']: the amount of inhabs per geometry
-        * gdf_raster['geometry']: the geometry
-    gdf_nodes : geopandas.GeoDataFrame()
-        * gdf_nodes['geometry']: the geometry
+    :param geopandas.GeoDataFrame() gdf_raster:
+            * gdf_raster['inhabs']: the amount of inhabs per geometry
+            * gdf_raster['geometry']: the geometry
+    :param geopandas.GeoDataFrame() gdf_nodes:
+            * gdf_nodes['geometry']: the geometry
 
-    Returns
-    -------
-    tuple(list, list)
-        * list of inhabitants per node
-        * list of raster id
+    :return:
+            * list of inhabitants per node
+            * list of raster id
+    :rtype: list, list
     """
 
     gdf_raster_spatial_index = gdf_raster.sindex
@@ -120,17 +139,15 @@ def alloc_nodes_to_inhabs(gdf_raster, gdf_nodes):
 def alloc_wc_to_type(gis_cat, gdf_gis_b):
     """Allocates water consumption to types coming from gis_buildings.
 
-    Parameters
-    ----------
-    gis_cat : pandas.DataFrame()
-        * gis_cat['type']: type of GIS-data
-        * gis_cat['cat']: category type belongs to
-    gdf_gis_b : geopandas.GeoDataFrame()
-        * gdf_gis_b['types']: type of building
-    Returns
-    -------
-    list(float)
-        the water consumption for each building in gdf_gis_b
+    :param pandas.DataFrame() gis_cat:
+            * gis_cat['type']: type of GIS-data
+            * gis_cat['cat']: category type belongs to
+    :param geopandas.GeoDataFrame() gdf_gis_b:
+            * gdf_gis_b['types']: type of building
+    :return:
+            the water consumption for each building in gdf_gis_b
+    :rtype: [float]
+
     """
     types = gdf_gis_b['type']
     dic = {key: val for key, val in zip(gis_cat['type'],

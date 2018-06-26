@@ -162,42 +162,47 @@
 <dt id="Data_IO.Data_IO.read_from_graphml">
 <code class="descname">read_from_graphml</code><span class="sig-paren">(</span><em>name</em>, <em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_graphml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_graphml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads File into pandas dataframe.
-Args:</p>
-<blockquote>
-<div>name: str, name of file in section Files in config</div></blockquote>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>nx.Graph</dd>
-</dl>
+:param name: str, name of file in section Files in config</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nx.Graph</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="Data_IO.Data_IO.read_from_shp">
 <code class="descname">read_from_shp</code><span class="sig-paren">(</span><em>name</em>, <em>path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_shp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_shp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads File into pandas dataframe.
-Args:</p>
-<blockquote>
-<div>name: str, name of file in section Files in config</div></blockquote>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>geopandas.DataFrame(fname)</dd>
-</dl>
+:param name: str, name of file in section Files in config</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">geopandas.DataFrame(fname)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="Data_IO.Data_IO.read_from_sqlServer">
 <code class="descname">read_from_sqlServer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.read_from_sqlServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.read_from_sqlServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads SQL-Database into pandas dataframe.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd><dl class="first last docutils">
-<dt>sql_query: str, name of sql-query in section SQL_QUERIES</dt>
-<dd>in config-file</dd>
-</dl>
-</dd>
-<dt>Returns:</dt>
-<dd>pandas.DataFrame(sql-db)</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sql_query</strong> – str, name of sql-query in section SQL_QUERIES
+in config-file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">pandas.DataFrame(sql-db)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -224,11 +229,18 @@ Args:</p>
 <dt id="Data_IO.Data_IO.write_gdf_to_file">
 <code class="descname">write_gdf_to_file</code><span class="sig-paren">(</span><em>gdf</em>, <em>fname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.write_gdf_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.write_gdf_to_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes to File.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>fname: str, filename can be set in Data_IO.__init__.city
-gdf: geopandas.GeoDataFrame(), which values are written to file</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fname</strong> – str, filename can be set in Data_IO.__init__.city</li>
+<li><strong>gdf</strong> – geopandas.GeoDataFrame(), which values are written to file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Returns:</p>
 </dd></dl>
 
@@ -236,10 +248,19 @@ gdf: geopandas.GeoDataFrame(), which values are written to file</dd>
 <dt id="Data_IO.Data_IO.write_to_sqlServer">
 <code class="descname">write_to_sqlServer</code><span class="sig-paren">(</span><em>table_name</em>, <em>df</em>, <em>dtype={}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Data_IO.html#Data_IO.write_to_sqlServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Data_IO.Data_IO.write_to_sqlServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes to SQL-Database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table_name</strong> – str, name of table to write to</li>
+<li><strong>df</strong> – pandas.DataFrame(), which values are written to table</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="docutils">
-<dt>Args:</dt>
-<dd>table_name: str, name of table to write to
-df: pandas.DataFrame(), which values are written to table</dd>
 <dt>Kwargs:</dt>
 <dd>dtype: dict, {col: type} type is of int, float, or geometry etc.</dd>
 </dl>

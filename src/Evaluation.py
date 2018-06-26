@@ -8,32 +8,28 @@ import numpy as np
 
 
 class Clustering():
+    """"""
 
     def __init__(self):
         pass
 
     def count_val_over_key(self, gdf, keys, keys_name='inhabs'):
-        '''Clusters points to -1, 0, 5, 10, 15... by its inhabs as
-            gdf,keys()
+        """Clusters points to -1, 0, 5, 10, 15 ... by its inhabs as gdf.keys()
 
-        ARGS:
-        -----
-        gdf: geopandas.DataFrame()
-            Data that are clustered by keys
-        keys: set
+        Parameters
+        ----------
+        gdf : geopandas.GeoDataFrame()
+            Data that are clustered by keys.
+        keys : set
             Are the keys the gdf is clustered by.
-
-        KWARGS:
-        ------
-        keys_name: str
+        keys_name: str, optional
             The name of values of keys. Must also be given as col name in gdf.
-
-        RETURNS:
-        --------
-        rang: dict
-            dict.keys == cluster_keys, dict.values == len(items of gdfs) per
-            cluter_key
-        '''
+        Returns
+        -------
+        dict
+            dict.keys == cluster_keys
+            dict.values == len(items of gdfs) per cluter_key
+        """
         maxi_val = np.around(max(keys))
         mini_val = 0
         rang = np.arange(mini_val, np.around(maxi_val, decimals=-1) + 5, 5)
@@ -51,25 +47,25 @@ class Clustering():
         return rang
 
     def best_pts_within_overlay_pts(self, comp_val, gdf, gdf_orig, buffer):
-        '''Selects pts in gdf, that match to pts in gdf_orig,
+        """Selects pts in gdf, that match to pts in gdf_orig,
         clustered to 0.25, 0.5, 0.75, 1....
 
-        ARGS:
-        -----
-        comp_val: str
+        Parameters
+        ----------
+        comp_val : str
             the col_name by which the best point is compared to gdf_orig
-        gdf: geopandas.DataFrame()
+        gdf : geopandas.DataFrame()
             gdf with col 'geometry' that is matched with gdf_orig.
-        gdf_orig: geopandas.DataFrame()
+        gdf_orig : geopandas.DataFrame()
             gdf with col 'geometry' gdf is matched to.
-        buffer: float
+        buffer : float
             Buffer around gdf_orig['geometry'] in [m].
 
-        RETURNS:
+        Returns
         --------
-        rang: dict
+        dict
             dictionary of gdf's
-        '''
+        """
         # TODO mark keys, where no V of sewage system exists.
         maxi_val = 0.25
         mini_val = 0

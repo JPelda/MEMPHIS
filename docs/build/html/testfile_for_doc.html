@@ -190,20 +190,26 @@ Corners with a ratio which exceed the limit will be beveled.</p>
 <dt id="testfile_for_doc.LineString.svg">
 <code class="descname">svg</code><span class="sig-paren">(</span><em>scale_factor=1.0</em>, <em>stroke_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/testfile_for_doc.html#LineString.svg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#testfile_for_doc.LineString.svg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns SVG polyline element for the LineString geometry.</p>
-<dl class="docutils">
-<dt>scale_factor <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Multiplication factor for the SVG stroke-width.  Default is 1.</dd>
-<dt>stroke_color <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
-<dd>Hex string for stroke color. Default is to use “#66cc99” if
-geometry is valid, and “#ff3333” if invalid.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scale_factor</strong> (<em>float</em>) – Multiplication factor for the SVG stroke-width.  Default is 1.</li>
+<li><strong>stroke_color</strong> (<em>str</em><em>, </em><em>optional</em>) – Hex string for stroke color. Default is to use “#66cc99” if
+geometry is valid, and “#ff3333” if invalid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="testfile_for_doc.LineString.xy">
 <code class="descname">xy</code><a class="headerlink" href="#testfile_for_doc.LineString.xy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Separate arrays of X and Y coordinate values</p>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">xy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="go">[0.0, 1.0]</span>

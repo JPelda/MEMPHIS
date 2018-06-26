@@ -24,7 +24,10 @@ from transformations_of_crs_values import transform_coords
 class Data_IO:
     '''Access to all sql queries. Initialised by config.ini.
 
-    fname_config: str, the config filename
+    Parameters
+    ----------
+    fname_config : str
+        the config filename
     '''
     def __init__(self, fname_config):
         print('Load config from {}'.format(fname_config))
@@ -55,18 +58,17 @@ class Data_IO:
         self.path_import = eval(self.config['Files']['path_import'])
 
     def write_to_sqlServer(self, table_name, df, dtype={}):
-        '''Writes to SQL-Database.
+        """Writes to SQL-Database.
 
-        Args:
-            table_name: str, name of table to write to
-            df: pandas.DataFrame(), which values are written to table
-
-        Kwargs:
-            dtype: dict, {col: type} type is of int, float, or geometry etc.
-
-        Returns:
-
-        '''
+        Parameters
+        ----------
+            table_name : str
+                name of table to write to
+            df : pandas.DataFrame()
+                which values are written to table
+            dtype : dict, optional
+                {col: type} type is of int, float, or geometry etc.
+        """
         print('Save data to {} in db {}'.format(table_name, self.engine))
 
         if 'GEOMETRY' in dtype.values():
@@ -100,15 +102,16 @@ class Data_IO:
         print("Saved.")
 
     def read_from_sqlServer(self, name):
-        '''Reads SQL-Database into pandas dataframe.
+        """Reads SQL-Database into pandas dataframe.
 
-        Args:
-            sql_query: str, name of sql-query in section SQL_QUERIES
-                        in config-file
-
-        Returns:
+        Parameters
+        ----------
+        sql_query : str
+            name of sql-query in section SQL_QUERIES in config-file
+        Returns
+        -------
             pandas.DataFrame(sql-db)
-        '''
+        """
 
         conf = eval(self.config['SQL_QUERIES'][name])
         table = conf['table']
@@ -202,14 +205,15 @@ class Data_IO:
         return sql
 
     def write_gdf_to_file(self, gdf, fname=''):
-        '''Writes to File.
+        """Writes to File.
 
-        Args:
-            fname: str, filename can be set in Data_IO.__init__.city
-            gdf: geopandas.GeoDataFrame(), which values are written to file
-
-        Returns:
-        '''
+        Parameters
+        ----------
+        fname: str
+            filename can be set in Data_IO.__init__.city
+        gdf: geopandas.GeoDataFrame()
+            which values are written to file
+        """
         if fname != '':
             fname = self.path_export + os.sep + self.city + '_' + fname
         else:
@@ -218,13 +222,16 @@ class Data_IO:
         gdf.to_file(filename=fname)
 
     def read_from_shp(self, name, path=None):
-        '''Reads File into pandas dataframe.
-        Args:
-            name: str, name of file in section Files in config
+        """Reads File into pandas dataframe.
+        Parameters
+        ----------
+        name: str
+            name of file in section Files in config
 
-        Returns:
+        Returns
+        -------
             geopandas.DataFrame(fname)
-        '''
+        """
         if path is not None:
             path = path
         else:
@@ -234,13 +241,17 @@ class Data_IO:
         return df
 
     def read_from_graphml(self, name, path=None):
-        '''Reads File into pandas dataframe.
-        Args:
-            name: str, name of file in section Files in config
+        """Reads File into pandas dataframe.
 
-        Returns:
-            nx.Graph
-        '''
+        Parameters
+        ----------
+        name : str
+            name of file in section Files in config
+
+        Returns
+        -------
+            nx.Graph()
+        """
         if path is None:
             path = eval(self.config['Files']['path_import'])
         else:

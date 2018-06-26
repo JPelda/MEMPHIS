@@ -8,7 +8,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
-    <option name="requirementsPath" value="" />
+    <option name="requirementsPath" value="C:\Users\jpelda\Documents\GitHub\memphis\requirements.txt" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="analyzeDoctest" value="false" />
+    <option name="myDocStringFormat" value="NumPy" />
   </component>
   <component name="ReSTService">
     <option name="workdir" value="C:\Users\jpelda\Documents\GitHub\memphis\docs" />

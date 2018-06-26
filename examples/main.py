@@ -21,7 +21,7 @@ sys.path.append(path + os.sep + 'src')
 sys.path.append(path + os.sep + 'src' + os.sep + 'utils')
 print(path)
 from Data_IO import Data_IO
-from Allocation import Allocation
+import Allocation as alloc
 from transformations_of_crs_values import transform_coords, transform_length,\
                                           transform_area
 from buffer import buffer
@@ -39,8 +39,8 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO('config' + os.sep + 'test_config.ini')
-alloc = Allocation()
-
+alloc.alloc_inhabs_to_nodes()
+alloc.test()
 gis_r = Data.read_from_sqlServer('gis_roads')
 gdf_gis_r = gpd.GeoDataFrame(gis_r, crs=Data.coord_system, geometry='SHAPE')
 
@@ -54,7 +54,7 @@ gis_cat = gis_cat[gis_cat['cmPsma'] != '?']
 gis_cat['cmPsma'] = gis_cat['cmPsma'].astype(float)
 
 gdf_gis_b['area'] = transform_area(gdf_gis_b.geometry)
-gdf_gis_b['wc'] = alloc.alloc_wc_to_type(gis_cat, gdf_gis_b['type'].values) *\
+gdf_gis_b['wc'] = alloc.alloc_wc_to_type(gis_cat, gdf_gis_b) *\
                     gdf_gis_b['area'] / (8760 * 3600)
 
 
