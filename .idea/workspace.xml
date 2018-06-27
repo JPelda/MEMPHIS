@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/memphis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memphis.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Allocation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Allocation.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Calculation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Calculation.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Conditioning.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Conditioning.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Data_IO.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Data_IO.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Evaluation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Evaluation.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/Visualisation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/Visualisation.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/modules.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/modules.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/testfile_for_doc.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/testfile_for_doc.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/wcPERinhab.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/wcPERinhab.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Allocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Allocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Calculation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Calculation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Conditioning.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Conditioning.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Data_IO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Data_IO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Evaluation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Evaluation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/Visualisation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/Visualisation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/Allocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/Allocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/testfile_for_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/testfile_for_doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/wcPERinhab.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/wcPERinhab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Allocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Allocation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data_IO.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data_IO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Evaluation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1081">
-              <caret line="56" column="59" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+            <state relative-caret-position="157">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="e#86#95#0" expanded="true" />
               </folding>
@@ -84,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data_IO.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Data_IO.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Data_IO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5474">
-              <caret line="248" column="12" selection-start-line="248" selection-start-column="12" selection-end-line="248" selection-end-column="12" />
+            <state relative-caret-position="-460">
+              <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -97,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/src/Allocation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="50">
-              <caret line="55" column="17" lean-forward="true" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+              <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -122,18 +95,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/utils/plotter.py" />
-        <option value="$PROJECT_DIR$/examples/main.py" />
         <option value="$PROJECT_DIR$/src/Visualisation.py" />
         <option value="$PROJECT_DIR$/src/Allocation.py" />
         <option value="$PROJECT_DIR$/src/Evaluation.py" />
         <option value="$PROJECT_DIR$/src/Data_IO.py" />
+        <option value="$PROJECT_DIR$/examples/main.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-15" />
-    <option name="width" value="3690" />
-    <option name="height" value="2075" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1797" />
+    <option name="y" value="-52" />
+    <option name="width" value="1476" />
+    <option name="height" value="830" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -247,14 +221,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1476" height="830" extended-state="0" />
-    <editor active="true" />
+    <frame x="-1928" y="-8" width="1936" height="1176" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17983074" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1359275" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32879376" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" x="0" y="0" width="319" height="630" id="Documentation" order="3" side_tool="true" visible="true" weight="0.25599435" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22701149" />
+      <window_info anchor="right" x="0" y="0" width="319" height="630" id="Documentation" order="3" side_tool="true" visible="true" weight="0.19349681" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14975369" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32976654" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32976654" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -561,16 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1081">
-          <caret line="56" column="59" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
-          <folding>
-            <element signature="e#86#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/-365048210/numpy/core/umath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1196">
@@ -598,13 +561,6 @@
         <state relative-caret-position="-575" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Visualisation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="13" column="48" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -615,14 +571,31 @@
     <entry file="file://$PROJECT_DIR$/src/Allocation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
-          <caret line="55" column="17" lean-forward="true" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Data_IO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5474">
-          <caret line="248" column="12" selection-start-line="248" selection-start-column="12" selection-end-line="248" selection-end-column="12" />
+        <state relative-caret-position="-460">
+          <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Visualisation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="13" column="48" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#86#95#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

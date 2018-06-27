@@ -22,13 +22,13 @@ from transformations_of_crs_values import transform_coords
 
 
 class Data_IO:
-    '''Access to all sql queries. Initialised by config.ini.
+    """Access to all sql queries. Initialised by config.ini.
 
     Parameters
     ----------
     fname_config : str
         the config filename
-    '''
+    """
     def __init__(self, fname_config):
         print('Load config from {}'.format(fname_config))
         self.config = cfp.ConfigParser()

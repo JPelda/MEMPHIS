@@ -156,44 +156,52 @@
 <code class="descname">best_pts_within_overlay_pts</code><span class="sig-paren">(</span><em>comp_val</em>, <em>gdf</em>, <em>gdf_orig</em>, <em>buffer</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.best_pts_within_overlay_pts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.best_pts_within_overlay_pts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects pts in gdf, that match to pts in gdf_orig,
 clustered to 0.25, 0.5, 0.75, 1….</p>
-<dl class="docutils">
-<dt>comp_val: str</dt>
-<dd>the col_name by which the best point is compared to gdf_orig</dd>
-<dt>gdf: geopandas.DataFrame()</dt>
-<dd>gdf with col ‘geometry’ that is matched with gdf_orig.</dd>
-<dt>gdf_orig: geopandas.DataFrame()</dt>
-<dd>gdf with col ‘geometry’ gdf is matched to.</dd>
-<dt>buffer: float</dt>
-<dd>Buffer around gdf_orig[‘geometry’] in [m].</dd>
-</dl>
-<dl class="docutils">
-<dt>rang: dict</dt>
-<dd>dictionary of gdf’s</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>comp_val</strong> (<em>str</em>) – the col_name by which the best point is compared to gdf_orig</li>
+<li><strong>gdf</strong> (<em>geopandas.DataFrame</em><em>(</em><em>)</em>) – gdf with col ‘geometry’ that is matched with gdf_orig.</li>
+<li><strong>gdf_orig</strong> (<em>geopandas.DataFrame</em><em>(</em><em>)</em>) – gdf with col ‘geometry’ gdf is matched to.</li>
+<li><strong>buffer</strong> (<em>float</em>) – Buffer around gdf_orig[‘geometry’] in [m].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dictionary of gdf’s</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="Evaluation.Clustering.count_val_over_key">
 <code class="descname">count_val_over_key</code><span class="sig-paren">(</span><em>gdf</em>, <em>keys</em>, <em>keys_name='inhabs'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.count_val_over_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.count_val_over_key" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Clusters points to -1, 0, 5, 10, 15… by its inhabs as</dt>
-<dd>gdf,keys()</dd>
-</dl>
-<dl class="docutils">
-<dt>gdf: geopandas.DataFrame()</dt>
-<dd>Data that are clustered by keys</dd>
-<dt>keys: set</dt>
-<dd>Are the keys the gdf is clustered by.</dd>
-</dl>
-<dl class="docutils">
-<dt>keys_name: str</dt>
-<dd>The name of values of keys. Must also be given as col name in gdf.</dd>
-</dl>
-<dl class="docutils">
-<dt>rang: dict</dt>
-<dd>dict.keys == cluster_keys, dict.values == len(items of gdfs) per
-cluter_key</dd>
-</dl>
+<dd><p>Clusters points to -1, 0, 5, 10, 15 … by its inhabs as gdf.keys()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gdf</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – Data that are clustered by keys.</li>
+<li><strong>keys</strong> (<em>set</em>) – Are the keys the gdf is clustered by.</li>
+<li><strong>keys_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of values of keys. Must also be given as col name in gdf.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict.keys == cluster_keys
+dict.values == len(items of gdfs) per cluter_key</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

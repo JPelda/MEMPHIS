@@ -39,8 +39,7 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO('config' + os.sep + 'test_config.ini')
-alloc.alloc_inhabs_to_nodes()
-alloc.test()
+
 gis_r = Data.read_from_sqlServer('gis_roads')
 gdf_gis_r = gpd.GeoDataFrame(gis_r, crs=Data.coord_system, geometry='SHAPE')
 
