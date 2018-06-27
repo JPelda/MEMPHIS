@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
 
 autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
                         "geopandas", "pymysql", "shapefile", "sqlalchemy",
-                        "osgeo", "pyproj"]
+                        "osgeo", "pyproj", "openssl"]
 
 # -- Project information -----------------------------------------------------
 

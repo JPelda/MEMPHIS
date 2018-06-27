@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = ''MEMPHIS'
+NAME = 'MEMPHIS'
 DESCRIPTION = 'This package enables you to draw a generic sewage system.'
 URL = 'https://github.com/JPelda/memphis'
 EMAIL = 'johannes.pelda@hawk.de'
@@ -42,7 +42,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
-with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+with io.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = '\n' + f.read()
 
 # Load the package's __version__.py module as a dictionary.
