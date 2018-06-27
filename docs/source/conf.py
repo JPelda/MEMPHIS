@@ -15,6 +15,7 @@
 import os
 import sys
 from recommonmark.parser import CommonMarkParser
+from unittest.mock import MagicMock
 
 source_parsers = {
     '.md': CommonMarkParser,
@@ -30,7 +31,18 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
 
 autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
                         "geopandas", "pymysql", "shapefile", "sqlalchemy",
-                        "osgeo", "pyproj", "openssl"]
+                        "osgeo", "pyproj"]
+
+
+
+
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return MagicMock()
+
+MOCK_MODULES = ['pygtk', 'gtk', 'gobject', 'argparse', 'numpy', 'pandas', 'openssl']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # -- Project information -----------------------------------------------------
 
