@@ -3,6 +3,7 @@ channels:
   - anaconda
   - conda-forge
   - defaults
+  - pip
 dependencies:
   - blas=1.0=mkl
   - ca-certificates=2018.03.07=0
@@ -104,5 +105,3 @@ dependencies:
   - wincertstore=0.2=py36h7fe50ca_0
 prefix: C:\Users\jpelda\AppData\Local\Continuum\anaconda3\envs\memphis
 
-pip:
-  -icc_rt 2017.0.4
