@@ -168,17 +168,11 @@ fields without nodes are allocated to nearest node.</p>
 <li>gdf[‘osmid’], gdf[‘geometry’]</li>
 </ul>
 </li>
-<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – <ul>
-<li>edges and nodes from graph of streetnetwork</li>
-</ul>
-</li>
+<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – edges  and nodes from graph of streetnetwork</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>list of inhabitants in order of gdf_nodes</li>
-</ul>
-</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of inhabitants in order of gdf_nodes</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(float)</p>
@@ -216,7 +210,7 @@ fields without nodes are allocated to nearest node.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list, list</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple(list, list)</p>
 </td>
 </tr>
 </tbody>
@@ -239,10 +233,7 @@ nearest node of graph.</p>
 <li>gdf_gis_b[‘area’]: the area of the building</li>
 </ul>
 </li>
-<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – <ul>
-<li>edges and nodes from graph of streetnetwork</li>
-</ul>
-</li>
+<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – edges and nodes from graph of streetnetwork</li>
 </ul>
 </td>
 </tr>
@@ -280,25 +271,7 @@ nearest node of graph.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the water consumption for each building in gdf_gis_b</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[float]</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="Allocation.test">
-<code class="descclassname">Allocation.</code><code class="descname">test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.test" title="Permalink to this definition">¶</a></dt>
-<dd><p>Switch minor tick labeling on or off.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>labelOnlyBase</strong> (<em>bool</em>) – If True, label ticks only at integer powers of base.</li>
-<li><strong>test_test</strong> (<em>str</em>) – </li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(float)</p>
 </td>
 </tr>
 </tbody>

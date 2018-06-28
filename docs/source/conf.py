@@ -14,35 +14,26 @@
 #
 import os
 import sys
-from recommonmark.parser import CommonMarkParser
-from unittest.mock import MagicMock
+#from recommonmark.parser import CommonMarkParser
 
-source_parsers = {
-    '.md': CommonMarkParser,
-}
+
+#source_parsers = {
+#    '.md': CommonMarkParser,
+#}
 
 source_suffix = ['.rst', '.md']
 
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
-                os.sep + 'src')
+                os.sep + 'memphis')
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
-                os.sep + 'src/utils')
+                os.sep + 'memphis/utils')
 
 autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
                         "geopandas", "pymysql", "shapefile", "sqlalchemy",
                         "osgeo", "pyproj"]
 
 
-
-
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return MagicMock()
-
-MOCK_MODULES = ['pygtk', 'gtk', 'gobject', 'argparse', 'numpy', 'pandas', 'openssl']
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # -- Project information -----------------------------------------------------
 
@@ -74,7 +65,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.autodoc',
-     'sphinxcontrib.napoleon'
+    'sphinxcontrib.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

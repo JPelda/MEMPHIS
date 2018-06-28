@@ -149,32 +149,28 @@
 
 
 <div class="viewcode-block" id="Clustering"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering">[docs]</a><span class="k">class</span> <span class="nc">Clustering</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="Clustering.count_val_over_key"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering.count_val_over_key">[docs]</a>    <span class="k">def</span> <span class="nf">count_val_over_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">keys_name</span><span class="o">=</span><span class="s1">&#39;inhabs&#39;</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Clusters points to -1, 0, 5, 10, 15... by its inhabs as</span>
-<span class="sd">            gdf,keys()</span>
+        <span class="sd">&quot;&quot;&quot;Clusters points to -1, 0, 5, 10, 15 ... by its inhabs as gdf.keys()</span>
 
-<span class="sd">        ARGS:</span>
-<span class="sd">        -----</span>
-<span class="sd">        gdf: geopandas.DataFrame()</span>
-<span class="sd">            Data that are clustered by keys</span>
-<span class="sd">        keys: set</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        gdf : geopandas.GeoDataFrame()</span>
+<span class="sd">            Data that are clustered by keys.</span>
+<span class="sd">        keys : set</span>
 <span class="sd">            Are the keys the gdf is clustered by.</span>
-
-<span class="sd">        KWARGS:</span>
-<span class="sd">        ------</span>
-<span class="sd">        keys_name: str</span>
+<span class="sd">        keys_name: str, optional</span>
 <span class="sd">            The name of values of keys. Must also be given as col name in gdf.</span>
-
-<span class="sd">        RETURNS:</span>
-<span class="sd">        --------</span>
-<span class="sd">        rang: dict</span>
-<span class="sd">            dict.keys == cluster_keys, dict.values == len(items of gdfs) per</span>
-<span class="sd">            cluter_key</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            dict.keys == cluster_keys</span>
+<span class="sd">            dict.values == len(items of gdfs) per cluter_key</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">maxi_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
         <span class="n">mini_val</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">rang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mini_val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">maxi_val</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -192,25 +188,25 @@
         <span class="k">return</span> <span class="n">rang</span></div>
 
 <div class="viewcode-block" id="Clustering.best_pts_within_overlay_pts"><a class="viewcode-back" href="../Evaluation.html#Evaluation.Clustering.best_pts_within_overlay_pts">[docs]</a>    <span class="k">def</span> <span class="nf">best_pts_within_overlay_pts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_val</span><span class="p">,</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">gdf_orig</span><span class="p">,</span> <span class="n">buffer</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Selects pts in gdf, that match to pts in gdf_orig,</span>
+        <span class="sd">&quot;&quot;&quot;Selects pts in gdf, that match to pts in gdf_orig,</span>
 <span class="sd">        clustered to 0.25, 0.5, 0.75, 1....</span>
 
-<span class="sd">        ARGS:</span>
-<span class="sd">        -----</span>
-<span class="sd">        comp_val: str</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        comp_val : str</span>
 <span class="sd">            the col_name by which the best point is compared to gdf_orig</span>
-<span class="sd">        gdf: geopandas.DataFrame()</span>
+<span class="sd">        gdf : geopandas.DataFrame()</span>
 <span class="sd">            gdf with col &#39;geometry&#39; that is matched with gdf_orig.</span>
-<span class="sd">        gdf_orig: geopandas.DataFrame()</span>
+<span class="sd">        gdf_orig : geopandas.DataFrame()</span>
 <span class="sd">            gdf with col &#39;geometry&#39; gdf is matched to.</span>
-<span class="sd">        buffer: float</span>
+<span class="sd">        buffer : float</span>
 <span class="sd">            Buffer around gdf_orig[&#39;geometry&#39;] in [m].</span>
 
-<span class="sd">        RETURNS:</span>
+<span class="sd">        Returns</span>
 <span class="sd">        --------</span>
-<span class="sd">        rang: dict</span>
+<span class="sd">        dict</span>
 <span class="sd">            dictionary of gdf&#39;s</span>
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO mark keys, where no V of sewage system exists.</span>
         <span class="n">maxi_val</span> <span class="o">=</span> <span class="mf">0.25</span>
         <span class="n">mini_val</span> <span class="o">=</span> <span class="mi">0</span>

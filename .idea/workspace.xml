@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="" />
+    <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/memphis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memphis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/environment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/environment.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +20,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="483">
+              <caret line="36" column="73" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
               <folding>
                 <element signature="e#86#95#0" expanded="true" />
               </folding>
@@ -65,7 +71,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -82,10 +87,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sim4dhs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -163,7 +169,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21548998" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32879376" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22660099" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22660099" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32976654" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32976654" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -324,8 +330,8 @@
     <entry file="file://$PROJECT_DIR$/src/Visualisation.py" />
     <entry file="file://$PROJECT_DIR$/examples/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="483">
+          <caret line="36" column="73" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
           <folding>
             <element signature="e#86#95#0" expanded="true" />
           </folding>
