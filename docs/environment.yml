@@ -3,7 +3,6 @@ channels:
   - anaconda
   - conda-forge
   - defaults
-  - pip
 dependencies:
   - blas=1.0=mkl
   - ca-certificates=2018.03.07=0
