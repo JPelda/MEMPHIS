@@ -33,7 +33,8 @@ REQUIRED = ['numpy>=1.14.0',
 			'sqlalchemy>=1.2.1',
 			'osgeo>=2.6.0',
             'gdal>=2.2.4',
-            'pymysql>=0.8.1']
+            'pymysql>=0.8.1',
+            'icc_rt>=2017.0.4']
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
