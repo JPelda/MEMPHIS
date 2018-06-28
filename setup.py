@@ -28,10 +28,12 @@ REQUIRED = ['numpy>=1.14.0',
 			'geopandas>=0.3.0',
 			'shapely>=1.6.4',
 			'osmnx>=0.8',
-			'matplotlib>=2.2.2'],
+			'matplotlib>=2.2.2',
 			'pyproj>=1.9.5.1',
 			'sqlalchemy>=1.2.1',
-			'osgeo>=2.6.0']
+			'osgeo>=2.6.0',
+            'gdal>=2.2.4',
+            'pymysql>=0.8.1']
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
