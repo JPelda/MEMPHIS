@@ -95,6 +95,8 @@ dependencies:
   - xz=5.2.3=0
   - zlib=1.2.11=vc14_0
   - pip=10.0.1=py36_0
+  - pip:
+    - icc_rt 2017.0.4
   - python=3.6.5=h0c2934d_0
   - scipy=1.1.0=py36h672f292_0
   - setuptools=39.2.0=py36_0
