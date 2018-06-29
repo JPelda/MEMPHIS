@@ -1,0 +1,7 @@
+README.rst
+setup.py
+memphis.egg-info/PKG-INFO
+memphis.egg-info/SOURCES.txt
+memphis.egg-info/dependency_links.txt
+memphis.egg-info/requires.txt
+memphis.egg-info/top_level.txt
