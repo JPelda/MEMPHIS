@@ -14,23 +14,26 @@
 #
 import os
 import sys
-from recommonmark.parser import CommonMarkParser
+#from recommonmark.parser import CommonMarkParser
 
-source_parsers = {
-    '.md': CommonMarkParser,
-}
+
+#source_parsers = {
+#    '.md': CommonMarkParser,
+#}
 
 source_suffix = ['.rst', '.md']
 
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
-                os.sep + 'src')
+                os.sep + 'memphis')
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
-                os.sep + 'src/utils')
+                os.sep + 'memphis/utils')
 
 autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
                         "geopandas", "pymysql", "shapefile", "sqlalchemy",
                         "osgeo", "pyproj"]
+
+
 
 # -- Project information -----------------------------------------------------
 
@@ -62,7 +65,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.autodoc',
-     'sphinxcontrib.napoleon'
+    'sphinxcontrib.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
