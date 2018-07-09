@@ -153,18 +153,21 @@
 <span class="sd">    raster&#39;s inhabitans divided by amout of nodes within raster. Raster</span>
 <span class="sd">    fields without nodes are allocated to nearest node.</span>
 
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_raster:</span>
-<span class="sd">            * gdf[&#39;SHAPE&#39;]</span>
-<span class="sd">            * gdf[&#39;SHAPE_b&#39;]</span>
-<span class="sd">            * gdf[&#39;inhabs&#39;]</span>
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_nodes:</span>
-<span class="sd">            * gdf[&#39;osmid&#39;], gdf[&#39;geometry&#39;]</span>
-<span class="sd">    :param nx.Graph() graph:</span>
-<span class="sd">            * edges and nodes from graph of streetnetwork</span>
-<span class="sd">    :return:</span>
-<span class="sd">            * list of inhabitants in order of gdf_nodes</span>
-<span class="sd">    :rtype: list(float)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gdf_raster : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf[&#39;SHAPE&#39;]</span>
+<span class="sd">        * gdf[&#39;SHAPE_b&#39;]</span>
+<span class="sd">        * gdf[&#39;inhabs&#39;]</span>
+<span class="sd">    gdf_nodes : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf[&#39;osmid&#39;], gdf[&#39;geometry&#39;]</span>
+<span class="sd">    graph : nx.Graph()</span>
+<span class="sd">        edges  and nodes from graph of streetnetwork</span>
 
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list(float)</span>
+<span class="sd">        list of inhabitants in order of gdf_nodes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">gdf_nodes_spatial_index</span> <span class="o">=</span> <span class="n">gdf_nodes</span><span class="o">.</span><span class="n">sindex</span>
@@ -191,34 +194,22 @@
     <span class="n">list_of_inhabs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">gdf_nodes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
     <span class="k">return</span> <span class="n">list_of_inhabs</span></div>
 
-<div class="viewcode-block" id="test"><a class="viewcode-back" href="../Allocation.html#Allocation.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Switch minor tick labeling on or off.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        </span>
-<span class="sd">        labelOnlyBase : bool</span>
-<span class="sd">            If True, label ticks only at integer powers of base.</span>
-<span class="sd">        test_test : str</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
-    
 <div class="viewcode-block" id="alloc_wc_from_b_to_node"><a class="viewcode-back" href="../Allocation.html#Allocation.alloc_wc_from_b_to_node">[docs]</a><span class="k">def</span> <span class="nf">alloc_wc_from_b_to_node</span><span class="p">(</span><span class="n">gdf_gis_b</span><span class="p">,</span> <span class="n">gdf_nodes</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Allocates the water consumption of each building in GIS-Data to</span>
 <span class="sd">    nearest node of graph.</span>
 
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_gis_b:</span>
-<span class="sd">            * gdf_gis_b[&#39;geometry&#39;]: the geometry</span>
-<span class="sd">            * gdf_gis_b[&#39;wc&#39;]: the water consumption</span>
-<span class="sd">            * gdf_gis_b[&#39;area&#39;]: the area of the building</span>
-<span class="sd">    :param nx.Graph() graph:</span>
-<span class="sd">            * edges and nodes from graph of streetnetwork</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gdf_gis_b : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf_gis_b[&#39;geometry&#39;]: the geometry</span>
+<span class="sd">        * gdf_gis_b[&#39;wc&#39;]: the water consumption</span>
+<span class="sd">        * gdf_gis_b[&#39;area&#39;]: the area of the building</span>
+<span class="sd">    graph : nx.Graph()</span>
+<span class="sd">        edges and nodes from graph of streetnetwork</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list(float)</span>
 <span class="sd">        list of water consumption of each node in order of gdf_nodes</span>
-<span class="sd">    :rtype: list(float)</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">gdf_nodes</span><span class="o">.</span><span class="n">index</span><span class="p">}</span>
@@ -235,16 +226,19 @@
 <div class="viewcode-block" id="alloc_nodes_to_inhabs"><a class="viewcode-back" href="../Allocation.html#Allocation.alloc_nodes_to_inhabs">[docs]</a><span class="k">def</span> <span class="nf">alloc_nodes_to_inhabs</span><span class="p">(</span><span class="n">gdf_raster</span><span class="p">,</span> <span class="n">gdf_nodes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Allocates nodes of gdf to fields of gdf_census.</span>
 
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_raster:</span>
-<span class="sd">            * gdf_raster[&#39;inhabs&#39;]: the amount of inhabs per geometry</span>
-<span class="sd">            * gdf_raster[&#39;geometry&#39;]: the geometry</span>
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_nodes:</span>
-<span class="sd">            * gdf_nodes[&#39;geometry&#39;]: the geometry</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gdf_raster : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf_raster[&#39;inhabs&#39;]: the amount of inhabs per geometry</span>
+<span class="sd">        * gdf_raster[&#39;geometry&#39;]: the geometry</span>
+<span class="sd">    gdf_nodes : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf_nodes[&#39;geometry&#39;]: the geometry</span>
 
-<span class="sd">    :return:</span>
-<span class="sd">            * list of inhabitants per node</span>
-<span class="sd">            * list of raster id</span>
-<span class="sd">    :rtype: list, list</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple(list, list)</span>
+<span class="sd">        * list of inhabitants per node</span>
+<span class="sd">        * list of raster id</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">gdf_raster_spatial_index</span> <span class="o">=</span> <span class="n">gdf_raster</span><span class="o">.</span><span class="n">sindex</span>
@@ -267,15 +261,17 @@
 <div class="viewcode-block" id="alloc_wc_to_type"><a class="viewcode-back" href="../Allocation.html#Allocation.alloc_wc_to_type">[docs]</a><span class="k">def</span> <span class="nf">alloc_wc_to_type</span><span class="p">(</span><span class="n">gis_cat</span><span class="p">,</span> <span class="n">gdf_gis_b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Allocates water consumption to types coming from gis_buildings.</span>
 
-<span class="sd">    :param pandas.DataFrame() gis_cat:</span>
-<span class="sd">            * gis_cat[&#39;type&#39;]: type of GIS-data</span>
-<span class="sd">            * gis_cat[&#39;cat&#39;]: category type belongs to</span>
-<span class="sd">    :param geopandas.GeoDataFrame() gdf_gis_b:</span>
-<span class="sd">            * gdf_gis_b[&#39;types&#39;]: type of building</span>
-<span class="sd">    :return:</span>
-<span class="sd">            the water consumption for each building in gdf_gis_b</span>
-<span class="sd">    :rtype: [float]</span>
-
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gis_cat : pandas.DataFrame()</span>
+<span class="sd">        * gis_cat[&#39;type&#39;]: type of GIS-data</span>
+<span class="sd">        * gis_cat[&#39;cat&#39;]: category type belongs to</span>
+<span class="sd">    gdf_gis_b : geopandas.GeoDataFrame()</span>
+<span class="sd">        * gdf_gis_b[&#39;types&#39;]: type of building</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list(float)</span>
+<span class="sd">        the water consumption for each building in gdf_gis_b</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">types</span> <span class="o">=</span> <span class="n">gdf_gis_b</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
     <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gis_cat</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
