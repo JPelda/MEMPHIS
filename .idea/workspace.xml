@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/memphis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memphis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/goettingen.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/goettingen.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/test_config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/test_config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_amount_of_points_over_popDens.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_amount_of_points_over_popDens.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_V.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_V_over_V.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_V_over_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_length.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_length.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_length_over_V.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test_boxplot_distr_length_over_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Data_IO.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Data_IO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Visualisation.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Visualisation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/utils/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/utils/plotter.py" afterDir="false" />
-    </list>
+    <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,11 +23,9 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Allocation.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Allocation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memphis/Allocation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-690" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="Data_IO.py" pinned="false" current-in-tab="false">
@@ -59,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Visualisation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Visualisation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/memphis/Visualisation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4317">
-              <caret line="190" column="18" lean-forward="true" selection-start-line="50" selection-start-column="6" selection-end-line="190" selection-end-column="18" />
+            <state relative-caret-position="-1410">
+              <caret line="191" lean-forward="true" selection-start-line="191" selection-end-line="191" />
               <folding>
                 <element signature="e#85#94#0" expanded="true" />
               </folding>
@@ -474,23 +452,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memphis/Data_IO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="147" column="42" selection-start-line="147" selection-start-column="42" selection-end-line="147" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memphis/Visualisation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4317">
-          <caret line="190" column="18" lean-forward="true" selection-start-line="50" selection-start-column="6" selection-end-line="190" selection-end-column="18" />
-          <folding>
-            <element signature="e#85#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -502,8 +463,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/memphis/Allocation.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memphis/Data_IO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-690" />
+        <state relative-caret-position="506">
+          <caret line="147" column="42" selection-start-line="147" selection-start-column="42" selection-end-line="147" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memphis/Visualisation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1410">
+          <caret line="191" lean-forward="true" selection-start-line="191" selection-end-line="191" />
+          <folding>
+            <element signature="e#85#94#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
