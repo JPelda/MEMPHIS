@@ -14,12 +14,18 @@
 #
 import os
 import sys
-#from recommonmark.parser import CommonMarkParser
 
+from unittest.mock import MagicMock
 
-#source_parsers = {
-#    '.md': CommonMarkParser,
-#}
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return MagicMock()
+
+MOCK_MODULES = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
+                        "geopandas", "pymysql", "shapefile", "sqlalchemy",
+                        "osgeo", "pyproj", "icc_rt"]
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 source_suffix = ['.rst', '.md']
 
@@ -28,10 +34,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
                 os.sep + 'memphis')
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
                 os.sep + 'memphis/utils')
-
-autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
-                        "geopandas", "pymysql", "shapefile", "sqlalchemy",
-                        "osgeo", "pyproj"]
 
 
 
