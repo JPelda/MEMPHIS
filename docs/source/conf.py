@@ -14,7 +14,7 @@
 #
 import os
 import sys
-import sys
+
 from unittest.mock import MagicMock
 
 class Mock(MagicMock):
@@ -22,7 +22,9 @@ class Mock(MagicMock):
     def __getattr__(cls, name):
         return MagicMock()
 
-MOCK_MODULES = ['pygtk', 'gtk', 'gobject', 'argparse', 'numpy', 'pandas', 'icc_rt']
+MOCK_MODULES = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
+                        "geopandas", "pymysql", "shapefile", "sqlalchemy",
+                        "osgeo", "pyproj", "icc_rt"]
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 source_suffix = ['.rst', '.md']
@@ -32,10 +34,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
                 os.sep + 'memphis')
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.getcwd())) +
                 os.sep + 'memphis/utils')
-
-autodoc_mock_imports = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
-                        "geopandas", "pymysql", "shapefile", "sqlalchemy",
-                        "osgeo", "pyproj"]
 
 
 
