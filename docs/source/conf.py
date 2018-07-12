@@ -24,7 +24,7 @@ class Mock(MagicMock):
 
 MOCK_MODULES = ["osmnx", "pandas", "numpy", "matplotlib", "shapely",
                         "geopandas", "pymysql", "shapefile", "sqlalchemy",
-                        "osgeo", "pyproj", "icc_rt"]
+                        "osgeo", "pyproj", "icc_rt=2017.0.4=h97af966_0"]
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 source_suffix = ['.rst', '.md']
