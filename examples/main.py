@@ -15,11 +15,10 @@ import geopandas as gpd
 import osmnx
 import numpy as np
 from shapely.geometry import MultiPoint, MultiLineString, Polygon
-
-path = os.path.dirname(os.getcwd())
+path = os.getcwd()
 sys.path.append(path + os.sep + 'memphis')
 sys.path.append(path + os.sep + 'memphis' + os.sep + 'utils')
-print(path)
+
 from Data_IO import Data_IO
 import Allocation as alloc
 from transformations_of_crs_values import transform_coords, transform_length,\
@@ -38,7 +37,8 @@ from Visualisation import Graphen
 print("load data")
 s_time = time.time()
 
-Data = Data_IO('config' + os.sep + 'test_config.ini')
+Data = Data_IO(path + os.sep + 'examples' + os.sep + 'config' +
+               os.sep + 'test_config.ini')
 
 gis_r = Data.read_from_sqlServer('gis_roads')
 gdf_gis_r = gpd.GeoDataFrame(gis_r, crs=Data.coord_system, geometry='SHAPE')
@@ -91,10 +91,10 @@ sew_net['V'] = conv.DN_to_V(sew_net)
 gdf_sewnet = gpd.GeoDataFrame(sew_net, crs=Data.coord_system, geometry='SHAPE')
 
 
-path = r"C:\Users\jpelda\Desktop\Stanet FW Stand 2011\shapefile"
-dhs = Data.read_from_shp('dhs', path=path)
-dhs['geometry'] = transform_coords(dhs.geometry, from_coord='epsg:5677')
-gdf_dhs = gpd.GeoDataFrame(dhs, crs=Data.coord_system, geometry='geometry')
+# path = r"C:\Users\jpelda\Desktop\Stanet FW Stand 2011\shapefile"
+# dhs = Data.read_from_shp('dhs', path=path)
+# dhs['geometry'] = transform_coords(dhs.geometry, from_coord='epsg:5677')
+# gdf_dhs = gpd.GeoDataFrame(dhs, crs=Data.coord_system, geometry='geometry')
 
 #########################################################################
 # C O N D I T I O N I N G
@@ -290,48 +290,45 @@ vis = Graphen()
 
 x_label = "$\\dot{V}$ of sewage network $[\\unitfrac{m^3}{s}]$"
 y_label = "Distribution of $\\dot{V}$ of \ngeneric network $[\\unitfrac{m^3}{s}]$"
-vis.plot_boxplot(boxplot_V_over_V_pat, Data.city,
-                 name='boxplot_distr_V_over_V',
-                 x_label=x_label, y_label=y_label, y_scale='log',
-                 x_rotation=90, path_export=os.getcwd())
+fig = vis.plot_boxplot(boxplot_V_over_V_pat, x_label=x_label, y_label=y_label,
+                 y_scale='log', x_rotation=90)
+Data.save_figure(fig, 'boxplot_distr_V_over_V')
 
 x_label = "$\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
 y_label = "Distribution of length [m]"
-vis.plot_boxplot_2_in_1(boxplot_length_over_V_pat, boxplot_length_over_V_sew,
-                        Data.city, name='boxplot_distr_length_over_V',
-                        x_label=x_label, y_label=y_label, y_scale='log',
-                        x_rotation=90, path_export=os.getcwd())
+fig = vis.plot_boxplot_2_in_1(boxplot_length_over_V_pat,
+                              boxplot_length_over_V_sew,
+                              x_label=x_label, y_label=y_label, y_scale='log',
+                              x_rotation=90)
+Data.save_figure(fig, 'boxplot_distr_length_over_V')
 
 data = {'Sewage network': gdf_sewnet.V, 'Generic network': gdf_paths.V}
 y_label = "Distribution of $\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
-vis.plot_boxplot(data, Data.city,
-                 name='boxplot_distr_V', y_label=y_label, y_scale='log',
-                 path_export=os.getcwd())
+fig = vis.plot_boxplot(data, y_label=y_label, y_scale='log')
+Data.save_figure(fig, 'boxplot_distr_V')
 
 data = {'Sewage network': gdf_sewnet.length,
         'Generic network': gdf_paths.length}
 y_label = "Distribution of edges' length [m]"
-vis.plot_boxplot(data, Data.city,
-                 name='boxplot_distr_length', y_label=y_label, y_scale='log',
-                 path_export=os.getcwd())
+fig = vis.plot_boxplot(data, y_label=y_label, y_scale='log')
+Data.save_figure(fig, 'boxplot_distr_length')
 
-vis.plot_distr_of_nodes(dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh,
-                        Data.city, 'amount_of_points_over_popDens',
-                        path_export=os.getcwd())
+fig = vis.plot_distr_of_nodes(dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh)
+Data.save_figure(fig, 'amount_of_points_over_popDens')
 
 min_vol_flow = 0.01
 min_dn = 0.8
 
-if gdf_paths[gdf_paths.V >= min_vol_flow].emtpy:
+if gdf_paths[gdf_paths.V >= min_vol_flow].empty:
     min_vol_flow = 0
 if gdf_sewnet[gdf_sewnet.DN >= min_dn].empty:
     min_dn = 0
 
-vis.plot_map(gdf_census,
+fig = vis.plot_map(gdf_census,
              gdf_paths[gdf_paths['V'] >= 0.01],
              gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b, gdf_gis_r,
-             Data.coord_system, Data.city, Data.wwtp.x, Data.wwtp.y,
-             path_export=os.getcwd())
+             Data.coord_system, Data.wwtp.x, Data.wwtp.y)
+Data.save_figure(fig)
 
 
 geo0 = [x[0] for x in gdf_sewnet['SHAPE'][gdf_sewnet['DN'] >= 0.8].boundary]
@@ -345,59 +342,48 @@ gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(convex_hull)]
 gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(convex_hull)]
 gdf_census_cut = gdf_census[gdf_census.within(convex_hull)]
 
-vis.plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
+fig = vis.plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
              gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
-             gdf_gis_r_cut, Data.coord_system,
-             Data.city + '_cut_ge_DN800', Data.wwtp.x, Data.wwtp.y,
-             path_export=os.getcwd())
+             gdf_gis_r_cut, Data.coord_system, Data.wwtp.x, Data.wwtp.y)
+Data.save_figure(fig, '_cut_ge_DN800')
 
-area = Polygon([[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
-                [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
-                [9.9336125704, 51.5358519306]])
-gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
-gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
-gdf_census_cut = gdf_census[gdf_census.within(area)]
-gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
-gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
-
-vis.plot_map(gdf_census_cut, gdf_paths_cut,
-             gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
-             Data.coord_system, Data.city + '_cut_area',
-             area.centroid.x, area.centroid.y,
-             path_export=os.getcwd(), paths_lw=3, sewnet_lw=1)
+# area = Polygon([[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
+#                 [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
+#                 [9.9336125704, 51.5358519306]])
+# gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+# gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+# gdf_census_cut = gdf_census[gdf_census.within(area)]
+# gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+# gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
+#
+# vis.plot_map(gdf_census_cut, gdf_paths_cut,
+#              gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
+#              Data.coord_system, Data.city + '_cut_area',
+#              area.centroid.x, area.centroid.y,
+#              path_export=Data.path_export, paths_lw=3, sewnet_lw=1)
 
 ##########################
 # SAVE
 ##########################
+path_export_shp = os.sep + 'shp' + os.sep
 
-
-# del census['SHAPE_b']
-# census = census.set_geometry('SHAPE')
-# Data.write_gdf_to_file(census, 'census.shp')
+census = census.set_geometry('SHAPE')
+census['SHAPE_b'] = [poly.wkt for poly in census['SHAPE_b']]
+Data.write_gdf_to_file(census, 'census.shp')
 
 Data.write_gdf_to_file(gdf_gis_b, 'gis_b.shp')
 Data.write_gdf_to_file(gdf_gis_r, 'gis_r.shp')
 
-# del gdf_paths['access']
-# del gdf_paths['area']
-# del gdf_paths['bridge']
-# del gdf_paths['highway']
-# del gdf_paths['junction']
-# del gdf_paths['key']
-# del gdf_paths['lanes']
-# del gdf_paths['maxspeed']
-# del gdf_paths['name']
-# del gdf_paths['oneway']
-# del gdf_paths['ref']
-# del gdf_paths['service']
-# del gdf_paths['tunnel']
-# del gdf_paths['width']
-# del gdf_paths['osmid']
-# Data.write_gdf_to_file(gdf_paths, 'paths.shp')
+gdf_paths_copy = gdf_paths.copy()
+for key in gdf_paths_copy.keys():
+    if key not in ['geometry', 'osmid', 'u', 'v', 'V', 'DN']:
+        del gdf_paths_copy[key]
+gdf_paths_copy['osmid'] = [str(x) for x in gdf_paths_copy['osmid']]
+Data.write_gdf_to_file(gdf_paths_copy, 'paths.shp')
 
 # del gdf_sewnet['geometry_b']
-gdf_sewnet = gdf_sewnet.set_geometry('SHAPE')
-Data.write_gdf_to_file(gdf_sewnet, 'sewnet.shp')
+# gdf_sewnet = gdf_sewnet.set_geometry('SHAPE')
+# Data.write_gdf_to_file(gdf_sewnet, 'shp' + os.sep + 'sewnet.shp')
 
 # Data.write_to_sqlServer('raster_visual', raster)
 # Data.write_to_sqlServer('gis_visual', gis_gdf, dtype=)

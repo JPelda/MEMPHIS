@@ -4,16 +4,14 @@ Created on Sat Apr 28 08:31:36 2018
 
 @author: jpelda
 """
+import matplotlib
 from matplotlib import rc
-from matplotlib import use as mpl_use
-mpl_use('Qt5Agg')
-
 from matplotlib import verbose
 
-def plot_format(xtick_direction='in', ytick_direction='in'):
-#    rc('font', family='sans-serif')
-    rc('font', family='sans-serif', size=7)
 
+def plot_format(xtick_direction='in', ytick_direction='in'):
+    matplotlib.use('Qt5Agg')
+    rc('font', family='sans-serif', size=7)
 #    rc('mathtext', fontset = 'dejavusans')
     rc('text', usetex=True)
 #    rc('font.sans-serif', 'CMU Sans Serif')

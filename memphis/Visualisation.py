@@ -8,29 +8,41 @@ import os
 import sys
 import matplotlib.lines as mlines
 import matplotlib.pyplot as plt
-from matplotlib import use as mplu
-mplu("Qt5Agg")
 from matplotlib.colors import from_levels_and_colors
 from matplotlib.ticker import FormatStrFormatter
 import numpy as np
-
-sys.path.append(os.getcwd() + os.sep + 'src' + os.sep + 'utils')
+sys.path.append(os.getcwd() + os.sep + 'memphis' + os.sep + 'utils')
 from plotter import plot_format
 from matplotlib.patches import Rectangle
 
-
 class Graphen:
+
     def __init__(self):
         pass
 
     def plot_map(self, gdf_census, gdf_paths, gdf_sewnet, gdf_gis_b,
-                 gdf_gis_r, coord_sys, city,
-                 wwtp_x=None, wwtp_y=None, path_export='',
+                 gdf_gis_r, wwtp_x=None, wwtp_y=None,
                  paths_lw=1, sewnet_lw=0.65):
+        """
 
-        fig, ax = plt.subplots(figsize=(16 / 2.54, 9 / 2.54))
+        Parameters
+        ----------
+        gdf_census
+        gdf_paths
+        gdf_sewnet
+        gdf_gis_b
+        gdf_gis_r
+        wwtp_x
+        wwtp_y
+        paths_lw
+        sewnet_lw
+
+        Returns
+        -------
+
+        """
         plot_format()
-
+        fig, ax = plt.subplots(figsize=(16 / 2.54, 9 / 2.54))
         # color_map()
         # cmap_nodes = plt.get_cmap('WhiteRed')
         # vmin_nodes = min(gdf_nodes['wc'])
@@ -175,18 +187,25 @@ class Graphen:
         leg.get_frame().set_linewidth(0.5)
 
         fig.tight_layout()
-        if path_export != '':
-            file = path_export + os.sep + city
-        else:
-            file = city
 
-        fig.savefig(file + '.pdf', filetype='pdf', bbox_inches='tight',
-                    dpi=1200, pad_inches=0.01)
-        fig.savefig(file + '.png', filetype='png', bbox_inches='tight',
-                    dpi=1200, pad_inches=0.01)
+        return fig
+
 
     def plot_distr_of_nodes(self, dis_sew_in_inh, dis_pat_in_inh,
-                            dis_cen_in_inh, city, name, path_export=''):
+                            dis_cen_in_inh):
+        """
+
+        Parameters
+        ----------
+        dis_sew_in_inh
+        dis_pat_in_inh
+        dis_cen_in_inh
+
+        Returns
+        -------
+        matplotlib.figure()
+
+        """
 
         sew_y = [dis_sew_in_inh[key] for key in sorted(dis_sew_in_inh.keys())]
         pat_y = [dis_pat_in_inh[key] for key in sorted(dis_pat_in_inh.keys())]
@@ -196,11 +215,11 @@ class Graphen:
         dev_pat_to_sew = dev_pat_to_sew / np.nanmax(abs(dev_pat_to_sew))
         dev_pat_to_sew = 1 - abs(dev_pat_to_sew)
 
-
+        plot_format()
         fig, ax0 = plt.subplots(figsize=(8 / 2.54, 4.5 / 2.54))
         fig.tight_layout()
         ax1 = ax0.twinx()
-        plot_format()
+
         ax0.set_xlabel("Population density "
                        "$[\\unitfrac{Inhabitants}{10,000 m^2}]$")
         ax0.set_ylabel('Match $[-]$')
@@ -254,24 +273,33 @@ class Graphen:
 
         ax1.set_ylim(ymin=0)
         
-        self.__save_figure(fig, city, name, path_export)
+        return fig
 
 
-    def plot_boxplot(self, data, city, name, x_label='', x_rotation=0,
-                     y_label='', y_scale='linear', path_export='',
-                     legend_name=None):
-        '''Distribution of generic calculated volumetric flow over real
+    def plot_boxplot(self, data, x_label='', x_rotation=0,
+                     y_label='', y_scale='linear', legend_name=None):
+        """
+        Distribution of generic calculated volumetric flow over real
         network volumetric flow.
-
-        ARGS:
-        -----
+        Parameters
+        ----------
         data : dict
             dict.keys() give the x names, dict.values() is distribution
-        '''
+        x_label
+        x_rotation
+        y_label
+        y_scale
+        legend_name
 
+        Returns
+        -------
+            matplotlib.figure()
+        """
+
+        plot_format()
         fig, ax = plt.subplots(figsize=(8 / 2.54, 4.5 / 2.54))
         fig.tight_layout()
-        plot_format()
+
         ax.set_yscale(y_scale)
         ax.set_ylabel(y_label)
         ax.set_xlabel(x_label)
@@ -287,17 +315,26 @@ class Graphen:
             p_1 = Rectangle((0, 0), 1, 1, fill=False, edgecolor='black')
             ax.legend([p_1], ["Generic network"])
 
-        self.__save_figure(fig, city, name, path_export)
+        return fig
 
-    def plot_boxplot_2_beside_in_1(self, data_1, data_2, city, name,
-                                   x_label='', x_rotation=0, y_label='',
-                                   y_scale='linear', path_export=''):
+    def plot_boxplot_2_beside_in_1(self, data_1, data_2):
+        """
 
+        Parameters
+        ----------
+        data_1
+        data_2
+
+        Returns
+        -------
+
+        """
         x = np.array(list(data_1.keys()))
         space = (x[::-1][0] - x[::-1][1]) / 5
+        plot_format()
         fig, ax = plt.subplots()
         fig.tight_layout(pad=0, w_pad=0, h_pad=0)
-        plot_format()
+
 
         ax.boxplot(data_1.values(), 0, '',
                    positions=np.array(range(len(x))) - 0.1, widths=space)
@@ -307,15 +344,29 @@ class Graphen:
         ax.set_xlim((0 - x[::-1][0] - x[::-1][1], len(x) + 2 * space))
         ax.xaxis.set_ticklabels(x)
 
-        self.__save_figure(fig, city, name, path_export)
+        return fig
 
-    def plot_boxplot_2_in_1(self, data_1, data_2, city, name, x_label='',
-                            x_rotation=0, y_label='', y_scale='linear',
-                            path_export=''):
+    def plot_boxplot_2_in_1(self, data_1, data_2, x_label='',
+                            x_rotation=0, y_label='', y_scale='linear'):
+        """
 
+        Parameters
+        ----------
+        data_1
+        data_2
+        x_label
+        x_rotation
+        y_label
+        y_scale
+
+        Returns
+        -------
+
+        """
+        plot_format()
         fig, ax = plt.subplots(figsize=(8 / 2.54, 4.5 / 2.54))
         fig.tight_layout()
-        plot_format()
+
         color = '#4472C4'
         ax.boxplot(data_1.values(), widths=0.4,
                    boxprops=dict(facecolor=color, color=color),
@@ -340,16 +391,14 @@ class Graphen:
         ax.legend([p_1, p_2], ["Generic network", "Sewage network"],
                   ncol=2)
 
-        self.__save_figure(fig, city, name, path_export)
+        return fig
 
-    def __save_figure(self, fig, city, name, path_export):
 
-        if path_export != '':
-            file = "{}{}{}_{}".format(path_export, os.sep, city, name)
-        else:
-            file = "{}_{}".format(city, name)
+if __name__ == '__main__':
+    import Visualisation
 
-        fig.savefig(file + '.pdf', filetype='pdf', bbox_inches='tight',
-                    dpi=1200, pad_inches=0.01)
-        fig.savefig(file + '.png', filetype='png', bbox_inches='tight',
-                    dpi=1200, pad_inches=0.01)
+    vis = Graphen()
+    vis.plot_boxplot({'helo': [12, 32, 43]}, 'test', 'test')
+
+else:
+    pass

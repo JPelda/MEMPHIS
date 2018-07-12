@@ -54,7 +54,10 @@ class Data_IO:
                           float(self.config['coords']
                                 ['waste_water_treatment_plant_y']))
         self.city = self.config['Files']['city']
-        self.path_export = eval(self.config['Files']['path_export'])
+        self.path_export = eval(self.config['Files']['path_export']) + os.sep +\
+                           self.city
+        self.path_export_fig = self.path_export + os.sep + 'fig'
+        self.path_export_shp = self.path_export + os.sep + 'shp'
         self.path_import = eval(self.config['Files']['path_import'])
 
     def write_to_sqlServer(self, table_name, df, dtype={}):
@@ -143,7 +146,6 @@ class Data_IO:
             sql = self.select_from(col, table)
 
         df = pd.read_sql(sql, self.engine)
-
         if 'coord_system' in conf.keys():
             if coord_system == self.coord_system:
                 if len(col['SHAPE']) is 1:
@@ -168,8 +170,8 @@ class Data_IO:
                         from_coord=coord_system,
                         into_coord=self.coord_system)
                     df['SHAPE'] = SHAPEmetry
-        if 'SHAPE' in df.keys():
-            del df[col['SHAPE'][0]]
+        if 'ST_ASText(SHAPE)' in df.keys():
+            del df['ST_ASText(SHAPE)']
         #  Rename columns to fit names in algorithm.
         inv_col = {v: k for k, v in col.items() if type(v) != list}
         df = df.rename(columns=(inv_col))
@@ -209,17 +211,18 @@ class Data_IO:
 
         Parameters
         ----------
-        fname: str
-            filename can be set in Data_IO.__init__.city
-        gdf: geopandas.GeoDataFrame()
-            which values are written to file
+        fname : str
+            fname can be set in Data_IO.__init__.city.
+        gdf : geopandas.GeoDataFrame()
+            Which values are written to file. File format is given by suffix.
         """
-        if fname != '':
-            fname = self.path_export + os.sep + self.city + '_' + fname
+        if fname.endswith('shp'):
+            fname = self.path_export_shp + os.sep + fname
         else:
-            fname = self.path_export + os.sep + self.city
+            fname = self.path_export
 
         gdf.to_file(filename=fname)
+        print("Saved {} \n to {}".format(gdf.keys(), fname))
 
     def read_from_shp(self, name, path=None):
         """Reads File into pandas dataframe.
@@ -232,10 +235,8 @@ class Data_IO:
         -------
             geopandas.DataFrame(fname)
         """
-        if path is not None:
-            path = path
-        else:
-            path = eval(self.config['Files']['path_import'])
+        if path is None:
+            path = self.path_import
         fname = eval(self.config['Files'][name])
         df = gpd.read_file(path + os.sep + fname)
         return df
@@ -253,13 +254,10 @@ class Data_IO:
             nx.Graph()
         """
         if path is None:
-            path = eval(self.config['Files']['path_import'])
-        else:
-            path = path
+            path = self.path_import
 
         graph = osmnx.save_load.load_graphml(path + os.sep +
                                              self.config['Files'][name])
-
         return graph
 
     def dict_of_nested_lists_to_list(self, dictionary):
@@ -273,6 +271,32 @@ class Data_IO:
                 arr.append(item)
         ret = arr
         return ret
+
+    def save_figure(self, fig, name='', path_export=None):
+        """
+
+        Parameters
+        ----------
+        fig : matplotlib.figure()
+        name : str
+        If an extension to Data.city is wanted.
+        path_export : str
+        Is given via Data.path_export_fig / Data.path_export_shp ...
+
+        Returns
+        -------
+
+        """
+        if path_export:
+            fname = "{}{}{}_{}".format(path_export, name)
+        else:
+            fname = self.path_export_fig + os.sep + self.city.upper() +\
+                    '_' +  name
+
+        fig.savefig(fname + '.pdf', filetype='pdf', bbox_inches='tight',
+                    dpi=1200, pad_inches=0.01)
+        fig.savefig(fname + '.png', filetype='png', bbox_inches='tight',
+                    dpi=1200, pad_inches=0.01)
 
 
 if __name__ == "__main__":
