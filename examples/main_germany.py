@@ -38,7 +38,7 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO(path + os.sep + 'examples' + os.sep + 'config' +
-               os.sep + 'test_config.ini')
+               os.sep + 'goettingen.ini')
 
 gis_r = Data.read_from_sqlServer('gis_roads')
 gdf_gis_r = gpd.GeoDataFrame(gis_r, crs=Data.coord_system, geometry='SHAPE')
@@ -327,7 +327,7 @@ if gdf_sewnet[gdf_sewnet.DN >= min_dn].empty:
 fig = vis.plot_map(gdf_census,
              gdf_paths[gdf_paths['V'] >= 0.01],
              gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b, gdf_gis_r,
-             Data.coord_system, Data.wwtp.x, Data.wwtp.y)
+             Data.wwtp.x, Data.wwtp.y)
 Data.save_figure(fig)
 
 
@@ -343,24 +343,23 @@ gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(convex_hull)]
 gdf_census_cut = gdf_census[gdf_census.within(convex_hull)]
 
 fig = vis.plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
-             gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
-             gdf_gis_r_cut, Data.coord_system, Data.wwtp.x, Data.wwtp.y)
+                   gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
+                   gdf_gis_r_cut, Data.wwtp.x, Data.wwtp.y)
 Data.save_figure(fig, '_cut_ge_DN800')
 
-# area = Polygon([[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
-#                 [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
-#                 [9.9336125704, 51.5358519306]])
-# gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
-# gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
-# gdf_census_cut = gdf_census[gdf_census.within(area)]
-# gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
-# gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
-#
-# vis.plot_map(gdf_census_cut, gdf_paths_cut,
-#              gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
-#              Data.coord_system, Data.city + '_cut_area',
-#              area.centroid.x, area.centroid.y,
-#              path_export=Data.path_export, paths_lw=3, sewnet_lw=1)
+area = Polygon([[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
+                [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
+                [9.9336125704, 51.5358519306]])
+gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+gdf_census_cut = gdf_census[gdf_census.within(area)]
+gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
+
+fig = vis.plot_map(gdf_census_cut, gdf_paths_cut,
+                   gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
+                   paths_lw=3, sewnet_lw=1)
+Data.save_figure(fig, '_cut_area')
 
 ##########################
 # SAVE

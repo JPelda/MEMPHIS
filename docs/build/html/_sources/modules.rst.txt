@@ -1,14 +1,16 @@
-src
-===
+utils
+=====
 
 .. toctree::
    :maxdepth: 4
 
-   Allocation
-   Calculation
-   Conditioning
-   Data_IO
-   Evaluation
-   Visualisation
-   wcPERinhab
-   testfile_for_doc
+   Equations
+   accumulate_val_along_path
+   buffer
+   logger
+   merge_points
+   paths_to_dataframe
+   plotter
+   shortest_paths
+   transform_coordinates
+   transformations_of_crs_values

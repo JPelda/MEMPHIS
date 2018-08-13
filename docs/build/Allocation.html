@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Allocation module &mdash; MEMPHIS 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MEMPHIS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Allocation module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MEMPHIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Allocation module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Allocation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-Allocation">
+<span id="allocation-module"></span><h1>Allocation module<a class="headerlink" href="#module-Allocation" title="Permalink to this headline">¶</a></h1>
+<p>Created on Wed May  2 11:32:35 2018</p>
+<p>&#64;author: jpelda</p>
+<dl class="function">
+<dt id="Allocation.alloc_inhabs_to_nodes">
+<code class="descclassname">Allocation.</code><code class="descname">alloc_inhabs_to_nodes</code><span class="sig-paren">(</span><em>gdf_raster</em>, <em>gdf_nodes</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_inhabs_to_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_inhabs_to_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates inhabitans to nodes. Nodes in same raster field will get
+raster’s inhabitans divided by amout of nodes within raster. Raster
+fields without nodes are allocated to nearest node.</p>
+<dl class="docutils">
+<dt>gdf_raster <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf[‘SHAPE’]</li>
+<li>gdf[‘SHAPE_b’]</li>
+<li>gdf[‘inhabs’]</li>
+</ul>
+</dd>
+<dt>gdf_nodes <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf[‘osmid’], gdf[‘geometry’]</li>
+</ul>
+</dd>
+<dt>graph <span class="classifier-delimiter">:</span> <span class="classifier">nx.Graph()</span></dt>
+<dd>edges  and nodes from graph of streetnetwork</dd>
+</dl>
+<dl class="docutils">
+<dt>list(float)</dt>
+<dd>list of inhabitants in order of gdf_nodes</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="Allocation.alloc_nodes_to_inhabs">
+<code class="descclassname">Allocation.</code><code class="descname">alloc_nodes_to_inhabs</code><span class="sig-paren">(</span><em>gdf_raster</em>, <em>gdf_nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_nodes_to_inhabs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_nodes_to_inhabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates nodes of gdf to fields of gdf_census.</p>
+<dl class="docutils">
+<dt>gdf_raster <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf_raster[‘inhabs’]: the amount of inhabs per geometry</li>
+<li>gdf_raster[‘geometry’]: the geometry</li>
+</ul>
+</dd>
+<dt>gdf_nodes <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf_nodes[‘geometry’]: the geometry</li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils">
+<dt>tuple(list, list)</dt>
+<dd><ul class="first last simple">
+<li>list of inhabitants per node</li>
+<li>list of raster id</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="Allocation.alloc_wc_from_b_to_node">
+<code class="descclassname">Allocation.</code><code class="descname">alloc_wc_from_b_to_node</code><span class="sig-paren">(</span><em>gdf_gis_b</em>, <em>gdf_nodes</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_wc_from_b_to_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_wc_from_b_to_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates the water consumption of each building in GIS-Data to
+nearest node of graph.</p>
+<dl class="docutils">
+<dt>gdf_gis_b <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf_gis_b[‘geometry’]: the geometry</li>
+<li>gdf_gis_b[‘wc’]: the water consumption</li>
+<li>gdf_gis_b[‘area’]: the area of the building</li>
+</ul>
+</dd>
+<dt>graph <span class="classifier-delimiter">:</span> <span class="classifier">nx.Graph()</span></dt>
+<dd>edges and nodes from graph of streetnetwork</dd>
+</dl>
+<dl class="docutils">
+<dt>list(float)</dt>
+<dd>list of water consumption of each node in order of gdf_nodes</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="Allocation.alloc_wc_to_type">
+<code class="descclassname">Allocation.</code><code class="descname">alloc_wc_to_type</code><span class="sig-paren">(</span><em>gis_cat</em>, <em>gdf_gis_b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_wc_to_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_wc_to_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates water consumption to types coming from gis_buildings.</p>
+<dl class="docutils">
+<dt>gis_cat <span class="classifier-delimiter">:</span> <span class="classifier">pandas.DataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gis_cat[‘type’]: type of GIS-data</li>
+<li>gis_cat[‘cat’]: category type belongs to</li>
+</ul>
+</dd>
+<dt>gdf_gis_b <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd><ul class="first last simple">
+<li>gdf_gis_b[‘types’]: type of building</li>
+</ul>
+</dd>
+</dl>
+<dl class="docutils">
+<dt>list(float)</dt>
+<dd>the water consumption for each building in gdf_gis_b</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Johannes Pelda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

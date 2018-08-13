@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Evaluation module &mdash; MEMPHIS 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MEMPHIS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Evaluation module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MEMPHIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Evaluation module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Evaluation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-Evaluation">
+<span id="evaluation-module"></span><h1>Evaluation module<a class="headerlink" href="#module-Evaluation" title="Permalink to this headline">¶</a></h1>
+<p>Created on Thu May 31 11:46:47 2018</p>
+<p>&#64;author: jpelda</p>
+<dl class="class">
+<dt id="Evaluation.Clustering">
+<em class="property">class </em><code class="descclassname">Evaluation.</code><code class="descname">Clustering</code><a class="reference internal" href="_modules/Evaluation.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="Evaluation.Clustering.best_pts_within_overlay_pts">
+<code class="descname">best_pts_within_overlay_pts</code><span class="sig-paren">(</span><em>comp_val</em>, <em>gdf</em>, <em>gdf_orig</em>, <em>buffer</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.best_pts_within_overlay_pts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.best_pts_within_overlay_pts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects pts in gdf, that match to pts in gdf_orig,
+clustered to 0.25, 0.5, 0.75, 1….</p>
+<dl class="docutils">
+<dt>comp_val <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>the col_name by which the best point is compared to gdf_orig</dd>
+<dt>gdf <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.DataFrame()</span></dt>
+<dd>gdf with col ‘geometry’ that is matched with gdf_orig.</dd>
+<dt>gdf_orig <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.DataFrame()</span></dt>
+<dd>gdf with col ‘geometry’ gdf is matched to.</dd>
+<dt>buffer <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Buffer around gdf_orig[‘geometry’] in [m].</dd>
+</dl>
+<dl class="docutils">
+<dt>dict</dt>
+<dd>dictionary of gdf’s</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Evaluation.Clustering.count_val_over_key">
+<code class="descname">count_val_over_key</code><span class="sig-paren">(</span><em>gdf</em>, <em>keys</em>, <em>keys_name='inhabs'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.count_val_over_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.count_val_over_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clusters points to -1, 0, 5, 10, 15 … by its inhabs as gdf.keys()</p>
+<dl class="docutils">
+<dt>gdf <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
+<dd>Data that are clustered by keys.</dd>
+<dt>keys <span class="classifier-delimiter">:</span> <span class="classifier">set</span></dt>
+<dd>Are the keys the gdf is clustered by.</dd>
+<dt>keys_name: str, optional</dt>
+<dd>The name of values of keys. Must also be given as col name in gdf.</dd>
+</dl>
+<dl class="docutils">
+<dt>dict</dt>
+<dd>dict.keys == cluster_keys
+dict.values == len(items of gdfs) per cluter_key</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Johannes Pelda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
