@@ -3,20 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/memphis-0.0.1.dev0-py3.6.egg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/main_germany.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/main_germany.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST__cut_ge_DN800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST__cut_ge_DN800.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_amount_of_points_over_popDens.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_amount_of_points_over_popDens.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V_over_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V_over_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length_over_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length_over_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis.egg-info/PKG-INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis.egg-info/SOURCES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis.egg-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis.egg-info/requires.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis.egg-info/top_level.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +14,7 @@
     <session id="-478806196">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -56,38 +43,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="346" column="19" selection-start-line="346" selection-start-column="19" selection-end-line="346" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memphis/Data_IO.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="296" selection-start-line="296" selection-end-line="296" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memphis/Visualisation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1510">
-              <caret line="23" column="47" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="47" />
-              <folding>
-                <element signature="e#85#94#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -432,6 +388,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1357">
+          <caret line="83" column="51" lean-forward="true" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/memphis/Data_IO.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -446,13 +409,6 @@
           <folding>
             <element signature="e#85#94#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="346" column="19" selection-start-line="346" selection-start-column="19" selection-end-line="346" selection-end-column="19" />
         </state>
       </provider>
     </entry>
