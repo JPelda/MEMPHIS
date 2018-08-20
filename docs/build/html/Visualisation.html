@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="wcPERinhab module" href="wcPERinhab.html" />
-    <link rel="prev" title="Evaluation module" href="Evaluation.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -78,17 +76,11 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Allocation.html">Allocation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Calculation.html">Calculation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conditioning.html">Conditioning module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Data_IO.html">Data_IO module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Evaluation.html">Evaluation module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Visualisation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wcPERinhab.html">wcPERinhab module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">utils</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Visualisation module</a></li>
 </ul>
-
+</div>
             
           
         </div>
@@ -151,8 +143,184 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="visualisation-module">
-<h1>Visualisation module<a class="headerlink" href="#visualisation-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-Visualisation">
+<span id="visualisation-module"></span><h1>Visualisation module<a class="headerlink" href="#module-Visualisation" title="Permalink to this headline">¶</a></h1>
+<p>Created on Thu May 31 20:50:39 2018</p>
+<p>&#64;author: jpelda</p>
+<dl class="class">
+<dt id="Visualisation.Graphen">
+<em class="property">class </em><code class="descclassname">Visualisation.</code><code class="descname">Graphen</code><a class="reference internal" href="_modules/Visualisation.html#Graphen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#Visualisation.Graphen.plot_boxplot" title="Visualisation.Graphen.plot_boxplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_boxplot</span></code></a>(data[,&nbsp;x_label,&nbsp;x_rotation,&nbsp;…])</td>
+<td>Distribution of generic calculated volumetric flow over real network volumetric flow.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#Visualisation.Graphen.plot_boxplot_2_beside_in_1" title="Visualisation.Graphen.plot_boxplot_2_beside_in_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_boxplot_2_beside_in_1</span></code></a>(data_1,&nbsp;data_2)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param data_1:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#Visualisation.Graphen.plot_boxplot_2_in_1" title="Visualisation.Graphen.plot_boxplot_2_in_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_boxplot_2_in_1</span></code></a>(data_1,&nbsp;data_2[,&nbsp;…])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param data_1:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#Visualisation.Graphen.plot_distr_of_nodes" title="Visualisation.Graphen.plot_distr_of_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_distr_of_nodes</span></code></a>(dis_sew_in_inh,&nbsp;…)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param dis_sew_in_inh:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#Visualisation.Graphen.plot_map" title="Visualisation.Graphen.plot_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_map</span></code></a>(gdf_census,&nbsp;gdf_paths,&nbsp;gdf_sewnet,&nbsp;…)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param gdf_census:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Visualisation.Graphen.plot_boxplot">
+<code class="descname">plot_boxplot</code><span class="sig-paren">(</span><em>data</em>, <em>x_label=''</em>, <em>x_rotation=0</em>, <em>y_label=''</em>, <em>y_scale='linear'</em>, <em>legend_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Visualisation.html#Graphen.plot_boxplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen.plot_boxplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distribution of generic calculated volumetric flow over real
+network volumetric flow.
+:param data: dict.keys() give the x names, dict.values() is distribution
+:type data: dict
+:param x_label:
+:param x_rotation:
+:param y_label:
+:param y_scale:
+:param legend_name:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">matplotlib.figure()</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Visualisation.Graphen.plot_boxplot_2_beside_in_1">
+<code class="descname">plot_boxplot_2_beside_in_1</code><span class="sig-paren">(</span><em>data_1</em>, <em>data_2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Visualisation.html#Graphen.plot_boxplot_2_beside_in_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen.plot_boxplot_2_beside_in_1" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_1</strong> – </li>
+<li><strong>data_2</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Visualisation.Graphen.plot_boxplot_2_in_1">
+<code class="descname">plot_boxplot_2_in_1</code><span class="sig-paren">(</span><em>data_1</em>, <em>data_2</em>, <em>x_label=''</em>, <em>x_rotation=0</em>, <em>y_label=''</em>, <em>y_scale='linear'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Visualisation.html#Graphen.plot_boxplot_2_in_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen.plot_boxplot_2_in_1" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_1</strong> – </li>
+<li><strong>data_2</strong> – </li>
+<li><strong>x_label</strong> – </li>
+<li><strong>x_rotation</strong> – </li>
+<li><strong>y_label</strong> – </li>
+<li><strong>y_scale</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Visualisation.Graphen.plot_distr_of_nodes">
+<code class="descname">plot_distr_of_nodes</code><span class="sig-paren">(</span><em>dis_sew_in_inh</em>, <em>dis_pat_in_inh</em>, <em>dis_cen_in_inh</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Visualisation.html#Graphen.plot_distr_of_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen.plot_distr_of_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dis_sew_in_inh</strong> – </li>
+<li><strong>dis_pat_in_inh</strong> – </li>
+<li><strong>dis_cen_in_inh</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matplotlib.figure()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Visualisation.Graphen.plot_map">
+<code class="descname">plot_map</code><span class="sig-paren">(</span><em>gdf_census</em>, <em>gdf_paths</em>, <em>gdf_sewnet</em>, <em>gdf_gis_b</em>, <em>gdf_gis_r</em>, <em>wwtp_x=None</em>, <em>wwtp_y=None</em>, <em>paths_lw=1</em>, <em>sewnet_lw=0.65</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Visualisation.html#Graphen.plot_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Visualisation.Graphen.plot_map" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gdf_census</strong> – </li>
+<li><strong>gdf_paths</strong> – </li>
+<li><strong>gdf_sewnet</strong> – </li>
+<li><strong>gdf_gis_b</strong> – </li>
+<li><strong>gdf_gis_r</strong> – </li>
+<li><strong>wwtp_x</strong> – </li>
+<li><strong>wwtp_y</strong> – </li>
+<li><strong>paths_lw</strong> – </li>
+<li><strong>sewnet_lw</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -160,15 +328,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="wcPERinhab.html" class="btn btn-neutral float-right" title="wcPERinhab module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Evaluation.html" class="btn btn-neutral" title="Evaluation module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

@@ -17,7 +17,7 @@ from sqlalchemy import create_engine
 from osgeo import ogr
 import osmnx
 
-sys.path.append(os.path.dirname(os.getcwd()) + os.sep + 'func')
+sys.path.append(os.path.dirname(os.getcwd()) + os.sep + 'utils')
 from transformations_of_crs_values import transform_coords
 
 

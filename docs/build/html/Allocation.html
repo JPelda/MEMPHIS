@@ -153,53 +153,68 @@
 <dd><p>Allocates inhabitans to nodes. Nodes in same raster field will get
 raster’s inhabitans divided by amout of nodes within raster. Raster
 fields without nodes are allocated to nearest node.</p>
-<dl class="docutils">
-<dt>gdf_raster <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gdf_raster</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf[‘SHAPE’]</li>
 <li>gdf[‘SHAPE_b’]</li>
 <li>gdf[‘inhabs’]</li>
 </ul>
-</dd>
-<dt>gdf_nodes <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+</li>
+<li><strong>gdf_nodes</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf[‘osmid’], gdf[‘geometry’]</li>
 </ul>
-</dd>
-<dt>graph <span class="classifier-delimiter">:</span> <span class="classifier">nx.Graph()</span></dt>
-<dd>edges  and nodes from graph of streetnetwork</dd>
-</dl>
-<dl class="docutils">
-<dt>list(float)</dt>
-<dd>list of inhabitants in order of gdf_nodes</dd>
-</dl>
+</li>
+<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – edges  and nodes from graph of streetnetwork</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of inhabitants in order of gdf_nodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(float)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Allocation.alloc_nodes_to_inhabs">
 <code class="descclassname">Allocation.</code><code class="descname">alloc_nodes_to_inhabs</code><span class="sig-paren">(</span><em>gdf_raster</em>, <em>gdf_nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_nodes_to_inhabs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_nodes_to_inhabs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates nodes of gdf to fields of gdf_census.</p>
-<dl class="docutils">
-<dt>gdf_raster <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gdf_raster</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf_raster[‘inhabs’]: the amount of inhabs per geometry</li>
 <li>gdf_raster[‘geometry’]: the geometry</li>
 </ul>
-</dd>
-<dt>gdf_nodes <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+</li>
+<li><strong>gdf_nodes</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf_nodes[‘geometry’]: the geometry</li>
 </ul>
-</dd>
-</dl>
-<dl class="docutils">
-<dt>tuple(list, list)</dt>
-<dd><ul class="first last simple">
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
 <li>list of inhabitants per node</li>
 <li>list of raster id</li>
 </ul>
-</dd>
-</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple(list, list)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -207,44 +222,60 @@ fields without nodes are allocated to nearest node.</p>
 <code class="descclassname">Allocation.</code><code class="descname">alloc_wc_from_b_to_node</code><span class="sig-paren">(</span><em>gdf_gis_b</em>, <em>gdf_nodes</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_wc_from_b_to_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_wc_from_b_to_node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates the water consumption of each building in GIS-Data to
 nearest node of graph.</p>
-<dl class="docutils">
-<dt>gdf_gis_b <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gdf_gis_b</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf_gis_b[‘geometry’]: the geometry</li>
 <li>gdf_gis_b[‘wc’]: the water consumption</li>
 <li>gdf_gis_b[‘area’]: the area of the building</li>
 </ul>
-</dd>
-<dt>graph <span class="classifier-delimiter">:</span> <span class="classifier">nx.Graph()</span></dt>
-<dd>edges and nodes from graph of streetnetwork</dd>
-</dl>
-<dl class="docutils">
-<dt>list(float)</dt>
-<dd>list of water consumption of each node in order of gdf_nodes</dd>
-</dl>
+</li>
+<li><strong>graph</strong> (<em>nx.Graph</em><em>(</em><em>)</em>) – edges and nodes from graph of streetnetwork</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of water consumption of each node in order of gdf_nodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(float)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Allocation.alloc_wc_to_type">
 <code class="descclassname">Allocation.</code><code class="descname">alloc_wc_to_type</code><span class="sig-paren">(</span><em>gis_cat</em>, <em>gdf_gis_b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Allocation.html#alloc_wc_to_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Allocation.alloc_wc_to_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocates water consumption to types coming from gis_buildings.</p>
-<dl class="docutils">
-<dt>gis_cat <span class="classifier-delimiter">:</span> <span class="classifier">pandas.DataFrame()</span></dt>
-<dd><ul class="first last simple">
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gis_cat</strong> (<em>pandas.DataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gis_cat[‘type’]: type of GIS-data</li>
 <li>gis_cat[‘cat’]: category type belongs to</li>
 </ul>
-</dd>
-<dt>gdf_gis_b <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd><ul class="first last simple">
+</li>
+<li><strong>gdf_gis_b</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – <ul>
 <li>gdf_gis_b[‘types’]: type of building</li>
 </ul>
-</dd>
-</dl>
-<dl class="docutils">
-<dt>list(float)</dt>
-<dd>the water consumption for each building in gdf_gis_b</dd>
-</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the water consumption for each building in gdf_gis_b</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(float)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

@@ -151,44 +151,72 @@
 <dt id="Evaluation.Clustering">
 <em class="property">class </em><code class="descclassname">Evaluation.</code><code class="descname">Clustering</code><a class="reference internal" href="_modules/Evaluation.html#Clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#Evaluation.Clustering.best_pts_within_overlay_pts" title="Evaluation.Clustering.best_pts_within_overlay_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">best_pts_within_overlay_pts</span></code></a>(comp_val,&nbsp;gdf,&nbsp;…)</td>
+<td>Selects pts in gdf, that match to pts in gdf_orig, clustered to 0.25, 0.5, 0.75, 1….</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#Evaluation.Clustering.count_val_over_key" title="Evaluation.Clustering.count_val_over_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_val_over_key</span></code></a>(gdf,&nbsp;keys[,&nbsp;keys_name])</td>
+<td>Clusters points to -1, 0, 5, 10, 15 …</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="Evaluation.Clustering.best_pts_within_overlay_pts">
 <code class="descname">best_pts_within_overlay_pts</code><span class="sig-paren">(</span><em>comp_val</em>, <em>gdf</em>, <em>gdf_orig</em>, <em>buffer</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.best_pts_within_overlay_pts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.best_pts_within_overlay_pts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects pts in gdf, that match to pts in gdf_orig,
 clustered to 0.25, 0.5, 0.75, 1….</p>
-<dl class="docutils">
-<dt>comp_val <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>the col_name by which the best point is compared to gdf_orig</dd>
-<dt>gdf <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.DataFrame()</span></dt>
-<dd>gdf with col ‘geometry’ that is matched with gdf_orig.</dd>
-<dt>gdf_orig <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.DataFrame()</span></dt>
-<dd>gdf with col ‘geometry’ gdf is matched to.</dd>
-<dt>buffer <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Buffer around gdf_orig[‘geometry’] in [m].</dd>
-</dl>
-<dl class="docutils">
-<dt>dict</dt>
-<dd>dictionary of gdf’s</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>comp_val</strong> (<em>str</em>) – the col_name by which the best point is compared to gdf_orig</li>
+<li><strong>gdf</strong> (<em>geopandas.DataFrame</em><em>(</em><em>)</em>) – gdf with col ‘geometry’ that is matched with gdf_orig.</li>
+<li><strong>gdf_orig</strong> (<em>geopandas.DataFrame</em><em>(</em><em>)</em>) – gdf with col ‘geometry’ gdf is matched to.</li>
+<li><strong>buffer</strong> (<em>float</em>) – Buffer around gdf_orig[‘geometry’] in [m].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dictionary of gdf’s</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="Evaluation.Clustering.count_val_over_key">
 <code class="descname">count_val_over_key</code><span class="sig-paren">(</span><em>gdf</em>, <em>keys</em>, <em>keys_name='inhabs'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Evaluation.html#Clustering.count_val_over_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Evaluation.Clustering.count_val_over_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clusters points to -1, 0, 5, 10, 15 … by its inhabs as gdf.keys()</p>
-<dl class="docutils">
-<dt>gdf <span class="classifier-delimiter">:</span> <span class="classifier">geopandas.GeoDataFrame()</span></dt>
-<dd>Data that are clustered by keys.</dd>
-<dt>keys <span class="classifier-delimiter">:</span> <span class="classifier">set</span></dt>
-<dd>Are the keys the gdf is clustered by.</dd>
-<dt>keys_name: str, optional</dt>
-<dd>The name of values of keys. Must also be given as col name in gdf.</dd>
-</dl>
-<dl class="docutils">
-<dt>dict</dt>
-<dd>dict.keys == cluster_keys
-dict.values == len(items of gdfs) per cluter_key</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gdf</strong> (<em>geopandas.GeoDataFrame</em><em>(</em><em>)</em>) – Data that are clustered by keys.</li>
+<li><strong>keys</strong> (<em>set</em>) – Are the keys the gdf is clustered by.</li>
+<li><strong>keys_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of values of keys. Must also be given as col name in gdf.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict.keys == cluster_keys
+dict.values == len(items of gdfs) per cluter_key</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

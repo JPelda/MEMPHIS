@@ -4,7 +4,6 @@ utils
 .. toctree::
    :maxdepth: 4
 
-   Equations
    accumulate_val_along_path
    buffer
    logger

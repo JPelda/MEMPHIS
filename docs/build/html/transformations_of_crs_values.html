@@ -27,8 +27,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="transform_coordinates module" href="transform_coordinates.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -77,29 +76,11 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Allocation.html">Allocation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Calculation.html">Calculation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Conditioning.html">Conditioning module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Data_IO.html">Data_IO module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Evaluation.html">Evaluation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Visualisation.html">Visualisation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wcPERinhab.html">wcPERinhab module</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">utils</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Equations.html">Equations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="accumulate_val_along_path.html">accumulate_val_along_path module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer.html">buffer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="logger.html">logger module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="merge_points.html">merge_points module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="paths_to_dataframe.html">paths_to_dataframe module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plotter.html">plotter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shortest_paths.html">shortest_paths module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transform_coordinates.html">transform_coordinates module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">transformations_of_crs_values module</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">transformations_of_crs_values module</a></li>
 </ul>
-</li>
-</ul>
-
+</div>
             
           
         </div>
@@ -143,8 +124,6 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="modules.html">utils</a> &raquo;</li>
-        
       <li>transformations_of_crs_values module</li>
     
     
@@ -164,8 +143,68 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="transformations-of-crs-values-module">
-<h1>transformations_of_crs_values module<a class="headerlink" href="#transformations-of-crs-values-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-transformations_of_crs_values">
+<span id="transformations-of-crs-values-module"></span><h1>transformations_of_crs_values module<a class="headerlink" href="#module-transformations_of_crs_values" title="Permalink to this headline">¶</a></h1>
+<p>Created on Wed Feb 21 10:40:53 2018</p>
+<p>&#64;author: jpelda</p>
+<dl class="function">
+<dt id="transformations_of_crs_values.crs_length_to_meter">
+<code class="descclassname">transformations_of_crs_values.</code><code class="descname">crs_length_to_meter</code><span class="sig-paren">(</span><em>linestring</em>, <em>crs='WGS84'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformations_of_crs_values.html#crs_length_to_meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformations_of_crs_values.crs_length_to_meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms crs_length into meters.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="transformations_of_crs_values.transform_area">
+<code class="descclassname">transformations_of_crs_values.</code><code class="descname">transform_area</code><span class="sig-paren">(</span><em>geom</em>, <em>crs_from='EPSG:4326'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformations_of_crs_values.html#transform_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformations_of_crs_values.transform_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms area into are based on crs.</p>
+<dl class="docutils">
+<dt>geom: list</dt>
+<dd>List contains geometric objects.</dd>
+</dl>
+<dl class="docutils">
+<dt>crs_from: str</dt>
+<dd>coord system of geom</dd>
+<dt>crs_into: str</dt>
+<dd>coord system defining the unit of return</dd>
+</dl>
+<dl class="docutils">
+<dt>area: [floats] [crs based]</dt>
+<dd>EPSG:3035 returns area [m]</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transformations_of_crs_values.transform_coords">
+<code class="descclassname">transformations_of_crs_values.</code><code class="descname">transform_coords</code><span class="sig-paren">(</span><em>geo</em>, <em>from_coord='epsg:3035'</em>, <em>into_coord='epsg:4326'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformations_of_crs_values.html#transform_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformations_of_crs_values.transform_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms coordinates from given to requested coordinate system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>geo</strong> – [[x]], x is either Polygon, LineString, Point or (f,f)*i)</li>
+<li><strong>from_coord</strong> – str, coordinate system given</li>
+<li><strong>into_coord</strong> – str, coordinate system requested</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">type(geo) transformed to into_coord</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="transformations_of_crs_values.transform_length">
+<code class="descclassname">transformations_of_crs_values.</code><code class="descname">transform_length</code><span class="sig-paren">(</span><em>length</em>, <em>crs_from='EPSG:32633'</em>, <em>crs_into='EPSG:4326'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transformations_of_crs_values.html#transform_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transformations_of_crs_values.transform_length" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Transforms length into length based on crs.</dt>
+<dd>It is a little bit imprecise. For better results use
+method crs_length_to_meter.</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -173,13 +212,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="transform_coordinates.html" class="btn btn-neutral" title="transform_coordinates module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

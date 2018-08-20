@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>transformations_of_crs_values &mdash; MEMPHIS 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> MEMPHIS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Allocation.html">Allocation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_IO.html">Data_IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Evaluation.html">Evaluation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Visualisation.html">Visualisation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wcPERinhab.html">wcPERinhab module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">utils</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MEMPHIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>transformations_of_crs_values</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for transformations_of_crs_values</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Wed Feb 21 10:40:53 2018</span>
+
+<span class="sd">@author: jpelda</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="k">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="kn">import</span> <span class="nn">shapely.ops</span> <span class="k">as</span> <span class="nn">ops</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">pyproj</span> <span class="k">as</span> <span class="nn">pp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="transform_coords"><a class="viewcode-back" href="../transformations_of_crs_values.html#transformations_of_crs_values.transform_coords">[docs]</a><span class="k">def</span> <span class="nf">transform_coords</span><span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="n">from_coord</span><span class="o">=</span><span class="s1">&#39;epsg:3035&#39;</span><span class="p">,</span> <span class="n">into_coord</span><span class="o">=</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Transforms coordinates from given to requested coordinate system.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        geo: [[x]], x is either Polygon, LineString, Point or (f,f)*i)</span>
+<span class="sd">        from_coord: str, coordinate system given</span>
+<span class="sd">        into_coord: str, coordinate system requested</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        type(geo) transformed to into_coord</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+        <span class="n">geo</span> <span class="o">=</span> <span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">geo_as_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+    <span class="n">geo_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    pp.transform needs tuples of floats to convert,</span>
+<span class="sd">    here input is converted into tuples</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Polygon</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">poly</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo</span><span class="p">):</span>
+            <span class="n">geo_as_tuples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span>
+                                            <span class="nb">zip</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">exterior</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">poly</span><span class="o">.</span><span class="n">exterior</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">elif</span> <span class="n">geo_type</span> <span class="o">==</span> <span class="n">LineString</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo</span><span class="p">):</span>
+            <span class="n">geo_as_tuples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">coords</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="n">geo_type</span> <span class="o">==</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo</span><span class="p">):</span>
+            <span class="n">geo_as_tuples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">point</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">point</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo</span><span class="p">):</span>
+            <span class="n">geo_as_tuples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span>
+
+    <span class="c1">#  conversion of coordinates</span>
+    <span class="n">geo_convert</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tuples</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo_as_tuples</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">]</span>
+        <span class="n">geo_convert</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">from_coord</span><span class="p">),</span>
+                                    <span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">into_coord</span><span class="p">),</span>
+                                    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">geo_convert</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">geo_convert</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                             <span class="n">geo_convert</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+
+    <span class="c1"># type(geo) shall be the output type</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">geo_type</span> <span class="o">==</span> <span class="n">Polygon</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo_convert</span><span class="p">):</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geo_type</span> <span class="o">==</span> <span class="n">LineString</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo_convert</span><span class="p">):</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">geo_type</span> <span class="o">==</span> <span class="n">Point</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geo_convert</span><span class="p">):</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">geo_convert</span>
+
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="transform_length"><a class="viewcode-back" href="../transformations_of_crs_values.html#transformations_of_crs_values.transform_length">[docs]</a><span class="k">def</span> <span class="nf">transform_length</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">crs_from</span><span class="o">=</span><span class="s2">&quot;EPSG:32633&quot;</span><span class="p">,</span> <span class="n">crs_into</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms length into length based on crs.</span>
+<span class="sd">        It is a little bit imprecise. For better results use </span>
+<span class="sd">        method crs_length_to_meter.</span>
+
+<span class="sd">    ARGS:</span>
+<span class="sd">    -----</span>
+<span class="sd">    length: float [meter]</span>
+
+<span class="sd">    KWARGS:</span>
+<span class="sd">    ------</span>
+<span class="sd">    crs_from: str</span>
+<span class="sd">        coord system of length</span>
+<span class="sd">    crs_into: str</span>
+<span class="sd">        coord system in which length shall be converted</span>
+
+<span class="sd">    RETURNS:</span>
+<span class="sd">    --------</span>
+<span class="sd">    length: float [crs based]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">length</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+    <span class="n">project</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+                      <span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">crs_from</span><span class="p">),</span>
+                      <span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">crs_into</span><span class="p">))</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">.</span><span class="n">length</span>
+
+    <span class="k">return</span> <span class="n">length</span></div>
+
+
+<div class="viewcode-block" id="crs_length_to_meter"><a class="viewcode-back" href="../transformations_of_crs_values.html#transformations_of_crs_values.crs_length_to_meter">[docs]</a><span class="k">def</span> <span class="nf">crs_length_to_meter</span><span class="p">(</span><span class="n">linestring</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;WGS84&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms crs_length into meters.</span>
+
+<span class="sd">    ARGS:</span>
+<span class="sd">    -----</span>
+<span class="sd">    linestring: shapely.geometry.LineString</span>
+
+<span class="sd">    RETURNS:</span>
+<span class="sd">    -------</span>
+<span class="sd">    length: float [m]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">geod</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">ellps</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+    <span class="n">angle1</span><span class="p">,</span> <span class="n">angle2</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">geod</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">linestring</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                        <span class="n">linestring</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                        <span class="n">linestring</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                        <span class="n">linestring</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">distance</span></div>
+
+<div class="viewcode-block" id="transform_area"><a class="viewcode-back" href="../transformations_of_crs_values.html#transformations_of_crs_values.transform_area">[docs]</a><span class="k">def</span> <span class="nf">transform_area</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">crs_from</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transforms area into are based on crs.</span>
+<span class="sd">    </span>
+<span class="sd">    ARGS:</span>
+<span class="sd">    ----</span>
+<span class="sd">    geom: list</span>
+<span class="sd">        List contains geometric objects.</span>
+<span class="sd">    KWARGS:</span>
+<span class="sd">    ------</span>
+<span class="sd">    crs_from: str</span>
+<span class="sd">        coord system of geom</span>
+<span class="sd">    crs_into: str</span>
+<span class="sd">        coord system defining the unit of return</span>
+<span class="sd">    </span>
+<span class="sd">    RETURNS:</span>
+<span class="sd">    -------</span>
+<span class="sd">    area: [floats] [crs based]</span>
+<span class="sd">        EPSG:3035 returns area [m]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">geom_area</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">geo</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geom</span><span class="p">):</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+                                      <span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">crs_from</span><span class="p">),</span>
+                                      <span class="n">pp</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="s1">&#39;aea&#39;</span><span class="p">,</span>
+                                              <span class="n">lat1</span><span class="o">=</span><span class="n">geo</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                              <span class="n">lat2</span><span class="o">=</span><span class="n">geo</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">])),</span>
+                                  <span class="n">geo</span><span class="p">)</span>
+        <span class="n">geom_area</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">area</span>
+
+    <span class="k">return</span> <span class="n">geom_area</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Johannes Pelda.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
