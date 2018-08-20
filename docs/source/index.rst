@@ -8,6 +8,15 @@ Welcome to MEMPHIS's documentation!
 .. include:: ../../README.rst
 .. toctree::
    :maxdepth: 2
+
+   Allocation
+   Calculation
+   Conditioning
+   Data_IO
+   Evaluation
+   Visualisation
+   wcPERinhab
+   modules
    :caption: Contents:
 
 
@@ -17,5 +26,5 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modules`
+* :ref:`modindex`
 * :ref:`search`
