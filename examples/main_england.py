@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb 21 10:36:21 2018
+Created on 21.08.2018
 
 @author: jpelda
 """
+
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -72,28 +74,6 @@ pipes_table = {DN: {'A': A, 'v': v, 'V': V} for DN, A, v, V in
                zip(pipes_table.DN, pipes_table.A,
                    pipes_table.v, pipes_table.V)}
 
-sew_net = Data.read_from_sqlServer('sewage_network')
-sew_net = sew_net[sew_net['type'] == 'Schmutzwasserkanal']
-sew_net['s_height'] = sew_net['s_height'].str.replace(',', '.')
-sew_net['e_height'] = sew_net['e_height'].str.replace(',', '.')
-sew_net['length'] = sew_net['length'].str.replace(',', '.')
-sew_net['depth'] = sew_net['depth'].str.replace(',', '.')
-
-sew_net['s_height'] = sew_net['s_height'].astype(float)
-sew_net['e_height'] = sew_net['e_height'].astype(float)
-sew_net['length'] = sew_net['length'].astype(float)
-sew_net['depth'] = sew_net['depth'].astype(float)
-sew_net['DN'] = sew_net['width'] / 1000
-sew_net['height'] = sew_net['height'] / 1000
-
-sew_net['V'] = conv.DN_to_V(sew_net)
-gdf_sewnet = gpd.GeoDataFrame(sew_net, crs=Data.coord_system, geometry='SHAPE')
-
-
-# path = r"C:\Users\jpelda\Desktop\Stanet FW Stand 2011\shapefile"
-# dhs = Data.read_from_shp('dhs', path=path)
-# dhs['geometry'] = transform_coords(dhs.geometry, from_coord='epsg:5677')
-# gdf_dhs = gpd.GeoDataFrame(dhs, crs=Data.coord_system, geometry='geometry')
 
 #########################################################################
 # C O N D I T I O N I N G
@@ -153,15 +133,6 @@ gdf_paths['DN'] = arr
 # E V A L U A T I O N
 ##########################################################################
 print('\nevaluation')
-
-geo0 = [x[0] for x in gdf_sewnet['SHAPE'].boundary]
-geo1 = [x[1] for x in gdf_sewnet['SHAPE'].boundary]
-V = np.append(gdf_sewnet['V'].values, gdf_sewnet['V'].values)
-length = np.append(gdf_sewnet['length'].values, gdf_sewnet['length'].values)
-d = {'geometry': geo0 + geo1, 'V': V, 'length': length}
-df = pd.DataFrame(data=d)
-gdf_pts_sewnet = gpd.GeoDataFrame(df, crs=Data.coord_system,
-                                  geometry='geometry')
 
 geo0 = [x[0] for x in gdf_paths.geometry.boundary]
 geo1 = [x[1] for x in gdf_paths.geometry.boundary]

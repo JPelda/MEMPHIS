@@ -9,16 +9,6 @@ Welcome to MEMPHIS's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
- 
-   Allocation
-   Data_IO
-   Evaluation
-   Visualisation
-   wcPERinhab
-   modules
-   
-
-
 
 
 Indices and tables
