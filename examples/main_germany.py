@@ -29,7 +29,7 @@ from paths_to_dataframe import paths_to_dataframe
 from shortest_paths import shortest_paths
 import Conversion as conv
 import Evaluation as evalu
-from Visualisation import Graphen
+import Visualisation as vis
 
 #########################################################################
 # LOAD DATA
@@ -284,8 +284,6 @@ for tup in k:
 # V I S U A L I S A T I O N
 #########################################################################
 print('\nvisualisation')
-vis = Graphen()
-
 x_label = "$\\dot{V}$ of sewage network $[\\unitfrac{m^3}{s}]$"
 y_label = "Distribution of $\\dot{V}$ of \ngeneric network $[\\unitfrac{m^3}{s}]$"
 fig = vis.plot_boxplot(boxplot_V_over_V_pat, x_label=x_label, y_label=y_label,
