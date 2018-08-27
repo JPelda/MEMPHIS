@@ -39,12 +39,12 @@ def buffer(gdf, x_min, x_max, y_min, y_max, factor=1.9):
     gdf_y_length = y_max - y_min
 
     factor = 1.9
-    delta = gdf_x_length/gdf_length_x
+    delta = gdf_x_length / gdf_length_x
     border = delta / factor
-    delta_x = gdf_x_length/gdf_length_x - border
-    delta = gdf_y_length/gdf_length_y
+    delta_x = gdf_x_length / gdf_length_x - border
+    delta = gdf_y_length / gdf_length_y
     border = delta / factor
-    delta_y = gdf_y_length/gdf_length_y - border
+    delta_y = gdf_y_length / gdf_length_y - border
 
     geo = [Polygon(((point.x - delta_x, point.y - delta_y),
                     (point.x + delta_x, point.y - delta_y),

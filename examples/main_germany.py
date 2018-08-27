@@ -105,7 +105,7 @@ else:
     gdf_census['len_x'] = len(x_points)
     gdf_census['len_y'] = len(y_points)
     gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
-                                   Data.y_min, Data.y_max)
+                                   Data.y_min, Data.y_max, factor=2.5)
     gdf_gis_b = alloc.inhabs_to_area(gdf_gis_b, Data.inhabs, dic.types['all'])
     c_sb = gdf_census.set_geometry('SHAPE_b')
     gdf_census['inhabs'] = alloc.points_to_poly(gdf_gis_b.centroid,

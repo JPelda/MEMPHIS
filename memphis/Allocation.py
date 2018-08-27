@@ -121,7 +121,7 @@ def points_to_poly(gdf_points, gdf_points_values,
         if possible_matches_index != []:
             dic[index] += sum(gdf_points_values.iloc[possible_matches_index])
             gdf_points_values.loc[possible_matches_index] = 0
-        if i % 5000 == 0:
+        if i % 2500 == 0:
             gdf_points_sindexed = gdf_points.loc[gdf_points_values != 0].sindex
 
     gdf_points = gdf_points.loc[gdf_points_values != 0]
