@@ -14,10 +14,11 @@ import numpy as np
 sys.path.append(os.getcwd() + os.sep + 'memphis' + os.sep + 'utils')
 from plotter import plot_format
 from matplotlib.patches import Rectangle
+from shapely.geometry import MultiPoint
+from shapely.geometry import Polygon
 
-
-def plot_map(self, gdf_census, gdf_paths, gdf_sewnet, gdf_gis_b,
-             gdf_gis_r, wwtp_x=None, wwtp_y=None,
+def plot_map(gdf_census=None, gdf_paths=None, gdf_sewnet=None,
+             gdf_gis_b=None, gdf_gis_r=None, wwtp=None,
              paths_lw=1, sewnet_lw=0.65):
     """
 
@@ -28,8 +29,7 @@ def plot_map(self, gdf_census, gdf_paths, gdf_sewnet, gdf_gis_b,
     gdf_sewnet
     gdf_gis_b
     gdf_gis_r
-    wwtp_x
-    wwtp_y
+    wwtp
     paths_lw
     sewnet_lw
 
@@ -46,136 +46,75 @@ def plot_map(self, gdf_census, gdf_paths, gdf_sewnet, gdf_gis_b,
 
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
 
-    levels = [-1, 0, 25, 50, 75, 100, 150, max(gdf_census['inhabs'])]
-    colors = ['white', '#C0C9E4', '#9EADD8', '#6D89CB',
-              '#406DBB', '#3960A7', '#2F528F']
-    cmap_census, norm_census = from_levels_and_colors(levels, colors)
+    if gdf_census is not None:
+        levels = [-1, 0, 25, 50, 75, 100, 150, max(gdf_census['inhabs'])]
+        colors = ['white', '#C0C9E4', '#9EADD8', '#6D89CB',
+                  '#406DBB', '#3960A7', '#2F528F']
+        cmap_census, norm_census = from_levels_and_colors(levels, colors)
+        sm_census = plt.cm.ScalarMappable(cmap=cmap_census, norm=norm_census)
+        sm_census._A = []
+        colorBar_census = fig.colorbar(sm_census, ax=ax)
 
-    gdf_paths_levels = [min(gdf_paths['V']), max(gdf_paths['V'])]
-    gdf_paths_colors = ['r']
-    # cmap_paths, norm_paths = from_levels_and_colors(gdf_paths_levels,
-    #                                                gdf_paths_colors)
+        gdf_census.set_geometry = gdf_census['SHAPE_b']
+        gdf_census.plot(ax=ax, cmap=cmap_census, norm=norm_census,
+                        column='inhabs', alpha=0.4)
+        colorBar_census.ax.set_ylabel("\\small{Inhabitants} "
+                                      "$[\\unitfrac{Persons}{10,000  m^2}]$",
+                                      fontsize=10)
 
-    gdf_sewnet_levels = [min(gdf_sewnet['DN']), max(gdf_sewnet['DN'])]
-    gdf_sewnet_colors = ['green']
-    # cmap_sewnet, norm_sewnet = from_levels_and_colors(gdf_sewnet_levels,
-    #                                                  gdf_sewnet_colors)
+    handles = []
+    if wwtp is not None:
+        for pt in wwtp:
+            ax.plot(pt.x, pt.y, color='black', markersize=10, marker='*')
 
-    sm_census = plt.cm.ScalarMappable(cmap=cmap_census, norm=norm_census)
-    sm_census._A = []
-    colorBar_census = fig.colorbar(sm_census, ax=ax)
-
-    gdf_census.set_geometry = gdf_census['SHAPE_b']
-    gdf_census.plot(ax=ax, cmap=cmap_census, norm=norm_census,
-                    column='inhabs', alpha=0.4)
-
-    colorBar_census.ax.set_ylabel("\\small{Inhabitants} "
-                                  "$[\\unitfrac{Persons}{10,000  m^2}]$",
-                                  fontsize=10,
-                                  )
-
-    gdf_gis_b_color = 'black'
-    gdf_gis_b_alpha = 0.2
-    gdf_gis_b.plot(ax=ax, color=gdf_gis_b_color, alpha=gdf_gis_b_alpha)
-
-    wwtp_legend = []
-    if wwtp_x and wwtp_y is not None:
-        ax.plot(wwtp_x, wwtp_y, color='black', markersize=10, marker='*')
         wwtp_legend = mlines.Line2D([], [], color='black', marker='*',
                                     linestyle='None', markersize=10,
                                     label='Waste water treatment plant')
-    gdf_gis_r_color = 'black'
-    gdf_gis_r_alpha = 0.3
-    gdf_gis_r_linewidth = 0.3
-    gdf_gis_r.plot(ax=ax, color=gdf_gis_r_color,
-                   linewidth=gdf_gis_r_linewidth, alpha=gdf_gis_r_alpha)
-
-    gdf_paths.plot(ax=ax, color='r', linewidth=paths_lw)
-    gdf_sewnet.plot(ax=ax, color='green', linewidth=sewnet_lw)
-
-    # gdf_paths[gdf_paths.DN >= 800].plot(ax=ax, cmap=cmap_paths,
-    # norm=norm_paths,
-    #         column="DN", linewidth=1, )
-    # gdf_sewnet[gdf_sewnet.width >= 800].plot(ax=ax, cmap=cmap_sewnet,
-    #          norm=norm_sewnet, column="width", linewidth=0.8)
-    # for x, y, txt in zip(gdf_nodes['x'], gdf_nodes['y'],
-    # gdf_nodes.index):
-    #    ax.annotate(txt, (x, y))
-    # gdf_dhs.plot(ax=ax)
-
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-
-    gdf_gis_b_legend = mlines.Line2D(
+        print(wwtp_legend)
+        handles += [wwtp_legend]
+    if gdf_gis_b is not None:
+        gdf_gis_b_color = 'black'
+        gdf_gis_b_alpha = 0.2
+        gdf_gis_b.plot(ax=ax, color=gdf_gis_b_color, alpha=gdf_gis_b_alpha)
+        gdf_gis_b_legend = mlines.Line2D(
             [], [], color=gdf_gis_b_color, marker='h', linestyle='None',
             markersize=10, label="Buildings", alpha=gdf_gis_b_alpha)
-    gdf_gis_r_legend = mlines.Line2D(
+        handles += [gdf_gis_b_legend]
+    if gdf_gis_r is not None:
+        gdf_gis_r_color = 'black'
+        gdf_gis_r_alpha = 0.3
+        gdf_gis_r_linewidth = 0.3
+        gdf_gis_r.plot(ax=ax, color=gdf_gis_r_color,
+                       linewidth=gdf_gis_r_linewidth, alpha=gdf_gis_r_alpha)
+        gdf_gis_r_legend = mlines.Line2D(
             [], [], color=gdf_gis_r_color, linestyle='-',
             linewidth=gdf_gis_r_linewidth, label="Roads",
             alpha=gdf_gis_r_alpha)
+        handles += [gdf_gis_r_legend]
+    if gdf_sewnet is not None:
+        gdf_sewnet_levels = [min(gdf_sewnet['DN']), max(gdf_sewnet['DN'])]
+        gdf_sewnet_colors = ['green']
+        gdf_sewnet.plot(ax=ax, color='green', linewidth=sewnet_lw)
+        gdf_sewnet_legend = mlines.Line2D(
+            [], [], color=gdf_sewnet_colors[0], linestyle='-',
+            label="Sewage network {:1.2f} m  $ \\leq $ DN $ \\leq $  {:10.2f}"
+                  " m".format(gdf_sewnet_levels[0],
+                              gdf_sewnet_levels[1]))
+        handles += [gdf_sewnet_legend]
+    if gdf_paths is not None:
+        gdf_paths_levels = [min(gdf_paths['V']), max(gdf_paths['V'])]
+        gdf_paths_colors = ['r']
+        gdf_paths.plot(ax=ax, color='r', linewidth=paths_lw)
+        gdf_path_legend = mlines.Line2D(
+            [], [], color=gdf_paths_colors[0], linestyle='-',
+            label="Generic sewage network {:1.2f} $\\unitfrac{{m^3}}{{s}}"
+                  " \\leq \\dot{{V}} \\leq$ {:10.2f} "
+                  "$\\unitfrac{{m^3}}{{s}}$".format(gdf_paths_levels[0],
+                                                    gdf_paths_levels[1]))
+        handles += [gdf_path_legend]
 
-    gdf_sewnet_legend = []
-    gdf_sewnet_legend.append(
-            mlines.Line2D(
-                    [], [], color=gdf_sewnet_colors[0],
-                    linestyle='-',
-                    label="Sewage network {:1.2f} "
-                    " m "
-                    " $ \\leq $ DN $ \\leq $  {:10.2f}"
-                    " m"
-                    "".format(
-                              gdf_sewnet_levels[0],
-                              gdf_sewnet_levels[1])))
-    # gdf_sewnet_legend.append(mlines.Line2D([], [],
-    #                          color=gdf_sewnet_colors[1],
-    #                          linestyle='-', label=
-    #                         "Sewage network DN {} $\leq$ x $\leq$ DN {} "
-    #                          "".format(
-    #                          gdf_sewnet_levels[1],
-    #                          gdf_sewnet_levels[2])))
-
-    legend_empty = [mlines.Line2D([], [], color='None', linestyle='')]
-    # ,                mlines.Line2D([], [], color='None', linestyle='')]
-    gdf_path_legend = []
-    gdf_path_legend.append(
-            mlines.Line2D(
-                    [], [], color=gdf_paths_colors[0],
-                    linestyle='-',
-                    label="Generic sewage network {:1.2f} "
-                    " $\\unitfrac{{m^3}}{{s}} \\leq \\dot{{V}} \\leq$ "
-                    " {:10.2f} $\\unitfrac{{m^3}}{{s}}$".format(
-                                                 gdf_paths_levels[0],
-                                                 gdf_paths_levels[1])))
-    # gdf_path_legend.append(mlines.Line2D([], [], color=gdf_paths_colors[1],
-    #                                linestyle='-',
-    #                                label=
-    #                                "Generic sewage network DN {} $\leq$ x $\leq$"
-    #                                " DN {}".format(
-    #                                        gdf_paths_levels[1],
-    #                                        gdf_paths_levels[2])))
-    # gdf_path_legend.append(mlines.Line2D([], [], color=gdf_paths_colors[2],
-    #                                linestyle='-',
-    #                                label=
-    #                                "Generic sewage network {} $\leq$ {:.0f}"
-    #                                " $[DN]$".format(
-    #                                        gdf_paths_levels[2],
-    #                                        gdf_paths_levels[3])))
-    if wwtp_legend == []:
-        handles = [gdf_gis_b_legend] + [gdf_gis_r_legend] +\
-               gdf_sewnet_legend + gdf_path_legend
-    else:
-        handles = [wwtp_legend] + [gdf_gis_b_legend] +\
-                    [gdf_gis_r_legend] + gdf_sewnet_legend +\
-                    gdf_path_legend
-
-    # Shrink current axis's height by 10% on the bottom
-#        box = ax.get_position()
-    # ax.set_position([box.x0, box.y0 + box.height * 0.1,
-    #                 box.width, box.height * 0.9])
-
-    # ax.legend(handles=handles, loc='lower left',
-    # bbox_to_anchor=(0, -0.2),
-    #  ncol=3)
+    ax.set_xlabel('Longitude')
+    ax.set_ylabel('Latitude')
 
     leg = plt.legend(handles=handles, bbox_to_anchor=(0.5, -0.13),
                      borderaxespad=0.12, ncol=2, loc=9)
@@ -187,7 +126,7 @@ def plot_map(self, gdf_census, gdf_paths, gdf_sewnet, gdf_gis_b,
     return fig
 
 
-def plot_distr_of_nodes(self, dis_sew_in_inh, dis_pat_in_inh,
+def plot_distr_of_nodes(dis_sew_in_inh, dis_pat_in_inh,
                         dis_cen_in_inh):
     """
 
@@ -272,7 +211,7 @@ def plot_distr_of_nodes(self, dis_sew_in_inh, dis_pat_in_inh,
     return fig
 
 
-def plot_boxplot(self, data, x_label='', x_rotation=0,
+def plot_boxplot(data, x_label='', x_rotation=0,
                  y_label='', y_scale='linear', legend_name=None):
     """
     Distribution of generic calculated volumetric flow over real
@@ -313,7 +252,7 @@ def plot_boxplot(self, data, x_label='', x_rotation=0,
 
     return fig
 
-def plot_boxplot_2_beside_in_1(self, data_1, data_2):
+def plot_boxplot_2_beside_in_1(data_1, data_2):
     """
 
     Parameters
@@ -342,7 +281,7 @@ def plot_boxplot_2_beside_in_1(self, data_1, data_2):
 
     return fig
 
-def plot_boxplot_2_in_1(self, data_1, data_2, x_label='',
+def plot_boxplot_2_in_1(data_1, data_2, x_label='',
                         x_rotation=0, y_label='', y_scale='linear'):
     """
 
@@ -388,3 +327,133 @@ def plot_boxplot_2_in_1(self, data_1, data_2, x_label='',
               ncol=2)
 
     return fig
+
+def memphis_vs_sewagenetwork(Data, gdf_gis_b, gdf_gis_r, gdf_census,
+                             gdf_sewnet, gdf_paths, boxplot_V_over_V_pat,
+                             boxplot_length_over_V_pat,
+                             boxplot_length_over_V_sew,
+                             dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh):
+    x_label = "$\\dot{V}$ of sewage network $[\\unitfrac{m^3}{s}]$"
+    y_label = "Distribution of $\\dot{V}$ of \ngeneric network $[\\unitfrac{m^3}{s}]$"
+    fig = plot_boxplot(boxplot_V_over_V_pat, x_label=x_label,
+                           y_label=y_label,
+                           y_scale='log', x_rotation=90)
+    Data.save_figure(fig, 'boxplot_distr_V_over_V')
+
+    x_label = "$\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
+    y_label = "Distribution of length [m]"
+    fig = plot_boxplot_2_in_1(boxplot_length_over_V_pat,
+                                  boxplot_length_over_V_sew,
+                                  x_label=x_label, y_label=y_label,
+                                  y_scale='log',
+                                  x_rotation=90)
+    Data.save_figure(fig, 'boxplot_distr_length_over_V')
+
+    data = {'Sewage network': gdf_sewnet.V, 'Generic network': gdf_paths.V}
+    y_label = "Distribution of $\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
+    fig = plot_boxplot(data, y_label=y_label, y_scale='log')
+    Data.save_figure(fig, 'boxplot_distr_V')
+
+    data = {'Sewage network': gdf_sewnet.length,
+            'Generic network': gdf_paths.length}
+    y_label = "Distribution of edges' length [m]"
+    fig = plot_boxplot(data, y_label=y_label, y_scale='log')
+    Data.save_figure(fig, 'boxplot_distr_length')
+
+    fig = plot_distr_of_nodes(dis_sew_in_inh, dis_pat_in_inh,
+                                  dis_cen_in_inh)
+    Data.save_figure(fig, 'amount_of_points_over_popDens')
+
+    min_vol_flow = 0.01
+    min_dn = 0.8
+
+    if gdf_paths[gdf_paths.V >= min_vol_flow].empty:
+        min_vol_flow = 0
+    if gdf_sewnet[gdf_sewnet.DN >= min_dn].empty:
+        min_dn = 0
+
+    fig = plot_map(gdf_census,
+                   gdf_paths[gdf_paths['V'] >= 0.01],
+                   gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b,
+                   gdf_gis_r, Data.wwtp)
+    Data.save_figure(fig)
+
+    geo0 = [x[0] for x in
+            gdf_sewnet['SHAPE'][gdf_sewnet['DN'] >= 0.8].boundary]
+    geo1 = [x[1] for x in
+            gdf_sewnet['SHAPE'][gdf_sewnet['DN'] >= 0.8].boundary]
+    geo2 = [x[0] for x in
+            gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
+    geo3 = [x[1] for x in
+            gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
+    mpt = MultiPoint(geo0 + geo1 + geo2 + geo3)
+
+    convex_hull = mpt.convex_hull
+    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(convex_hull)]
+    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(convex_hull)]
+    gdf_census_cut = gdf_census[gdf_census.within(convex_hull)]
+
+    fig = plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
+                       gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
+                       gdf_gis_r_cut, Data.wwtp)
+    Data.save_figure(fig, '_cut_ge_DN800')
+
+    area = Polygon(
+        [[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
+         [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
+         [9.9336125704, 51.5358519306]])
+    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+    gdf_census_cut = gdf_census[gdf_census.within(area)]
+    gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+    gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
+
+    fig = plot_map(gdf_census_cut, gdf_paths_cut,
+                       gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
+                       paths_lw=3, sewnet_lw=1)
+    Data.save_figure(fig, '_cut_area')
+
+
+def memphis(data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths):
+
+    min_vol_flow = 0.01
+
+    if gdf_paths[gdf_paths.V >= min_vol_flow].empty:
+        min_vol_flow = 0
+
+    fig = plot_map(gdf_census, gdf_paths=gdf_paths[gdf_paths['V'] >= 0.01],
+                   gdf_gis_b=gdf_gis_b, gdf_gis_r=gdf_gis_r, wwtp=data.wwtp)
+
+    data.save_figure(fig)
+
+    geo2 = [x[0] for x in
+            gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
+    geo3 = [x[1] for x in
+            gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
+    mpt = MultiPoint(geo2 + geo3)
+
+    convex_hull = mpt.convex_hull
+    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(convex_hull)]
+    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(convex_hull)]
+    gdf_census_cut = gdf_census[gdf_census.within(convex_hull)]
+
+    fig = plot_map(gdf_census_cut,
+                   gdf_paths[gdf_paths['V'] >= 0.01],
+                   gdf_gis_b=gdf_gis_b_cut, gdf_gis_r=gdf_gis_r_cut,
+                   wwtp=data.wwtp)
+    data.save_figure(fig, '_cut_ge_DN800')
+
+    area = Polygon(
+        [[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
+         [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
+         [9.9336125704, 51.5358519306]])
+    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+    gdf_census_cut = gdf_census[gdf_census.within(area)]
+    gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+
+    fig = plot_map(gdf_census_cut, gdf_paths_cut,
+                   gdf_gis_b=gdf_gis_b_cut,
+                   gdf_gis_r=gdf_gis_r_cut,
+                   paths_lw=3, sewnet_lw=1)
+    data.save_figure(fig, '_cut_area')

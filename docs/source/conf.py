@@ -45,8 +45,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinx.ext.napoleon',
-    'numpydoc'
+    'sphinx.ext.napoleon'
 ]
 
 # Napoleon settings

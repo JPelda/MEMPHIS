@@ -14,7 +14,8 @@ import geopandas as gpd
 
 import osmnx
 import numpy as np
-from shapely.geometry import MultiPoint, MultiLineString, Polygon
+from shapely.geometry import MultiPoint, Point
+
 path = os.getcwd()
 sys.path.append(path + os.sep + 'memphis')
 sys.path.append(path + os.sep + 'memphis' + os.sep + 'utils')
@@ -27,9 +28,12 @@ from buffer import buffer
 from accumulate_val_along_path import sum_wc
 from paths_to_dataframe import paths_to_dataframe
 from shortest_paths import shortest_paths
+from import_sewnet import import_sewagenetwork
+import dictionary as dic
 import Conversion as conv
 import Evaluation as evalu
 import Visualisation as vis
+
 
 #########################################################################
 # LOAD DATA
@@ -38,19 +42,31 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO(path + os.sep + 'examples' + os.sep + 'config' +
-               os.sep + 'goettingen.ini')
+               os.sep + 'edinburgh.ini')
 
+graph = Data.read_from_graphml('graph')
+gdf_nodes, gdf_edges = osmnx.save_load.graph_to_gdfs(graph, nodes=True,
+                                                     edges=True,
+                                                     node_geometry=True,
+                                                     fill_edge_geometry=True)
+
+stime = time.time()
 gis_r = Data.read_from_sqlServer('gis_roads')
 gdf_gis_r = gpd.GeoDataFrame(gis_r, crs=Data.coord_system, geometry='SHAPE')
+print("gis_r | {}".format(time.time() - stime))
 
+stime = time.time()
 gis_b = Data.read_from_sqlServer('gis_buildings')
 gdf_gis_b = gpd.GeoDataFrame(gis_b, crs=Data.coord_system, geometry='SHAPE')
+print("gis_b | {}".format(time.time() - stime))
 
+stime = time.time()
 gis_cat = Data.read_from_sqlServer('gis_categories')
 gis_cat['cmPsma'] = gis_cat['cmPsma'].str.replace(',', '.')
 gis_cat = gis_cat[gis_cat['cmPsma'] != '']
 gis_cat = gis_cat[gis_cat['cmPsma'] != '?']
 gis_cat['cmPsma'] = gis_cat['cmPsma'].astype(float)
+print("gis_cat | {}".format(time.time() - stime))
 
 gdf_gis_b['area'] = transform_area(gdf_gis_b.geometry)
 gdf_gis_b['wc'] = alloc.alloc_wc_to_type(gis_cat, gdf_gis_b) *\
@@ -61,10 +77,43 @@ wc = Data.read_from_sqlServer('wc_per_inhab')
 wc = wc.drop(0)
 wc['cmPERpTIMESh'] = wc['lPERpTIMESd'].astype(float) / 1000 / (24 * 3600)
 
-graph = Data.read_from_graphml('graph')
+if Data.census != 'None':
+    census = Data.read_from_sqlServer('census')
+    gdf_census = gpd.GeoDataFrame(census, crs=Data.coord_system,
+                                  geometry='SHAPE')
+    gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
+                                   Data.y_min, Data.y_max)
+else:
+    print("Census will be calculated as census data are missing")
+    points = [Point(graph.nodes[key]['x'], graph.nodes[key]['y']) for key in
+              graph.nodes.keys()]
+    mpoints = MultiPoint(points)
+    bounds = mpoints.bounds
+    poly = osmnx.bbox_to_poly(bounds[3], bounds[1], bounds[0], bounds[2])
 
-census = Data.read_from_sqlServer('census')
-gdf_census = gpd.GeoDataFrame(census, crs=Data.coord_system, geometry='SHAPE')
+    length = transform_length(100, crs_from=Data.coord_system_raster,
+                              crs_into=Data.coord_system)
+    x_points = np.linspace(Data.x_min, Data.x_max,
+                           num=int((Data.x_max - Data.x_min) / length))
+    y_points = np.linspace(Data.y_min, Data.y_max,
+                           num=int((Data.y_max - Data.y_min) / length))
+    pts = [Point(x, y) for x in x_points for y in y_points]
+
+    gdf_census = gpd.GeoDataFrame(pts, columns=['SHAPE'], geometry='SHAPE')
+    gdf_census['x_mp_100m'] = np.repeat(x_points, len(y_points))
+    gdf_census['y_mp_100m'] = np.repeat(y_points, len(x_points))
+    gdf_census['len_x'] = len(x_points)
+    gdf_census['len_y'] = len(y_points)
+    gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
+                                   Data.y_min, Data.y_max)
+    gdf_gis_b = alloc.inhabs_to_area(gdf_gis_b, Data.inhabs, dic.types['all'])
+    c_sb = gdf_census.set_geometry('SHAPE_b')
+    gdf_census['inhabs'] = alloc.points_to_poly(gdf_gis_b.centroid,
+                                                gdf_gis_b['inhabs'],
+                                                c_sb['SHAPE_b'],
+                                                gdf_census['SHAPE'])
+    gdf_gis_b.set_geometry('SHAPE')
+    gdf_census.set_geometry('SHAPE')
 
 pipes_table = Data.read_from_sqlServer('pipes_dn_a_v_v')
 pipes_table['V'] = pipes_table['V'] / 1000
@@ -72,48 +121,31 @@ pipes_table = {DN: {'A': A, 'v': v, 'V': V} for DN, A, v, V in
                zip(pipes_table.DN, pipes_table.A,
                    pipes_table.v, pipes_table.V)}
 
-sew_net = Data.read_from_sqlServer('sewage_network')
-sew_net = sew_net[sew_net['type'] == 'Schmutzwasserkanal']
-sew_net['s_height'] = sew_net['s_height'].str.replace(',', '.')
-sew_net['e_height'] = sew_net['e_height'].str.replace(',', '.')
-sew_net['length'] = sew_net['length'].str.replace(',', '.')
-sew_net['depth'] = sew_net['depth'].str.replace(',', '.')
-
-sew_net['s_height'] = sew_net['s_height'].astype(float)
-sew_net['e_height'] = sew_net['e_height'].astype(float)
-sew_net['length'] = sew_net['length'].astype(float)
-sew_net['depth'] = sew_net['depth'].astype(float)
-sew_net['DN'] = sew_net['width'] / 1000
-sew_net['height'] = sew_net['height'] / 1000
-
-sew_net['V'] = conv.DN_to_V(sew_net)
-gdf_sewnet = gpd.GeoDataFrame(sew_net, crs=Data.coord_system, geometry='SHAPE')
-
-
-# path = r"C:\Users\jpelda\Desktop\Stanet FW Stand 2011\shapefile"
-# dhs = Data.read_from_shp('dhs', path=path)
-# dhs['geometry'] = transform_coords(dhs.geometry, from_coord='epsg:5677')
-# gdf_dhs = gpd.GeoDataFrame(dhs, crs=Data.coord_system, geometry='geometry')
+gdf_sewnet = gpd.GeoDataFrame()
+if Data.sewage_network != 'None':
+    sew_net = import_sewagenetwork(Data)
+    sew_net['V'] = conv.DN_to_V(sew_net)
+    gdf_sewnet = gpd.GeoDataFrame(sew_net, crs=Data.coord_system,
+                                  geometry='SHAPE')
 
 #########################################################################
 # C O N D I T I O N I N G
 #########################################################################
 print('conditioning')
-gdf_nodes, gdf_edges = osmnx.save_load.graph_to_gdfs(graph, nodes=True,
-                                                     edges=True,
-                                                     node_geometry=True,
-                                                     fill_edge_geometry=True)
 
 # Builds buffer around points of census.
-gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
-                               Data.y_min, Data.y_max)
-geo0 = [x[0] for x in gdf_sewnet['SHAPE'].boundary]
-geo1 = [x[1] for x in gdf_sewnet['SHAPE'].boundary]
-mpt = MultiPoint(geo0 + geo1)
-convex_hull = mpt.convex_hull
-gdf_census = gdf_census[gdf_census.within(convex_hull)]
-gdf_gis_r = gdf_gis_r[gdf_gis_r.within(convex_hull)]
-gdf_gis_b = gdf_gis_b[gdf_gis_b.within(convex_hull)]
+stime = time.time()
+
+print("buffer | {}".format(time.time() - stime))
+
+if Data.sewage_network != 'None':
+    geo0 = [x[0] for x in gdf_sewnet['SHAPE'].boundary]
+    geo1 = [x[1] for x in gdf_sewnet['SHAPE'].boundary]
+    mpt = MultiPoint(geo0 + geo1)
+    convex_hull = mpt.convex_hull
+    gdf_census = gdf_census[gdf_census.within(convex_hull)]
+    gdf_gis_r = gdf_gis_r[gdf_gis_r.within(convex_hull)]
+    gdf_gis_b = gdf_gis_b[gdf_gis_b.within(convex_hull)]
 
 #########################################################################
 # A L L O C A T I O N
@@ -123,16 +155,55 @@ gdf_gis_b = gdf_gis_b[gdf_gis_b.within(convex_hull)]
 # water consumption of previous specified country.
 
 print('allocation')
-gdf_nodes['inhabs'] = alloc.alloc_inhabs_to_nodes(gdf_census, gdf_nodes, graph)
+
+stime = time.time()
+c_sb = gdf_census.set_geometry('SHAPE_b')
+gdf_nodes['inhabs'] = alloc.polys_to_point(c_sb['SHAPE_b'],
+                                           gdf_census['SHAPE'],
+                                           gdf_census['inhabs'],
+                                           gdf_nodes['geometry'])
+print("alloc_inhabs_to_nodes | {}".format(stime - time.time()))
+
+# if Data.census != 'None':
+#     stime = time.time()
+#     gdf_nodes['inhabs'] = alloc.polys_to_node(gdf_census, gdf_nodes, graph,
+#                                               'inhabs')
+#     print("alloc_inhabs_to_nodes | {}".format(stime - time.time()))
+# else:
+#     stime = time.time()
+#     res = alloc.nodes_to_node(gdf_census, graph)
+#     gdf_nodes['inhabs'] = res
+#     print("nodes_to_nodes | {}".format(stime - time.time()))
+
+gdf_census = gdf_census.set_geometry('SHAPE_b')
 gdf_nodes['wc'] = gdf_nodes['inhabs'] *\
                          wc[wc.country_l ==
                             Data.country].cmPERpTIMESh.item() * 1.6
+stime = time.time()
 gdf_nodes['wc'] += alloc.alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph)
-
+print("alloc_wc_from_b_to_node | {}".format(stime - time.time()))
 # Sets node of graph that is nearest to waste water treatment plant and
 # calculates paths from nodes where nodes['inhabs'] > 0.
-end_node = osmnx.get_nearest_node(graph, (Data.wwtp.y, Data.wwtp.x))
-gdf_nodes['path_to_end_node'] = shortest_paths(graph, gdf_nodes, end_node)
+end_nodes = [osmnx.get_nearest_node(graph, (pt.y, pt.x)) for pt in Data.wwtp]
+paths = [0] * len(end_nodes)
+lengths = np.array([[0] * len(gdf_nodes)] * len(end_nodes))
+for i, enode in enumerate(end_nodes):
+    print("Calculate paths to {}. wwtp".format(i + 1))
+    paths[i] = list(shortest_paths(graph, gdf_nodes, enode))
+    for j, path in enumerate(paths[i]):
+        lengths[i][j] = sum([graph[path[k]][path[k + 1]][0]['length'] for
+                            k, u in enumerate(path) if k + 1 < len(path)])
+
+    # dists[index] = [graph.edges[list(test)[1][i],
+    #                 list(test)[1][i + 1], 0]['length'] for
+    #                 n in list(test) for i, u in enumerate(n) if
+    #                 i + 1 < len(list(test)[1])]
+idx = np.argmin(lengths, axis=0)
+path_to_end_node = [0] * len(gdf_nodes)
+for i, _ in enumerate(path_to_end_node):
+    path_to_end_node[i] = paths[idx[i]][i]
+
+gdf_nodes['path_to_end_node'] = path_to_end_node
 
 # Accumulates wc along each path.
 gdf_nodes['V'] = sum_wc(gdf_nodes)
@@ -154,209 +225,25 @@ gdf_paths['DN'] = arr
 ##########################################################################
 print('\nevaluation')
 
-geo0 = [x[0] for x in gdf_sewnet['SHAPE'].boundary]
-geo1 = [x[1] for x in gdf_sewnet['SHAPE'].boundary]
-V = np.append(gdf_sewnet['V'].values, gdf_sewnet['V'].values)
-length = np.append(gdf_sewnet['length'].values, gdf_sewnet['length'].values)
-d = {'geometry': geo0 + geo1, 'V': V, 'length': length}
-df = pd.DataFrame(data=d)
-gdf_pts_sewnet = gpd.GeoDataFrame(df, crs=Data.coord_system,
-                                  geometry='geometry')
-
-geo0 = [x[0] for x in gdf_paths.geometry.boundary]
-geo1 = [x[1] for x in gdf_paths.geometry.boundary]
-V = np.append(gdf_paths.V.values, gdf_paths.V.values)
-length = np.append(gdf_paths['length'].values, gdf_paths['length'].values)
-d = {'geometry': geo0 + geo1, 'V': V, 'length': length}
-df = pd.DataFrame(data=d)
-gdf_pts_paths = gpd.GeoDataFrame(df, crs=Data.coord_system,
-                                 geometry='geometry')
-
-gdf_census = gdf_census.set_geometry('SHAPE_b')
-gdf_pts_sewnet['inhabs'], gdf_pts_sewnet['raster'] = alloc.alloc_nodes_to_inhabs(
-        gdf_census, gdf_pts_sewnet)
-gdf_pts_paths['inhabs'], gdf_pts_paths['raster'] = alloc.alloc_nodes_to_inhabs(
-        gdf_census, gdf_pts_paths)
-
-# Getting distribution of points V to census inhabs
-keys = set(gdf_census.inhabs)
-dis_sew_in_inh = evalu.count_val_over_key(gdf_pts_sewnet, keys)
-dis_pat_in_inh = evalu.count_val_over_key(gdf_pts_paths, keys)
-dis_cen_in_inh = evalu.count_val_over_key(gdf_census, keys)
-
-pat_comp_V_sew = evalu.best_pts_within_overlay_pts('V',
-                                                   gdf_pts_paths,
-                                                   gdf_pts_sewnet,
-                                                   buffer=transform_length(20))
-
-k = list(pat_comp_V_sew.keys())
-k = [(k[i], k[i+1]) for i, item in enumerate(k) if i+1 < len(k)]
-boxplot_V_over_V_pat = {key: [] for key in pat_comp_V_sew.keys()}
-boxplot_V_over_V_sew = {key: [] for key in pat_comp_V_sew.keys()}
-for tup in k:
-    V_list = []
-    for val in pat_comp_V_sew[tup[0]]:
-        if not val.empty:
-            V_list.append(val.V)
-        else:
-            V_list.append([])
-    boxplot_V_over_V_pat[tup[0]] = V_list
-
-    V_list = []
-    arr = gdf_pts_sewnet[gdf_pts_sewnet.V > tup[0]]
-    arr = arr[arr.V <= tup[1]]
-    if not arr.empty:
-        V_list.append(arr['V'].values)
-    else:
-        V_list.append([])
-    boxplot_V_over_V_sew[tup[0]] = V_list
-
-
-boxplot_length_over_V_pat = {key: [] for key in pat_comp_V_sew.keys()}
-boxplot_length_over_V_sew = {key: [] for key in pat_comp_V_sew.keys()}
-for tup in k:
-    L_list = []
-    for val in pat_comp_V_sew[tup[0]]:
-        if not val.empty:
-            L_list.append(val.length)
-        else:
-            L_list.append([])
-    boxplot_length_over_V_pat[tup[0]] = L_list
-
-    L_list = []
-    leng = gdf_pts_sewnet[gdf_pts_sewnet.V > tup[0]]
-    leng = leng[leng.V <= tup[1]]
-    if not leng.empty:
-        L_list.append(leng['length'].values)
-    else:
-        L_list.append([])
-    boxplot_length_over_V_sew[tup[0]] = L_list
-
-
-overlay_match = {}
-overlay_sew = {}
-overlay_pat = {}
-for tup in k:
-    m_ls_sew = gdf_sewnet[gdf_sewnet.V >= tup[0]]
-    m_ls_sew = m_ls_sew[m_ls_sew.V < tup[1]]
-    m_ls_pat = gdf_paths[gdf_paths.V >= tup[0]]
-    m_ls_pat = m_ls_pat[m_ls_pat.V < tup[1]]
-
-    m_ls_sew['geometry'] = m_ls_sew.buffer(transform_length(30))
-
-    m_ls_sew = MultiLineString([(x) for x in m_ls_sew.geometry.values])
-    m_ls_pat = MultiLineString([(x) for x in m_ls_pat.geometry.values])
-    lines = m_ls_sew.intersection(m_ls_pat)
-
-    overlay_match[tup[1]] = transform_length(
-            np.sum(lines.length),
-            crs_from="EPSG:4326",
-            crs_into="EPSG:32633")
-    overlay_sew[tup[1]] = transform_length(
-            np.sum(m_ls_sew.length),
-            crs_from="EPSG:4326",
-            crs_into="EPSG:32633")
-    overlay_pat[tup[1]] = transform_length(
-            np.sum(m_ls_pat.length),
-            crs_from="EPSG:4326",
-            crs_into="EPSG:32633")
-
-length_over_V_sew = {}
-length_over_V_pat = {}
-
-for tup in k:
-    m_ls_sew = gdf_sewnet[gdf_sewnet.V >= tup[0]]
-    m_ls_sew = m_ls_sew[m_ls_sew.V < tup[1]]
-    m_ls_pat = gdf_paths[gdf_paths.V >= tup[0]]
-    m_ls_pat = m_ls_pat[m_ls_pat.V < tup[1]]
-
-    len_sew = transform_length(sum(m_ls_sew.geometry.length),
-                               crs_from="EPSG:4326",
-                               crs_into="EPSG:32633")
-    len_pat = transform_length(sum(m_ls_pat.geometry.length),
-                               crs_from="EPSG:4326",
-                               crs_into="EPSG:32633")
-
-    length_over_V_sew[tup[1]] = len_sew
-    length_over_V_pat[tup[1]] = len_pat
+if Data.sewage_network != 'None':
+    boxplot_V_over_V_pat, boxplot_length_over_V_pat,\
+    boxplot_length_over_V_sew, dis_sew_in_inh, dis_pat_in_inh,\
+    dis_cen_in_inh = evalu.memphis_vs_sewagenetwork(Data, gdf_sewnet,
+                                                    gdf_paths, gdf_census)
 
 #########################################################################
 # V I S U A L I S A T I O N
 #########################################################################
 print('\nvisualisation')
-x_label = "$\\dot{V}$ of sewage network $[\\unitfrac{m^3}{s}]$"
-y_label = "Distribution of $\\dot{V}$ of \ngeneric network $[\\unitfrac{m^3}{s}]$"
-fig = vis.plot_boxplot(boxplot_V_over_V_pat, x_label=x_label, y_label=y_label,
-                 y_scale='log', x_rotation=90)
-Data.save_figure(fig, 'boxplot_distr_V_over_V')
 
-x_label = "$\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
-y_label = "Distribution of length [m]"
-fig = vis.plot_boxplot_2_in_1(boxplot_length_over_V_pat,
-                              boxplot_length_over_V_sew,
-                              x_label=x_label, y_label=y_label, y_scale='log',
-                              x_rotation=90)
-Data.save_figure(fig, 'boxplot_distr_length_over_V')
-
-data = {'Sewage network': gdf_sewnet.V, 'Generic network': gdf_paths.V}
-y_label = "Distribution of $\\dot{V}$ $[\\unitfrac{m^3}{s}]$"
-fig = vis.plot_boxplot(data, y_label=y_label, y_scale='log')
-Data.save_figure(fig, 'boxplot_distr_V')
-
-data = {'Sewage network': gdf_sewnet.length,
-        'Generic network': gdf_paths.length}
-y_label = "Distribution of edges' length [m]"
-fig = vis.plot_boxplot(data, y_label=y_label, y_scale='log')
-Data.save_figure(fig, 'boxplot_distr_length')
-
-fig = vis.plot_distr_of_nodes(dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh)
-Data.save_figure(fig, 'amount_of_points_over_popDens')
-
-min_vol_flow = 0.01
-min_dn = 0.8
-
-if gdf_paths[gdf_paths.V >= min_vol_flow].empty:
-    min_vol_flow = 0
-if gdf_sewnet[gdf_sewnet.DN >= min_dn].empty:
-    min_dn = 0
-
-fig = vis.plot_map(gdf_census,
-             gdf_paths[gdf_paths['V'] >= 0.01],
-             gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b, gdf_gis_r,
-             Data.wwtp.x, Data.wwtp.y)
-Data.save_figure(fig)
-
-
-geo0 = [x[0] for x in gdf_sewnet['SHAPE'][gdf_sewnet['DN'] >= 0.8].boundary]
-geo1 = [x[1] for x in gdf_sewnet['SHAPE'][gdf_sewnet['DN'] >= 0.8].boundary]
-geo2 = [x[0] for x in gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
-geo3 = [x[1] for x in gdf_paths['geometry'][gdf_paths['V'] >= 0.01].boundary]
-mpt = MultiPoint(geo0 + geo1 + geo2 + geo3)
-
-convex_hull = mpt.convex_hull
-gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(convex_hull)]
-gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(convex_hull)]
-gdf_census_cut = gdf_census[gdf_census.within(convex_hull)]
-
-fig = vis.plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
-                   gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
-                   gdf_gis_r_cut, Data.wwtp.x, Data.wwtp.y)
-Data.save_figure(fig, '_cut_ge_DN800')
-
-area = Polygon([[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
-                [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
-                [9.9336125704, 51.5358519306]])
-gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
-gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
-gdf_census_cut = gdf_census[gdf_census.within(area)]
-gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
-gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
-
-fig = vis.plot_map(gdf_census_cut, gdf_paths_cut,
-                   gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
-                   paths_lw=3, sewnet_lw=1)
-Data.save_figure(fig, '_cut_area')
-
+if Data.sewage_network != 'None':
+    vis.memphis_vs_sewagenetwork(Data, gdf_gis_b, gdf_gis_r, gdf_census,
+                                 gdf_sewnet, gdf_paths, boxplot_V_over_V_pat,
+                                 boxplot_length_over_V_pat,
+                                 boxplot_length_over_V_sew, dis_sew_in_inh,
+                                 dis_pat_in_inh, dis_cen_in_inh)
+else:
+    vis.memphis(Data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths)
 ##########################
 # SAVE
 ##########################

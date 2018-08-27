@@ -6,7 +6,7 @@ Created on Tue May 29 10:06:08 2018
 """
 import numpy as np
 
-def DN_to_V(self, df, g=9.81, v=1.31e-6, k=15e-4):
+def DN_to_V(df, g=9.81, v=1.31e-6, k=15e-4):
     '''Calculates the maximum volumestream possible in channel with
     nominal width DN.
 

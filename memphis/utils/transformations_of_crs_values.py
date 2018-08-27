@@ -23,6 +23,8 @@ def transform_coords(geo, from_coord='epsg:3035', into_coord='epsg:4326'):
     Returns:
         type(geo) transformed to into_coord
     '''
+    import time
+    stime = time.time()
     if type(geo[0]) == pd.core.series.Series:
         geo = geo[0].tolist()
     geo_as_tuples = [0]*len(geo)
@@ -71,7 +73,7 @@ def transform_coords(geo, from_coord='epsg:3035', into_coord='epsg:4326'):
             ret[i] = Point(item)
     else:
         ret = geo_convert
-
+    print("transform_coords | {}".format(time.time() - stime))
     return ret
 
 

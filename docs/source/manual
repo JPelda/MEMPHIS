@@ -1,0 +1,68 @@
+~~~~~~~~~~~~~~~
+Getting started
+~~~~~~~~~~~~~~~
+
+
+Graph from new city
+###################
+MEMPHIS works with the package osmnx that provides mathematical structured graphs from various cities.
+For cities where the graph can not directly be downloaded by osmnx.graph_from_place() as the method can not find the city's bounding box, the approach is shown after the default way of download.
+The following example shows the download of the city Göttingen, Germany.
+
+.. code-block:: python
+
+	import os
+	import osmnx as ox
+
+	graph = ox.graph_from_place('Goettingen, Germany')
+	ox.save_graphml(graph, 'goettingen', folder=os.getcwd())
+
+If osmnx does not provide your requested city by name, you have to look for the city's borders yourself. The borders must be given in any gis-readable format. This format must then be translated into a shapely.geometry.polygon object which can then be forwarded to osmnx like following:
+
+.. code-block:: python
+
+	import os
+	import osmnx as ox
+	from shapely.wkt import loads
+
+	city_boundaries = "Polygon((10 20, 10 40, 50 60, 10 20))" # This is defined by city's borders
+	poly = loads(city_boundaries)
+
+	graph = ox.graph_from_polygon(poly)
+	ox.save_graphml(graph, 'goettingen', folder=os.getcwd())
+
+
+
+Bounding box from city's graph
+##############################
+If you do not know the bounding box of the city under investigation take the previously downloaded graphml file and proceed as following:
+
+.. code-block:: python
+	
+	import os
+	import osmnx as ox
+
+	graph = ox.load_graphml('goettingen', folder=os.getcwd())
+	gdf_nodes, _ = osmnx.save_load.graph_to_gdfs(graph, nodes=True,
+                                                     edges=True,
+                                                     node_geometry=True,
+                                                     fill_edge_geometry=True)
+    xmin = min(gdf_nodes.geometry.x)
+    ymin = min(gdf_nodes.geometry.y)
+    xmax = max(gdf_nodes.geometry.x)
+    ymax = max(gdf_nodes.geometry.y)
+
+    print(xmin, ymin, xmax, ymax)
+
+
+Building config
+###############
+
+
+
+
+.. contents::
+    :depth: 1
+    :local:
+    :backlinks: top
+

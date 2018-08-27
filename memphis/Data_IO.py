@@ -48,11 +48,18 @@ class Data_IO:
                   (self.x_min, self.y_min))
         self.bbox = Polygon(coords)
         self.coord_system = GIS['coord_system']
-        self.country = self.config['SQL_QUERIES']['country']
-        self.wwtp = Point(float(self.config['coords']
-                                ['waste_water_treatment_plant_x']),
-                          float(self.config['coords']
-                                ['waste_water_treatment_plant_y']))
+        self.country = GIS['country']
+        self.sewage_network = GIS['sewage_network']
+        self.census = GIS['census']
+
+        RASTER = self.config['raster']
+        self.coord_system_raster = RASTER['coord_system']
+        if self.coord_system_raster != 'None':
+            self.inhabs = int(RASTER['inhabitants'])
+
+        wwtp = [c[1].split(', ') for c in list(self.config['wwtp'].items())]
+        self.wwtp = [Point(float(c[0]), float(c[1])) for c in wwtp]
+
         self.city = self.config['Files']['city']
         self.path_export = eval(self.config['Files']['path_export']) + os.sep +\
                            self.city
@@ -104,7 +111,7 @@ class Data_IO:
 
         print("Saved.")
 
-    def read_from_sqlServer(self, name):
+    def read_from_sqlServer(self, name, all=False):
         """Reads SQL-Database into pandas dataframe.
 
         Parameters
@@ -136,12 +143,14 @@ class Data_IO:
         # Import as string = ST_AsBinary(name)
         # ST_GeomFromWKB(x'01010000008D976E1283C0F33F16FBCBEEC9C30240')
         # shapely.wkb.loads(string)
-        if 'SHAPE' in col.keys():
+        if 'SHAPE' in col.keys() and all is not True:
             if len(col['SHAPE']) is 1:
                 sql = self.select_from_where_mbrContains(col, table, bbox)
-
             elif len(col['SHAPE']) is 2:
                 sql = self.select_from_where_between(col, table, bbox)
+
+        elif all is True:
+            sql = self.select_from(col, table)
         else:
             sql = self.select_from(col, table)
 
@@ -201,9 +210,8 @@ class Data_IO:
         return ("ST_GEOMFROMTEXT('{}')").format(geom)
 
     def select_from(self, col, table):
-        col = col.values()
-        sql = ("SELECT {} FROM {}").format(', '.join([x for x in col if
-                                                      x is not None]), table)
+        sql = ("SELECT {} FROM {}").format(
+            ', '.join(self.dict_of_nested_lists_to_list(col)), table)
         return sql
 
     def write_gdf_to_file(self, gdf, fname=''):
