@@ -39,7 +39,7 @@ def polys_to_point(gdf_polys, gdf_polys_centroid, gdf_polys_values,
                                         zip(gdf_polys_centroid,
                                             gdf_polys,
                                             gdf_polys_values)):
-        print("Objects left {}".format(len(gdf_polys) - i))
+        print("Polys to points, objects left {}".format(len(gdf_polys) - i))
         if value <= 0:
             continue
         else:
@@ -49,7 +49,6 @@ def polys_to_point(gdf_polys, gdf_polys_centroid, gdf_polys_values,
 
             if possible_matches_index != []:
                 val = value / len(possible_matches_index)
-                print(possible_matches_index)
                 for key in possible_matches_index:
                     key = gdf_points.index[key]
                     dic[key] += val
@@ -128,7 +127,9 @@ def points_to_poly(gdf_points, gdf_points_values,
     gdf_points_values = gdf_points_values.loc[gdf_points_values != 0]
     if not gdf_points.empty:
         pts = gdf_polys_centroid.unary_union
-        for pt, val in zip(gdf_points, gdf_points_values):
+        for i, (pt, val) in enumerate(zip(gdf_points, gdf_points_values)):
+            print("Points to poly -> nearest_points,"
+                  " objects left {}".format(len(gdf_points) - i))
             nearest = gdf_polys_centroid.geometry == \
                       shapely.ops.nearest_points(pt, pts)[1]
             key = gdf_polys[nearest].index.values[0]
