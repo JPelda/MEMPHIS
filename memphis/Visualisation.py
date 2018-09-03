@@ -47,7 +47,8 @@ def plot_map(gdf_census=None, gdf_paths=None, gdf_sewnet=None,
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
 
     if gdf_census is not None:
-        levels = [-1, 0, 25, 50, 75, 100, 150, max(gdf_census['inhabs'])]
+        max_val = max(gdf_census.inhabs)
+        levels = [-1, 0, 25, 50, 75, 100, 150, max_val]
         colors = ['white', '#C0C9E4', '#9EADD8', '#6D89CB',
                   '#406DBB', '#3960A7', '#2F528F']
         cmap_census, norm_census = from_levels_and_colors(levels, colors)
@@ -55,7 +56,7 @@ def plot_map(gdf_census=None, gdf_paths=None, gdf_sewnet=None,
         sm_census._A = []
         colorBar_census = fig.colorbar(sm_census, ax=ax)
 
-        gdf_census.set_geometry = gdf_census['SHAPE_b']
+        gdf_census.set_geometry = gdf_census['SHAPE']
         gdf_census.plot(ax=ax, cmap=cmap_census, norm=norm_census,
                         column='inhabs', alpha=0.4)
         colorBar_census.ax.set_ylabel("\\small{Inhabitants} "
@@ -73,6 +74,7 @@ def plot_map(gdf_census=None, gdf_paths=None, gdf_sewnet=None,
         print(wwtp_legend)
         handles += [wwtp_legend]
     if gdf_gis_b is not None:
+        gdf_gis_b = gdf_gis_b.set_geometry('SHAPE')
         gdf_gis_b_color = 'black'
         gdf_gis_b_alpha = 0.2
         gdf_gis_b.plot(ax=ax, color=gdf_gis_b_color, alpha=gdf_gis_b_alpha)
@@ -332,7 +334,8 @@ def memphis_vs_sewagenetwork(Data, gdf_gis_b, gdf_gis_r, gdf_census,
                              gdf_sewnet, gdf_paths, boxplot_V_over_V_pat,
                              boxplot_length_over_V_pat,
                              boxplot_length_over_V_sew,
-                             dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh):
+                             dis_sew_in_inh, dis_pat_in_inh, dis_cen_in_inh,
+                             area='all'):
     x_label = "$\\dot{V}$ of sewage network $[\\unitfrac{m^3}{s}]$"
     y_label = "Distribution of $\\dot{V}$ of \ngeneric network $[\\unitfrac{m^3}{s}]$"
     fig = plot_boxplot(boxplot_V_over_V_pat, x_label=x_label,
@@ -396,25 +399,21 @@ def memphis_vs_sewagenetwork(Data, gdf_gis_b, gdf_gis_r, gdf_census,
     fig = plot_map(gdf_census_cut, gdf_paths[gdf_paths['V'] >= 0.01],
                        gdf_sewnet[gdf_sewnet['DN'] >= 0.80], gdf_gis_b_cut,
                        gdf_gis_r_cut, Data.wwtp)
-    Data.save_figure(fig, '_cut_ge_DN800')
+    Data.save_figure(fig, 'cut_ge_DN800')
 
-    area = Polygon(
-        [[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
-         [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
-         [9.9336125704, 51.5358519306]])
-    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
-    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
-    gdf_census_cut = gdf_census[gdf_census.within(area)]
-    gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
-    gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
-
-    fig = plot_map(gdf_census_cut, gdf_paths_cut,
+    if area != 'all':
+        gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+        gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+        gdf_census_cut = gdf_census[gdf_census.within(area)]
+        gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+        gdf_sewnet_cut = gdf_sewnet[gdf_sewnet.within(area)]
+        fig = plot_map(gdf_census_cut, gdf_paths_cut,
                        gdf_sewnet_cut, gdf_gis_b_cut, gdf_gis_r_cut,
                        paths_lw=3, sewnet_lw=1)
-    Data.save_figure(fig, '_cut_area')
+        Data.save_figure(fig, 'cut_area')
 
 
-def memphis(data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths):
+def memphis(data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths, area='all'):
 
     min_vol_flow = 0.01
 
@@ -441,19 +440,16 @@ def memphis(data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths):
                    gdf_paths[gdf_paths['V'] >= 0.01],
                    gdf_gis_b=gdf_gis_b_cut, gdf_gis_r=gdf_gis_r_cut,
                    wwtp=data.wwtp)
-    data.save_figure(fig, '_cut_ge_DN800')
+    data.save_figure(fig, 'cut_ge_DN800')
 
-    area = Polygon(
-        [[9.9336125704, 51.5358519306], [9.9619366976, 51.5358519306],
-         [9.9619366976, 51.5469020742], [9.9336125704, 51.5469020742],
-         [9.9336125704, 51.5358519306]])
-    gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
-    gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
-    gdf_census_cut = gdf_census[gdf_census.within(area)]
-    gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
+    if area != 'all':
+        gdf_gis_b_cut = gdf_gis_b[gdf_gis_b.within(area)]
+        gdf_gis_r_cut = gdf_gis_r[gdf_gis_r.within(area)]
+        gdf_census_cut = gdf_census[gdf_census.within(area)]
+        gdf_paths_cut = gdf_paths[gdf_paths.within(area)]
 
-    fig = plot_map(gdf_census_cut, gdf_paths_cut,
-                   gdf_gis_b=gdf_gis_b_cut,
-                   gdf_gis_r=gdf_gis_r_cut,
-                   paths_lw=3, sewnet_lw=1)
-    data.save_figure(fig, '_cut_area')
+        fig = plot_map(gdf_census_cut, gdf_paths_cut,
+                       gdf_gis_b=gdf_gis_b_cut,
+                       gdf_gis_r=gdf_gis_r_cut,
+                       paths_lw=3, sewnet_lw=1)
+        data.save_figure(fig, 'cut_area')

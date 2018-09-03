@@ -15,7 +15,7 @@ def buffer(gdf, x_min, x_max, y_min, y_max, factor=1.9):
     ARGS:
     -----
     gdf : geopandas.GeoDataFrame()
-        gdf['len_x'], gdf['len_y'], gdf['SHAPE']
+        gdf['len_x'], gdf['len_y'], gdf['CENTROID']
     x_max : float
         length of map in x direction
     y_max : float
@@ -38,12 +38,12 @@ def buffer(gdf, x_min, x_max, y_min, y_max, factor=1.9):
     gdf_x_length = x_max - x_min
     gdf_y_length = y_max - y_min
 
-    factor = 1.9
+    factor = factor
     delta = gdf_x_length / gdf_length_x
     border = delta / factor
     delta_x = gdf_x_length / gdf_length_x - border
-    delta = gdf_y_length / gdf_length_y
-    border = delta / factor
+    # delta = gdf_y_length / gdf_length_y
+    # border = delta / factor
     delta_y = gdf_y_length / gdf_length_y - border
 
     geo = [Polygon(((point.x - delta_x, point.y - delta_y),
@@ -51,6 +51,6 @@ def buffer(gdf, x_min, x_max, y_min, y_max, factor=1.9):
                     (point.x + delta_x, point.y + delta_y),
                     (point.x - delta_x, point.y + delta_y),
                     (point.x - delta_x, point.y - delta_y))) for
-           point in gdf['SHAPE']]
+           point in gdf['CENTROID']]
 
     return geo

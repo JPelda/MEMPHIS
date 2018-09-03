@@ -7,59 +7,93 @@ Created on Wed May  2 11:32:35 2018
 from osmnx import get_nearest_node
 from networkx import get_node_attributes
 import shapely.ops
+import geopandas as gpd
+import pandas as pd
+import numpy as np
+import time
 
-
-def polys_to_point(gdf_polys, gdf_polys_centroid, gdf_polys_values,
-                   gdf_points):
-    """Allocates inhabitans to nodes. Nodes in same raster field will get
-    raster's inhabitans divided by amout of nodes within raster. Raster
-    fields without nodes are allocated to nearest node. Values <= 0 are not
-    considered!
+def polys_to_point(gdf_polys, gdf_points, col):
+    """Allocates values of col of polygons to nodes.
+    Points in same polygon will get value divided by amout of points within
+    raster. Polygons without points are allocated to nearest points.
 
     Parameters
     ----------
-    gdf_polys : geopandas.GeoDataFrame(shapely.geometry.polygon)
-    gdf_polys_centroid : geopandas.GeoDataFrame(shapely.geometry.Point)
-    gdf_polys_values : geopandas.GeoDataFrame(int or float)
-    gdf_points : geopandas.GeoDataFrame(shapely.geometry.points)
-
+    gdf_polys : geopandas.GeoDataFrame()
+        *gdf_polys['SHAPE'] as geometry and shapely.geometry.polygon
+        *gdf_polys['CENTROID'], gdf_polys[col]
+    gdf_points : gpd.GeoDataFrame()
+        gdf_points['SHAPE'] as geometry and shapely.geometry.point
+    col: str
+        Name of column with values
 
     Returns
     -------
     list(float)
-        list of inhabitants in order of gdf_nodes
+        list of inhabitants in order of gdf_points
     """
 
-    gdf_points_sindexed = gdf_points.sindex
-    dic = {key: 0 for key in gdf_points.index}
-    print(dic.keys())
-    pts1 = gdf_points.unary_union
+    df = pd.DataFrame(0, index=gdf_points.index, columns=['results'])
+    gdf_res = gpd.sjoin(gdf_polys, gdf_points, op='intersects', how='right')
 
-    for i, (geo, poly, value) in enumerate(
-                                        zip(gdf_polys_centroid,
-                                            gdf_polys,
-                                            gdf_polys_values)):
-        print("Polys to points, objects left {}".format(len(gdf_polys) - i))
-        if value <= 0:
-            continue
-        else:
-            possible_matches_index = list(
-                            gdf_points_sindexed.intersection(
-                                    poly.bounds))
+    polys_left = gdf_polys.drop(set(
+        gdf_res.index_left[gdf_res.index_left.notnull()]))
 
-            if possible_matches_index != []:
-                val = value / len(possible_matches_index)
-                for key in possible_matches_index:
-                    key = gdf_points.index[key]
-                    dic[key] += val
-            else:
-                nearest = gdf_points.geometry ==\
-                          shapely.ops.nearest_points(geo, pts1)[1]
-                key = gdf_points[nearest].index.values[0]
-                dic[key] += value
+    # finds mean value for the polygon which gets the values from points.
+    counts = gdf_res['index_left'].value_counts(sort=False, dropna=False)
+    factor = np.repeat(counts.values, counts.values)
+    values = gdf_res[col] / factor
 
-    list_of_inhabs = [dic[key] for key in gdf_points.index]
-    return list_of_inhabs
+    df.loc[gdf_res.index, 'results'] += values
+    df['results'] = df['results'].fillna(0)
+
+    if not polys_left.empty:
+        d = {key: 0 for key in gdf_points.index}
+        ptsofpoints = gdf_points.centroid.unary_union
+
+        pts = polys_left['CENTROID'].values
+        pts_val = polys_left[col].values
+
+        pts_test = gdf_points.centroid.values
+        pts_test = np.array([(p.x, p.y) for p in pts_test])
+
+        for i, (pt, val) in enumerate(zip(pts, pts_val)):
+            print("Poly to points -> nearest_points,"
+                  " objects left {}".format(len(pts) - i))
+            # stime = time.time()
+            # nearest = gdf_points.geometry == \
+            #           shapely.ops.nearest_points(pt, ptsofpoints)[1]
+            # key = gdf_points[nearest].index.values[0]
+            # d[key] += val
+            # print(key)
+            # print(time.time() - stime)
+            # stime = time.time()
+            nearest = closest_node(pt, pts_test)
+            key = gdf_points.index[nearest]
+            d[key] += val
+            # print(nearest)
+            # print(time.time() -stime)
+
+        df.loc[d.keys(), 'results'] += list(d.values())
+
+    return df.values
+
+def closest_node(point, points):
+    """
+
+    Parameters
+    ----------
+    point
+    points : array()
+
+    Returns
+    -------
+    index : int
+    """
+    deltas = points - point
+    dist_2 = np.einsum('ij,ij->i', deltas, deltas)
+
+    return np.argmin(dist_2)
 
 def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     """Allocates the water consumption of each building in GIS-Data to
@@ -68,7 +102,7 @@ def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     Parameters
     ----------
     gdf_gis_b : geopandas.GeoDataFrame()
-        * gdf_gis_b['geometry']: the geometry
+        * gdf_gis_b['CENTROID']: the geometry
         * gdf_gis_b['wc']: the water consumption
         * gdf_gis_b['area']: the area of the building
     graph : nx.Graph()
@@ -80,7 +114,7 @@ def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     """
 
     dic = {key: 0 for key in gdf_nodes.index}
-    geos = gdf_gis_b['SHAPE'][gdf_gis_b['wc'] > 0].centroid
+    geos = gdf_gis_b['CENTROID'][gdf_gis_b['wc'] > 0]
     wc = gdf_gis_b['wc'][gdf_gis_b['wc'] > 0]
 
     for i, (geo, wc) in enumerate(zip(geos, wc)):
@@ -91,8 +125,7 @@ def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     return list_of_wc
 
 
-def points_to_poly(gdf_points, gdf_points_values,
-                   gdf_polys, gdf_polys_centroid):
+def points_to_poly(gdf_points, gdf_polys, col):
     """Allocates points' values to polygon if point is within polygon. Values
     <= 0 are not considered!
     If there is no unary_union for a gdf than first set the right geometry
@@ -100,43 +133,46 @@ def points_to_poly(gdf_points, gdf_points_values,
 
     Parameters
     ----------
-    gdf_points : geopandas.GeoDataFrame(shapely.geometry.points)
-    gdf_points_values : geopandas.GeoDataFrame(int / float)
-    gdf_polys : geopandas.GeoDataFrame(shapely.geometry.polygons)
-    gdf_polys_centroid : geopandas.GeoDataFrame(shapely.geometry.points)
-
+    gdf_points : geopandas.GeoDataFrame()
+        * gdf_points['geometry']  as shapely.geometry.Points set as geometry
+        * gdf_points[col]
+    gdf_polys : geopandas.GeoDataFrame()
+        * gdf_polys['SHAPE'] as shapely.geometry.polygons set as geometry,
+        * gdf_polys['CENTROID']
+    col : str
+        column name of values which will be transfered to polygon
     Returns
     -------
     arr : containing the accumulated values in gdf_polys order
     """
 
-    gdf_points_sindexed = gdf_points.sindex
-    dic = {key: 0 for key in gdf_polys.index}
-    for i, (index, poly) in enumerate(zip(gdf_polys.index.values, gdf_polys)):
-        print("Points to poly, objects left {}".format(len(gdf_polys) - i))
+    df = pd.DataFrame(0, index=gdf_polys.index, columns=['results'])
+    gdf_res = gpd.sjoin(gdf_points, gdf_polys, op='intersects', how='right')
 
-        possible_matches_index = list(gdf_points_sindexed.intersection(
-                                      poly.bounds))
-        if possible_matches_index != []:
-            dic[index] += sum(gdf_points_values.iloc[possible_matches_index])
-            gdf_points_values.loc[possible_matches_index] = 0
-        if i % 2500 == 0:
-            gdf_points_sindexed = gdf_points.loc[gdf_points_values != 0].sindex
+    pts_left = gdf_points.drop(set(
+        gdf_res.index_left[gdf_res.index_left.notnull()]))
 
-    gdf_points = gdf_points.loc[gdf_points_values != 0]
-    gdf_points_values = gdf_points_values.loc[gdf_points_values != 0]
-    if not gdf_points.empty:
-        pts = gdf_polys_centroid.unary_union
-        for i, (pt, val) in enumerate(zip(gdf_points, gdf_points_values)):
+    if not pts_left.empty:
+        d = {key: 0 for key in gdf_polys.index}
+        ptsofpoly = gdf_polys.centroid.unary_union
+        pts = pts_left.geometry.values
+        pts_val = pts_left[col].values
+        for i, (pt, val) in enumerate(zip(pts, pts_val)):
             print("Points to poly -> nearest_points,"
-                  " objects left {}".format(len(gdf_points) - i))
-            nearest = gdf_polys_centroid.geometry == \
-                      shapely.ops.nearest_points(pt, pts)[1]
-            key = gdf_polys[nearest].index.values[0]
-            dic[key] += val
+                  " objects left {}".format(len(pts) - i))
+            nearest = gdf_polys.centroid == \
+                                shapely.ops.nearest_points(pt, ptsofpoly)[1]
 
-    arr = [dic[key] for key in gdf_polys.index]
-    return arr
+            key = gdf_polys[nearest].index.values[0]
+            d[key] += val
+
+        df.loc[d.keys(), 'results'] += list(d.values())
+
+    gdf_res = gdf_res.groupby('index_right')[col].sum()
+    df.loc[gdf_res.index, 'results'] += gdf_res.values
+
+    return df.values
+
 
 def inhabs_to_area(gdf_gis_b, inhabitants, types):
     """
@@ -196,6 +232,39 @@ def nodes_to_node(gdf_nodes, gdf_node, name='inhabs'):
         # shapely.ops.
     return list(get_node_attributes(graph, name).values())
 
+#TODO can this be transformed to points_to_poly?
+def alloc_nodes_to_inhabs(self, gdf_raster, gdf_nodes):
+    """Allocates points of gdf to fields of gdf_census.
+
+    ARGS:
+    -----
+    gdf_raster : geopandas.GeoDataFrame()
+        gdf_raster['inhabs']
+    gdf_nodes : geopandas.GeoDataFrame()
+        gdf_nodes['geometry'].boundary
+
+    RETURNS:
+    --------
+    list_of_inhabs : list(floats)
+        List of floats is in order of gdf_nodes
+    """
+
+    gdf_raster_spatial_index = gdf_raster.sindex
+    arr = [0] * len(gdf_nodes)
+    raster = [0] * len(gdf_nodes)
+
+    for i, geo in enumerate(gdf_nodes['geometry']):
+
+        possible_matches_index = list(
+                            gdf_raster_spatial_index.intersection(
+                                    geo.bounds))
+        possible_matches = gdf_raster.iloc[possible_matches_index]
+        precise_matches = possible_matches[
+                possible_matches.contains(geo)]
+        if not precise_matches.empty:
+            arr[i] = precise_matches['inhabs'].values[0]
+            raster[i] = precise_matches.index.values[0]
+    return arr, raster
 
 def alloc_wc_to_type(gis_cat, gdf_gis_b):
     """Allocates water consumption to types coming from gis_buildings.

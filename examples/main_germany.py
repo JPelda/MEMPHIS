@@ -9,12 +9,11 @@ import os
 import sys
 
 import time
-import pandas as pd
 import geopandas as gpd
 
 import osmnx
 import numpy as np
-from shapely.geometry import MultiPoint, Point
+from shapely.geometry import MultiPoint, Point, Polygon
 
 path = os.getcwd()
 sys.path.append(path + os.sep + 'memphis')
@@ -42,13 +41,15 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO(path + os.sep + 'examples' + os.sep + 'config' +
-               os.sep + 'edinburgh.ini')
+               os.sep + 'graz.ini')
 
 graph = Data.read_from_graphml('graph')
 gdf_nodes, gdf_edges = osmnx.save_load.graph_to_gdfs(graph, nodes=True,
                                                      edges=True,
                                                      node_geometry=True,
                                                      fill_edge_geometry=True)
+gdf_nodes.crs = Data.coord_system
+gdf_edges.crs = Data.coord_system
 
 stime = time.time()
 gis_r = Data.read_from_sqlServer('gis_roads')
@@ -58,6 +59,7 @@ print("gis_r | {}".format(time.time() - stime))
 stime = time.time()
 gis_b = Data.read_from_sqlServer('gis_buildings')
 gdf_gis_b = gpd.GeoDataFrame(gis_b, crs=Data.coord_system, geometry='SHAPE')
+gdf_gis_b['CENTROID'] = gdf_gis_b['SHAPE'].centroid
 print("gis_b | {}".format(time.time() - stime))
 
 stime = time.time()
@@ -72,7 +74,6 @@ gdf_gis_b['area'] = transform_area(gdf_gis_b.geometry)
 gdf_gis_b['wc'] = alloc.alloc_wc_to_type(gis_cat, gdf_gis_b) *\
                     gdf_gis_b['area'] / (8760 * 3600)
 
-
 wc = Data.read_from_sqlServer('wc_per_inhab')
 wc = wc.drop(0)
 wc['cmPERpTIMESh'] = wc['lPERpTIMESd'].astype(float) / 1000 / (24 * 3600)
@@ -81,10 +82,10 @@ if Data.census != 'None':
     census = Data.read_from_sqlServer('census')
     gdf_census = gpd.GeoDataFrame(census, crs=Data.coord_system,
                                   geometry='SHAPE')
-    gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
-                                   Data.y_min, Data.y_max)
+    gdf_census['CENTROID'] = gdf_census['SHAPE']
+    gdf_census['SHAPE'] = buffer(gdf_census, Data.x_min, Data.x_max,
+                                 Data.y_min, Data.y_max)
 else:
-    print("Census will be calculated as census data are missing")
     points = [Point(graph.nodes[key]['x'], graph.nodes[key]['y']) for key in
               graph.nodes.keys()]
     mpoints = MultiPoint(points)
@@ -99,21 +100,44 @@ else:
                            num=int((Data.y_max - Data.y_min) / length))
     pts = [Point(x, y) for x in x_points for y in y_points]
 
-    gdf_census = gpd.GeoDataFrame(pts, columns=['SHAPE'], geometry='SHAPE')
+    gdf_census = gpd.GeoDataFrame(pts, columns=['CENTROID'],
+                                  geometry='CENTROID',
+                                  crs=Data.coord_system)
     gdf_census['x_mp_100m'] = np.repeat(x_points, len(y_points))
     gdf_census['y_mp_100m'] = np.repeat(y_points, len(x_points))
     gdf_census['len_x'] = len(x_points)
     gdf_census['len_y'] = len(y_points)
-    gdf_census['SHAPE_b'] = buffer(gdf_census, Data.x_min, Data.x_max,
-                                   Data.y_min, Data.y_max)
-    gdf_gis_b = alloc.inhabs_to_area(gdf_gis_b, Data.inhabs, dic.types['all'])
-    c_sb = gdf_census.set_geometry('SHAPE_b')
-    gdf_census['inhabs'] = alloc.points_to_poly(gdf_gis_b.centroid,
-                                                gdf_gis_b['inhabs'],
-                                                c_sb['SHAPE_b'],
-                                                gdf_census['SHAPE'])
-    gdf_gis_b.set_geometry('SHAPE')
-    gdf_census.set_geometry('SHAPE')
+    gdf_census['SHAPE'] = buffer(gdf_census, Data.x_min, Data.x_max,
+                                 Data.y_min, Data.y_max, factor=2)
+
+    if Data.census == 'None' and Data.districts == 'None':
+        print("Census will be calculated by city's inhabitants and distribution of"
+              "houses' area")
+
+        gdf_gis_b = alloc.inhabs_to_area(gdf_gis_b, Data.inhabs, dic.types['all'])
+
+        # gdf_census['inhabs'] = alloc.points_to_poly(gdf_gis_b.centroid,
+        #                                             gdf_gis_b.inhabs,
+        #                                             c_sb['SHAPE_b'],
+        #                                             gdf_census['SHAPE'])
+        gdf_gis_b = gdf_gis_b.set_geometry('CENTROID')
+        gdf_census = gdf_census.set_geometry('SHAPE')
+        gdf_census['inhabs'] = alloc.points_to_poly(gdf_gis_b,
+                                                    gdf_census, 'inhabs')
+    elif Data.districts != 'None':
+        print("Census will be calculated by city districts' inhabitants and"
+              " distribution of houses' area")
+        districts = Data.read_from_sqlServer('districts')
+        gdf_districts = gpd.GeoDataFrame(districts, crs=Data.coord_system,
+                                         geometry='SHAPE')
+        gdf_census['inhabs'] = alloc.polys_to_point(gdf_districts,
+                                                    gdf_census, 'inhabs')
+        gdf_census = gdf_census.set_geometry('SHAPE')
+
+
+
+
+
 
 pipes_table = Data.read_from_sqlServer('pipes_dn_a_v_v')
 pipes_table['V'] = pipes_table['V'] / 1000
@@ -157,11 +181,13 @@ if Data.sewage_network != 'None':
 print('allocation')
 
 stime = time.time()
-c_sb = gdf_census.set_geometry('SHAPE_b')
-gdf_nodes['inhabs'] = alloc.polys_to_point(c_sb['SHAPE_b'],
-                                           gdf_census['SHAPE'],
-                                           gdf_census['inhabs'],
-                                           gdf_nodes['geometry'])
+gdf_census = gdf_census.set_geometry('SHAPE')
+# gdf_nodes['inhabs'] = alloc.polys_to_point(gdf_census['SHAPE'],
+#                                            gdf_census['CENTROID'],
+#                                            gdf_census['inhabs'],
+#                                            gdf_nodes['geometry'])
+gdf_nodes['inhabs'] = alloc.polys_to_point(gdf_census, gdf_nodes, 'inhabs')
+
 print("alloc_inhabs_to_nodes | {}".format(stime - time.time()))
 
 # if Data.census != 'None':
@@ -175,7 +201,7 @@ print("alloc_inhabs_to_nodes | {}".format(stime - time.time()))
 #     gdf_nodes['inhabs'] = res
 #     print("nodes_to_nodes | {}".format(stime - time.time()))
 
-gdf_census = gdf_census.set_geometry('SHAPE_b')
+
 gdf_nodes['wc'] = gdf_nodes['inhabs'] *\
                          wc[wc.country_l ==
                             Data.country].cmPERpTIMESh.item() * 1.6
@@ -241,17 +267,27 @@ if Data.sewage_network != 'None':
                                  gdf_sewnet, gdf_paths, boxplot_V_over_V_pat,
                                  boxplot_length_over_V_pat,
                                  boxplot_length_over_V_sew, dis_sew_in_inh,
-                                 dis_pat_in_inh, dis_cen_in_inh)
+                                 dis_pat_in_inh, dis_cen_in_inh, area=
+                                 Polygon([[9.9336125704, 51.5358519306],
+                                          [9.9619366976, 51.5358519306],
+                                          [9.9619366976, 51.5469020742],
+                                          [9.9336125704, 51.5469020742],
+                                          [9.9336125704, 51.5358519306]]))
 else:
-    vis.memphis(Data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths)
+    vis.memphis(Data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths, area=
+                Polygon([[-3.1792115377, 55.9762789334],
+                         [-3.1652104067, 55.9762789334],
+                         [-3.1652104067, 55.9723886831],
+                         [-3.1792115377, 55.9723886831],
+                         [-3.1792115377, 55.9762789334]]))
 ##########################
 # SAVE
 ##########################
 path_export_shp = os.sep + 'shp' + os.sep
 
-census = census.set_geometry('SHAPE')
-census['SHAPE_b'] = [poly.wkt for poly in census['SHAPE_b']]
-Data.write_gdf_to_file(census, 'census.shp')
+gdf_census_copy = gdf_census.copy()
+del gdf_census_copy['CENTROID']
+Data.write_gdf_to_file(gdf_census_copy, 'census.shp')
 
 Data.write_gdf_to_file(gdf_gis_b, 'gis_b.shp')
 Data.write_gdf_to_file(gdf_gis_r, 'gis_r.shp')

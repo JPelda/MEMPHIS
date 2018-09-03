@@ -51,10 +51,13 @@ class Data_IO:
         self.country = GIS['country']
         self.sewage_network = GIS['sewage_network']
         self.census = GIS['census']
+        self.districts = GIS['districts']
 
+        self.inhabs = 'None'
         RASTER = self.config['raster']
         self.coord_system_raster = RASTER['coord_system']
-        if self.coord_system_raster != 'None':
+        if self.coord_system_raster != 'None' and \
+                RASTER['inhabitants'] != 'None':
             self.inhabs = int(RASTER['inhabitants'])
 
         wwtp = [c[1].split(', ') for c in list(self.config['wwtp'].items())]
@@ -298,8 +301,11 @@ class Data_IO:
         if path_export:
             fname = "{}{}{}_{}".format(path_export, name)
         else:
-            fname = self.path_export_fig + os.sep + self.city.upper() +\
-                    '_' +  name
+            if name == '':
+                fname = self.path_export_fig + os.sep + self.city.upper()
+            else:
+                fname = self.path_export_fig + os.sep + self.city.upper() +\
+                    '_' + name
 
         fig.savefig(fname + '.pdf', filetype='pdf', bbox_inches='tight',
                     dpi=1200, pad_inches=0.01)

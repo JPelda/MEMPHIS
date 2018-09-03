@@ -35,39 +35,46 @@ class TestAllocation(unittest.TestCase):
     def setUp(self):
         self.poly1 = Polygon(((1, 1), (2.5, 1), (3.5, 3), (1, 3), (1, 1)))
         self.poly2 = Polygon(((4, 4), (5, 4), (5, 5), (4, 5), (4, 4)))
+        self.poly3 = Polygon(((-1, -1), (-1, -2), (-2, -2),
+                              (-2, -1), (-1, -1)))
         self.point1 = Point((0.5, 2))
         self.point2 = Point((2, 1.5))
         self.point3 = Point((3.5, 3))
         self.point4 = Point((1.5, 1))
         self.point5 = Point((7, 9))
+        self.point6 = Point((4.5, 4.5))
 
-        self.gdf_polys = gpd.GeoDataFrame([self.poly1, self.poly2],
-                                           columns=['SHAPE_b'],
-                                           geometry='SHAPE_b')
-        self.gdf_polys_centroid = self.gdf_polys['SHAPE_b'].centroid
-        self.gdf_polys['values'] = np.array([6, 5])
+        self.gdf_polys = gpd.GeoDataFrame([self.poly1, self.poly2, self.poly3],
+                                           columns=['SHAPE'],
+                                           geometry='SHAPE')
+        self.gdf_polys['CENTROID'] = self.gdf_polys['SHAPE'].centroid
+        self.gdf_polys['values_poly'] = np.array([6, 5, 8])
         self.gdf_points = gpd.GeoDataFrame([self.point1, self.point2,
                                             self.point3, self.point4,
-                                            self.point5],
+                                            self.point5, self.point6],
                                             columns=['SHAPE'],
                                             geometry='SHAPE')
-        self.gdf_points['values'] = [1, 2, 3, 4, 5]
+        self.gdf_points['values_point'] = [1, 2, 3, 4, 5, 6]
 
 
-    def test_polys_to_point(self):
-        arr = alloc.polys_to_point(self.gdf_polys['SHAPE_b'],
-                                   self.gdf_polys_centroid,
-                                   self.gdf_polys['values'],
-                                   self.gdf_points)
-        results = [0, 2, 7, 2, 0]
+    # def test_polys_to_point(self):
+    #     arr = alloc.polys_to_point(self.gdf_polys['SHAPE_b'],
+    #                                self.gdf_polys_centroid,
+    #                                self.gdf_polys['values'],
+    #                                self.gdf_points)
+    #     results = [0, 2, 7, 2, 0]
+    #     self.assertListEqual(arr, results)
+    def test_poly_to_point(self):
+        arr = list(alloc.polys_to_point(self.gdf_polys,
+                                        self.gdf_points,
+                                        col='values_poly'))
+        results = [0, 2, 2, 10, 0, 5]
         self.assertListEqual(arr, results)
 
     def test_points_to_poly(self):
-        arr = alloc.points_to_poly(self.gdf_points['SHAPE'],
-                                   self.gdf_points['values'],
-                                   self.gdf_polys['SHAPE_b'],
-                                   self.gdf_polys_centroid)
-        results = [10, 5]
+        arr = list(alloc.points_to_poly(self.gdf_points, self.gdf_polys,
+                                        col='values_point'))
+        results = [10, 11, 0]
         self.assertListEqual(arr, results)
 
 
