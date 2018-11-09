@@ -11,17 +11,21 @@ Methodology to evaluate and map the potential of waste heat from sewage water by
 Requirements
 ============
 
-memphis 0.0.1 requires
+memphis 0.1.0 requires
 
 * Python >= 3.5
 
 MEMPHIS was developed by using `anaconda <https://www.anaconda.com/distribution/>`__ as python distribution 
 
-Clone the repository and run the setup.py via 
+Clone the repository and run the environment.yml via 
 
 .. code-block:: console
 
-	$ python setup.py
+	$ conda env create -f environment.yml
+
+Getting Started
+===============
+First of all you have to design a config-file for your city. It has the information to your database containing all gis files necessary. For examples, see the config-files (goettingen.ini) in the repository.
 
 
 Authors
