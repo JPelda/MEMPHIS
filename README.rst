@@ -6,7 +6,6 @@ Methodology to evaluate and map the potential of waste heat from sewage water by
 
 * `Blog <http://blogs.hawk-hhg.de/memphis/>`__
 * `MEMPHIS GitHub repository <https://github.com/JPelda/memphis>`__
-* `MEMPHIS documentation and manual <https://memphis.readthedocs.io/en/latest/>`__
 
 Requirements
 ============
