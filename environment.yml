@@ -1,7 +1,10 @@
-name: test3
+name: memphis
 channels:
   - vtraag
   - anaconda
+  - http://conda.anaconda.org/gurobi
+  - pkgw-forge
+  - ostrokach-forge
   - conda-forge
   - defaults
   - ostrokach

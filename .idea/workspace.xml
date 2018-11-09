@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97afc513-127f-4ca1-acba-5de641e45d4d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/memphis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/memphis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/mannheim_by_poly.graphml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/environment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/edinburgh.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/edinburgh.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/goettingen.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/goettingen.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/graz.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/graz.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/config/test_graz.ini" beforeDir="false" afterPath="$PROJECT_DIR$/examples/config/test_graz.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/input/graz.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/input/graz.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/main_germany.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/main_germany.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/newtown-creek-wastewater-treatment-plant.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/newtown-creek-wastewater-treatment-plant.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Edinburgh/fig/EDINBURGH_cut.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Edinburgh/fig/EDINBURGH_cut.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Edinburgh/fig/EDINBURGH_cut.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Edinburgh/fig/EDINBURGH_cut.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Edinburgh/fig/WWTP_coords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Edinburgh/fig/WWTP_coords.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Edinburgh/fig/edinburgh_wwtp_g200DN.qgs" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Edinburgh/fig/edinburgh_wwtp_g200DN.qgs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/WWTP.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/main_austria.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/main_england.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/main_germany.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_amount_of_points_over_popDens.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_amount_of_points_over_popDens.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_amount_of_points_over_popDens.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_amount_of_points_over_popDens.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_V.pdf" afterDir="false" />
@@ -26,26 +23,105 @@
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length_over_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length_over_V.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length_over_V.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_boxplot_distr_length_over_V.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/SNvsGnvsDHS.qgs" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/SNvsGnvsDHS.qgs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_area.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_area.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_ge_DN800.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_ge_DN800.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_ge_DN800.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/fig/GOETTINGEN_cut_ge_DN800.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.dbf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.shp" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.shp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.shx" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/census.shx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.shp" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.shx" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_b.shx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.shp" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.shx" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/gis_r.shx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.dbf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.shp" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.shp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.shx" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Goettingen/shp/paths.shx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Graz/fig/GRAZ.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Graz/fig/GRAZ.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/output/Graz/fig/GRAZ.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/output/Graz/fig/GRAZ.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/sewercover.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Allocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Allocation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Data_IO.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Data_IO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/Visualisation.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/Visualisation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/utils/Conversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/utils/Conversion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/utils/accumulate_val_along_path.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/utils/accumulate_val_along_path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memphis/utils/import_sewnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/memphis/utils/import_sewnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION_cut_area.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION_cut_area.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION_cut_ge_DN800.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/fig/GOETTINGEN_CENSUSBYCITYSPOPULATION_cut_ge_DN800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/census.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/census.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/census.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/census.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/census.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_b.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_b.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_b.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_b.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_b.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_r.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_r.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_r.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_r.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/gis_r.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/paths.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/paths.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/paths.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/paths.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/Goettingen_censusByCitysPopulation/shp/paths.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST__cut_ge_DN800.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST__cut_ge_DN800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_amount_of_points_over_popDens.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_amount_of_points_over_popDens.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V_over_V.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_V_over_V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length_over_V.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/fig/TEST_boxplot_distr_length_over_V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/census.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/census.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/census.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/census.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_b.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_b.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_b.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_b.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_b.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_r.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_r.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_r.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_r.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/gis_r.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/paths.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/paths.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/paths.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/paths.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/paths.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test/shp/test.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/fig/TEST_EDINBURGH_.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/fig/TEST_EDINBURGH_.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/fig/TEST_EDINBURGH__cut_ge_DN800.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/fig/TEST_EDINBURGH__cut_ge_DN800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/census.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/census.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/census.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/census.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/census.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_b.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_b.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_b.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_b.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_b.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_r.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_r.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_r.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_r.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/gis_r.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/paths.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/paths.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/paths.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/paths.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/output/test_Edinburgh/shp/paths.shx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,26 +145,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="53" />
+          <entry key="py" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="53" />
+          <entry key="Python" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="38109" />
           <entry key="dummy" value="10" />
-          <entry key="main_germany" value="999" />
-          <entry key="py" value="28739" />
+          <entry key="main_germany" value="1168" />
+          <entry key="py" value="28741" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="67847" />
+          <entry key="Python" value="68018" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -97,22 +173,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
+        <entry file="file://$PROJECT_DIR$/memphis/utils/import_sewnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="150" column="4" lean-forward="true" selection-start-line="150" selection-start-column="4" selection-end-line="150" selection-end-column="40" />
-              <folding>
-                <element signature="e#86#95#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="437">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memphis/utils/import_sewnet.py">
+        <entry file="file://$PROJECT_DIR$/examples/main.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/memphis/Lib/tokenize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+            <state relative-caret-position="219">
+              <caret line="451" column="42" lean-forward="true" selection-start-line="451" selection-start-column="42" selection-end-line="451" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -148,23 +226,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memphis/utils/Conversion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
+            <state relative-caret-position="336">
               <caret line="39" column="52" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/compare_census_to_censusFromCityPopulation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="759">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
-              <folding>
-                <element signature="e#72#81#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -272,9 +338,9 @@
         <option value="$PROJECT_DIR$/examples/main_germany.py" />
         <option value="$PROJECT_DIR$/memphis/Allocation.py" />
         <option value="$PROJECT_DIR$/memphis/utils/accumulate_val_along_path.py" />
-        <option value="$PROJECT_DIR$/memphis/utils/import_sewnet.py" />
         <option value="$PROJECT_DIR$/memphis/Evaluation.py" />
         <option value="$PROJECT_DIR$/memphis/utils/Conversion.py" />
+        <option value="$PROJECT_DIR$/memphis/utils/import_sewnet.py" />
       </list>
     </option>
   </component>
@@ -293,7 +359,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/memphis/Visualisation.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/examples/main.py" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -326,7 +392,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_germany">
+  <component name="RunManager" selected="Python.main">
     <configuration name="Data_IO" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="memphis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -411,6 +477,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="memphis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\jpelda\AppData\Local\Continuum\anaconda3\envs\memphis\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_germany" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="memphis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -427,20 +511,6 @@
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_Equations.TestAllocation.test_polys_to_node" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="memphis" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_Equations.TestAllocation.test_polys_to_node&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests in test_Equations.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -461,17 +531,17 @@
       <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.main_germany" />
       <item itemvalue="Python tests.Unittests in test_Equations.py" />
-      <item itemvalue="Python tests.Unittests for test_Equations.TestAllocation.test_polys_to_node" />
       <item itemvalue="Python.compare_census_to_censusFromCityPopulation" />
       <item itemvalue="Python.Data_IO" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.main_germany" />
         <item itemvalue="Python.compare_census_to_censusFromCityPopulation" />
         <item itemvalue="Python.Data_IO" />
         <item itemvalue="Python tests.Unittests in test_Equations.py" />
-        <item itemvalue="Python tests.Unittests for test_Equations.TestAllocation.test_polys_to_node" />
       </list>
     </recent_temporary>
   </component>
@@ -594,7 +664,6 @@
     <entry file="file://$PROJECT_DIR$/examples/testPlot.py" />
     <entry file="file://$PROJECT_DIR$/memphis/testPlot.py" />
     <entry file="file://$PROJECT_DIR$/examples/maintotestPlot.py" />
-    <entry file="file://$PROJECT_DIR$/examples/main.py" />
     <entry file="file://$PROJECT_DIR$/examples/main_austria.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4255" />
@@ -742,16 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="150" column="4" lean-forward="true" selection-start-line="150" selection-start-column="4" selection-end-line="150" selection-end-column="40" />
-          <folding>
-            <element signature="e#86#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/memphis/Evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -759,17 +818,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memphis/utils/import_sewnet.py">
+    <entry file="file://$PROJECT_DIR$/examples/main_germany.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        <state relative-caret-position="414">
+          <caret line="43" column="41" lean-forward="true" selection-start-line="7" selection-end-line="43" selection-end-column="41" />
+          <folding>
+            <element signature="e#86#95#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/memphis/utils/Conversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
+        <state relative-caret-position="336">
           <caret line="39" column="52" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memphis/utils/import_sewnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/main.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/memphis/Lib/tokenize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="451" column="42" lean-forward="true" selection-start-line="451" selection-start-column="42" selection-end-line="451" selection-end-column="42" />
         </state>
       </provider>
     </entry>
