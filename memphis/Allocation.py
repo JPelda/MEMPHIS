@@ -14,7 +14,7 @@ import time
 
 def polys_to_point(gdf_polys, gdf_points, col):
     """Allocates values of col of polygons to nodes.
-    Points in same polygon will get value divided by amout of points within
+    Points in same polygon will get value divided by amount of points within
     raster. Polygons without points are allocated to nearest points.
 
     Parameters
@@ -34,7 +34,7 @@ def polys_to_point(gdf_polys, gdf_points, col):
     """
 
     df = pd.DataFrame(0, index=gdf_points.index, columns=['results'])
-    gdf_res = gpd.sjoin(gdf_polys, gdf_points, op='intersects', how='right')
+    gdf_res = gpd.sjoin(gdf_polys, gdf_points, op='within', how='right')
 
     polys_left = gdf_polys.drop(set(
         gdf_res.index_left[gdf_res.index_left.notnull()]))
@@ -49,8 +49,6 @@ def polys_to_point(gdf_polys, gdf_points, col):
 
     if not polys_left.empty:
         d = {key: 0 for key in gdf_points.index}
-        ptsofpoints = gdf_points.centroid.unary_union
-
         pts = polys_left['CENTROID'].values
         pts_val = polys_left[col].values
 
@@ -60,40 +58,34 @@ def polys_to_point(gdf_polys, gdf_points, col):
         for i, (pt, val) in enumerate(zip(pts, pts_val)):
             print("Poly to points -> nearest_points,"
                   " objects left {}".format(len(pts) - i))
-            # stime = time.time()
-            # nearest = gdf_points.geometry == \
-            #           shapely.ops.nearest_points(pt, ptsofpoints)[1]
-            # key = gdf_points[nearest].index.values[0]
-            # d[key] += val
-            # print(key)
-            # print(time.time() - stime)
-            # stime = time.time()
             nearest = closest_node(pt, pts_test)
             key = gdf_points.index[nearest]
             d[key] += val
-            # print(nearest)
-            # print(time.time() -stime)
 
         df.loc[d.keys(), 'results'] += list(d.values())
 
     return df.values
 
+
 def closest_node(point, points):
     """
+    Finds closest point between to shapely points
 
     Parameters
     ----------
-    point
+    point : shapely.geometry.Point()
     points : array()
 
     Returns
     -------
     index : int
     """
+
     deltas = points - point
     dist_2 = np.einsum('ij,ij->i', deltas, deltas)
 
     return np.argmin(dist_2)
+
 
 def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
     """Allocates the water consumption of each building in GIS-Data to
@@ -107,6 +99,7 @@ def alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph):
         * gdf_gis_b['area']: the area of the building
     graph : nx.Graph()
         edges and nodes from graph of streetnetwork
+
     Returns
     -------
     list(float)
@@ -176,6 +169,9 @@ def points_to_poly(gdf_points, gdf_polys, col):
 
 def inhabs_to_area(gdf_gis_b, inhabitants, types):
     """
+    Allocates the population to shapefile.geometry.Polygon() by dividing the
+    overall inhabitants by sum of polygon's area and then taking this factor
+    times each polygon area and allocate the results to the specific polygon.
 
     Parameters
     ----------
@@ -187,14 +183,9 @@ def inhabs_to_area(gdf_gis_b, inhabitants, types):
         All types that are not inhabited.
     Returns
     -------
-    gdf
+    gdf['inhabs']
     """
 
-    # gdf['area'] = transform_area(gdf.geometry)
-
-    # sum of all inhabited building areas (example type='none',
-    #  type='dormitory'),
-    # to calculate the population density by overall_population / sum_inhabs.
     logical = ~gdf_gis_b['type'].isin(types)
     area = sum(gdf_gis_b['area'][logical])
 
@@ -206,6 +197,7 @@ def inhabs_to_area(gdf_gis_b, inhabitants, types):
     print("Distribution of inhabitants: {} [inhabs/m²]".format(inhabsperarea))
 
     return gdf_gis_b
+
 
 def nodes_to_node(gdf_nodes, gdf_node, name='inhabs'):
     """
@@ -232,11 +224,11 @@ def nodes_to_node(gdf_nodes, gdf_node, name='inhabs'):
         # shapely.ops.
     return list(get_node_attributes(graph, name).values())
 
-#TODO can this be transformed to points_to_poly?
-def alloc_nodes_to_inhabs(self, gdf_raster, gdf_nodes):
+
+def alloc_nodes_to_inhabs(gdf_raster, gdf_nodes):
     """Allocates points of gdf to fields of gdf_census.
 
-    ARGS:
+    Parameters:
     -----
     gdf_raster : geopandas.GeoDataFrame()
         gdf_raster['inhabs']
@@ -265,6 +257,7 @@ def alloc_nodes_to_inhabs(self, gdf_raster, gdf_nodes):
             arr[i] = precise_matches['inhabs'].values[0]
             raster[i] = precise_matches.index.values[0]
     return arr, raster
+
 
 def alloc_wc_to_type(gis_cat, gdf_gis_b):
     """Allocates water consumption to types coming from gis_buildings.

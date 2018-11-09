@@ -47,7 +47,7 @@ def plot_map(gdf_census=None, gdf_paths=None, gdf_sewnet=None,
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
 
     if gdf_census is not None:
-        max_val = max(gdf_census.inhabs)
+        max_val = gdf_census.inhabs.max()
         levels = [-1, 0, 25, 50, 75, 100, 150, max_val]
         colors = ['white', '#C0C9E4', '#9EADD8', '#6D89CB',
                   '#406DBB', '#3960A7', '#2F528F']

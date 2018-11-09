@@ -200,8 +200,7 @@ def best_pts_within_overlay_pts(comp_val, gdf, gdf_orig, buffer):
     # TODO mark keys, where no V of sewage system exists.
     maxi_val = 0.25
     mini_val = 0
-    rang = np.arange(mini_val, np.around(maxi_val + 0.01, decimals=3),
-                     0.01)
+    rang = np.arange(mini_val, np.around(maxi_val + 0.01, decimals=3), 0.01)
     rang = np.insert(rang, 0, -1)
     rang = {key: [] for key in rang}
 

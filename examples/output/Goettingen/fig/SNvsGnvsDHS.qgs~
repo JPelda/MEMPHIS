@@ -5,12 +5,12 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="goettingen_erweitertesNetz_2017_PIPE20180901201041834" source="D:/jpelda/projekte/StadtwerkeGöttingen/Wärmenetz SWGoe/05 Materialien/erweitertes Netz Stand 2017/goettingen_erweitertesNetz_2017_PIPE.SHP" name="District heating system">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="Hawk20181108142437675" source="D:/jpelda/projekte/IEA_DHC_MEMPHIS/05 Materialien/data/goettingen/Hawk.shp|layerid=0|subset=&quot;PBREITE&quot; > 800" name="Sewage network  DN > 0.8 m">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="Hawk20180901190235163" source="D:/jpelda/projekte/IEA_DHC_MEMPHIS/05 Materialien/data/Hawk.shp|layerid=0|subset=&quot;KANALART&quot; = 'Schmutzwasserkanal' AND &quot;PBREITE&quot; > 800" name="Sewage network">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Unchecked" id="goettingen_erweitertesNetz_2017_PIPE20180901201041834" source="D:/jpelda/projekte/StadtwerkeGöttingen/Wärmenetz SWGoe/05 Materialien/erweitertes Netz Stand 2017/goettingen_erweitertesNetz_2017_PIPE.SHP" name="District heating system">
       <customproperties>
-        <property key="legend/title-label" value="Sewage network DN > 800"/>
+        <property key="legend/title-label" value="District heating system"/>
       </customproperties>
     </layer-tree-layer>
     <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="paths20180901190112172" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Goettingen/shp/paths.shp|layerid=0|subset=&quot;V_1&quot; > 0.01" name="Generic sewage network">
@@ -18,7 +18,7 @@
         <property key="legend/title-label" value="Generic sewage network V > 0.01 m³/s"/>
       </customproperties>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="" checked="Qt::Unchecked" id="OpenLayers_plugin_layer20180831132301869" source="" name="Bing Road">
+    <layer-tree-layer expanded="1" providerKey="" checked="Qt::Unchecked" id="OpenLayers_plugin_layer20180831132301869" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Goettingen/fig" name="Bing Road">
       <customproperties>
         <property key="legend/title-label" value=""/>
       </customproperties>
@@ -28,10 +28,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>1104525.61624954780563712</xmin>
-      <ymin>6716382.88307567313313484</ymin>
-      <xmax>1107303.1451072976924479</xmax>
-      <ymax>6718098.05475305207073689</ymax>
+      <xmin>1103701.12581090955063701</xmin>
+      <ymin>6715125.33014387544244528</ymin>
+      <xmax>1109256.18352640932425857</xmax>
+      <ymax>6718555.67349863704293966</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -49,41 +49,45 @@
     </destinationsrs>
     <rendermaptile>0</rendermaptile>
     <layer_coordinate_transform_info>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenStreetMap20180831131633484"/>
       <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="census20180831152418919"/>
       <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenStreetMap20180831130935380"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:31287" srcDatumTransform="-1" destDatumTransform="-1" layerid="census20180831150156429"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_b20180831152323106"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180831131004991"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="census20180831132508057"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180831145753267"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_b20180831150208004"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:5677" srcDatumTransform="-1" destDatumTransform="-1" layerid="goettingen_erweitertesNetz_2017_PIPE20180901201041834"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenStreetMap20180831131405872"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenStreetMap20180831131633484"/>
       <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180831132327939"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenLayers_plugin_layer20180831132301869"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="census220180831152342776"/>
-      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:5677" srcDatumTransform="-1" destDatumTransform="-1" layerid="Hawk20180901190235163"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_b20180831152323106"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="census20180831132508057"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_r20180902123006873"/>
       <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180901190112172"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180831131004991"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="paths20180831145753267"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenStreetMap20180831131405872"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_r20180902122934179"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:5677" srcDatumTransform="-1" destDatumTransform="-1" layerid="Hawk20181108142437675"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="census220180831152342776"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:5677" srcDatumTransform="-1" destDatumTransform="-1" layerid="goettingen_erweitertesNetz_2017_PIPE20180901201041834"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_b20180831150208004"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="gis_osm_roads_free_120180902123453019"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:5677" srcDatumTransform="-1" destDatumTransform="-1" layerid="Hawk20180901190235163"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:31287" srcDatumTransform="-1" destDatumTransform="-1" layerid="census20180831150156429"/>
+      <layer_coordinate_transform destAuthId="EPSG:3857" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OpenLayers_plugin_layer20180831132301869"/>
     </layer_coordinate_transform_info>
   </mapcanvas>
   <layer-tree-canvas>
     <custom-order enabled="0">
       <item>OpenLayers_plugin_layer20180831132301869</item>
       <item>paths20180901190112172</item>
-      <item>Hawk20180901190235163</item>
       <item>goettingen_erweitertesNetz_2017_PIPE20180901201041834</item>
+      <item>Hawk20181108142437675</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="District heating system" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Sewage network  DN > 0.8 m" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="goettingen_erweitertesNetz_2017_PIPE20180901201041834" visible="1"/>
+        <legendlayerfile isInOverview="0" layerid="Hawk20181108142437675" visible="1"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Sewage network" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="District heating system" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="Hawk20180901190235163" visible="1"/>
+        <legendlayerfile isInOverview="0" layerid="goettingen_erweitertesNetz_2017_PIPE20180901201041834" visible="0"/>
       </filegroup>
     </legendlayer>
     <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Generic sewage network" showFeatureCount="0">
@@ -182,7 +186,7 @@
               <property key="legend/title-label" value="Generic sewage network DN > 200"/>
             </customproperties>
           </layer-tree-layer>
-          <layer-tree-layer expanded="1" providerKey="" checked="Qt::Checked" id="OpenLayers_plugin_layer20180831132301869" source="" name="Bing Road">
+          <layer-tree-layer expanded="1" providerKey="" checked="Qt::Checked" id="OpenLayers_plugin_layer20180831132301869" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Goettingen/fig" name="Bing Road">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -193,7 +197,7 @@
         </ComposerItem>
       </ComposerLegend>
       <ComposerMap followPreset="false" mapRotation="0" keepLayerSet="false" followPresetName="" id="0" previewMode="Cache" drawCanvasItems="true">
-        <Extent ymin="7548383.14016896113753319" xmin="-356096.36811963893705979" ymax="7553980.308612453751266" xmax="-348190.78408712480450049"/>
+        <Extent ymin="7548383.14016896113753319" xmin="-356096.36811963893705979" ymax="7553980.30491136386990547" xmax="-348190.78408712480450049"/>
         <LayerSet/>
         <Grid/>
         <ComposerMapGrid rightAnnotationDirection="0" gridFramePenColor="0,0,0,255" show="0" bottomAnnotationPosition="1" annotationPrecision="3" showAnnotation="0" topFrameDivisions="0" uuid="{9ad01811-c1fd-4310-a2ff-889a74b4a28a}" leftAnnotationDirection="0" topAnnotationPosition="1" rightAnnotationDisplay="0" offsetX="0" offsetY="0" rightFrameDivisions="0" gridStyle="0" annotationFontColor="0,0,0,255" intervalX="0" gridFrameSideFlags="15" intervalY="0" bottomAnnotationDirection="0" leftAnnotationDisplay="0" leftFrameDivisions="0" frameFillColor1="255,255,255,255" annotationExpression="" frameFillColor2="0,0,0,255" crossLength="3" gridFramePenThickness="0.5" bottomAnnotationDisplay="0" unit="0" topAnnotationDisplay="0" leftAnnotationPosition="1" blendMode="0" gridFrameStyle="0" rightAnnotationPosition="1" gridFrameWidth="2" name="Gitter 1" annotationFormat="0" bottomFrameDivisions="0" topAnnotationDirection="0" frameAnnotationDistance="1">
@@ -260,7 +264,7 @@
       </customproperties>
     </Composition>
   </Composer>
-  <Composer title="SewageNetwork vs GenergicSewageNetwork vs DistrictHeatingNetwork" visible="0">
+  <Composer title="SewageNetwork vs GenergicSewageNetwork vs DistrictHeatingNetwork" visible="1">
     <Composition resizeToContentsMarginLeft="0" snapping="0" showPages="1" guidesVisible="1" resizeToContentsMarginTop="0" worldFileMap="{6dc8de0e-3e09-4d8a-a16e-37bda2136ff8}" alignmentSnap="1" printResolution="300" paperWidth="297" gridVisible="0" snapGridOffsetX="0" smartGuides="1" snapGridOffsetY="0" resizeToContentsMarginRight="0" snapTolerancePixels="5" printAsRaster="0" generateWorldFile="0" paperHeight="210" numPages="1" snapGridResolution="10" resizeToContentsMarginBottom="0">
       <symbol alpha="1" clip_to_extent="1" type="fill" name="">
         <layer pass="0" class="SimpleFill" locked="0">
@@ -289,7 +293,7 @@
           <customproperties/>
         </ComposerItem>
       </ComposerScaleBar>
-      <ComposerLegend symbolWidth="7" title="Legend" rasterBorderWidth="0" titleAlignment="1" map="0" wmsLegendWidth="50" rasterBorderColor="0,0,0,255" wrapChar="" fontColor="#000000" legendFilterByAtlas="0" columnCount="1" wmsLegendHeight="25" columnSpace="2" symbolHeight="4" equalColumnWidth="0" resizeToContents="1" splitLayer="0" boxSpace="2" rasterBorder="1">
+      <ComposerLegend symbolWidth="13" title="Legend" rasterBorderWidth="0" titleAlignment="1" map="0" wmsLegendWidth="50" rasterBorderColor="0,0,0,255" wrapChar="" fontColor="#000000" legendFilterByAtlas="0" columnCount="1" wmsLegendHeight="25" columnSpace="2" symbolHeight="4" equalColumnWidth="0" resizeToContents="1" splitLayer="0" boxSpace="2" rasterBorder="1">
         <styles>
           <style marginBottom="2" name="title">
             <styleFont description="Arial,28,-1,5,50,0,0,0,0,0" style=""/>
@@ -307,7 +311,7 @@
             <styleFont description="Arial,24,-1,5,50,0,0,0,0,0" style=""/>
           </style>
         </styles>
-        <ComposerItem pagey="-1.95454" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="135.804" y="-1.95454" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="160.6" outlineWidth="0.3" excludeFromExports="0" uuid="{3428f683-bd7b-4451-9ca7-5c997d1aeaf8}" height="43.1" itemRotation="0" frame="false" pagex="135.804">
+        <ComposerItem pagey="-1.95454" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="135.804" y="-1.95454" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="166.6" outlineWidth="0.3" excludeFromExports="0" uuid="{3428f683-bd7b-4451-9ca7-5c997d1aeaf8}" height="43.1" itemRotation="0" frame="false" pagex="135.804">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -366,7 +370,7 @@
           <annotationFontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="-1.95454" page="1" id="" lastValidViewScaleFactor="9.72097" positionMode="0" positionLock="false" x="0" y="-1.95454" visibility="1" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="307" outlineWidth="0.3" excludeFromExports="0" uuid="{6dc8de0e-3e09-4d8a-a16e-37bda2136ff8}" height="213" itemRotation="0" frame="false" pagex="0">
+        <ComposerItem pagey="-1.95454" page="1" id="" lastValidViewScaleFactor="5.95217" positionMode="0" positionLock="false" x="0" y="-1.95454" visibility="1" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="307" outlineWidth="0.3" excludeFromExports="0" uuid="{6dc8de0e-3e09-4d8a-a16e-37bda2136ff8}" height="213" itemRotation="0" frame="false" pagex="0">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -383,18 +387,12 @@
   </Composer>
   <projectlayers>
     <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Line" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <extent>
-        <xmin>3556854.38200000021606684</xmin>
-        <ymin>5706982.29200000036507845</ymin>
-        <xmax>3570145.06199999991804361</xmax>
-        <ymax>5716188.60599999967962503</ymax>
-      </extent>
-      <id>Hawk20180901190235163</id>
-      <datasource>D:/jpelda/projekte/IEA_DHC_MEMPHIS/05 Materialien/data/Hawk.shp|layerid=0|subset="KANALART" = 'Schmutzwasserkanal' AND "PBREITE" > 800</datasource>
+      <id>Hawk20181108142437675</id>
+      <datasource>D:/jpelda/projekte/IEA_DHC_MEMPHIS/05 Materialien/data/goettingen/Hawk.shp|layerid=0|subset="PBREITE" > 800</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>Sewage network</layername>
+      <layername>Sewage network  DN > 0.8 m</layername>
       <srs>
         <spatialrefsys>
           <proj4>+proj=tmerc +lat_0=0 +lon_0=9 +k=1 +x_0=3500000 +y_0=0 +ellps=bessel +towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7 +units=m +no_defs</proj4>
@@ -471,9 +469,9 @@
               <prop k="customdash_unit" v="MM"/>
               <prop k="draw_inside_polygon" v="0"/>
               <prop k="joinstyle" v="bevel"/>
-              <prop k="line_color" v="16,227,66,255"/>
+              <prop k="line_color" v="155,48,236,255"/>
               <prop k="line_style" v="solid"/>
-              <prop k="line_width" v="0.26"/>
+              <prop k="line_width" v="0.5"/>
               <prop k="line_width_unit" v="MM"/>
               <prop k="offset" v="0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -534,24 +532,8 @@
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="1406979480">
-        <columns>
-          <column width="-1" hidden="0" type="field" name="HALTU_MMER"/>
-          <column width="-1" hidden="0" type="field" name="HALTU_ENGE"/>
-          <column width="-1" hidden="0" type="field" name="STRAS_NAME"/>
-          <column width="-1" hidden="0" type="field" name="KANALART"/>
-          <column width="-1" hidden="0" type="field" name="SHO"/>
-          <column width="-1" hidden="0" type="field" name="DHO"/>
-          <column width="-1" hidden="0" type="field" name="SHU"/>
-          <column width="-1" hidden="0" type="field" name="DHU"/>
-          <column width="-1" hidden="0" type="field" name="MTIEFE"/>
-          <column width="-1" hidden="0" type="field" name="PART"/>
-          <column width="-1" hidden="0" type="field" name="PBREITE"/>
-          <column width="-1" hidden="0" type="field" name="PHOEHE"/>
-          <column width="-1" hidden="0" type="field" name="MAT"/>
-          <column width="-1" hidden="0" type="field" name="AUSKLEID"/>
-          <column width="-1" hidden="1" type="actions"/>
-        </columns>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="65">
+        <columns/>
       </attributetableconfig>
       <editform></editform>
       <editforminit/>
@@ -582,7 +564,7 @@
         <default field="AUSKLEID" expression=""/>
         <default field="orig_ogc_fid" expression=""/>
       </defaults>
-      <previewExpression>COALESCE( "STRAS_NAME", '&lt;NULL>' )</previewExpression>
+      <previewExpression></previewExpression>
     </maplayer>
     <maplayer minimumScale="0" maximumScale="1e+08" type="plugin" hasScaleBasedVisibilityFlag="0" name="openlayers">
       <extent>
@@ -592,7 +574,7 @@
         <ymax>20037508.33999999985098839</ymax>
       </extent>
       <id>OpenLayers_plugin_layer20180831132301869</id>
-      <datasource></datasource>
+      <datasource>.</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -614,6 +596,12 @@
       </customproperties>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Line" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <extent>
+        <xmin>3563460.5</xmin>
+        <ymin>5708284</ymin>
+        <xmax>3569748</xmax>
+        <ymax>5713921.63638000097125769</ymax>
+      </extent>
       <id>goettingen_erweitertesNetz_2017_PIPE20180901201041834</id>
       <datasource>D:/jpelda/projekte/StadtwerkeGöttingen/Wärmenetz SWGoe/05 Materialien/erweitertes Netz Stand 2017/goettingen_erweitertesNetz_2017_PIPE.SHP</datasource>
       <keywordList>
@@ -1244,7 +1232,7 @@
               <prop k="joinstyle" v="bevel"/>
               <prop k="line_color" v="73,115,239,255"/>
               <prop k="line_style" v="solid"/>
-              <prop k="line_width" v="0.26"/>
+              <prop k="line_width" v="0.5"/>
               <prop k="line_width_unit" v="MM"/>
               <prop k="offset" v="0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -1284,7 +1272,7 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <annotationform></annotationform>
+      <annotationform>.</annotationform>
       <aliases>
         <alias field="ANFNAM" index="0" name=""/>
         <alias field="ENDNAM" index="1" name=""/>
@@ -1487,13 +1475,13 @@
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="1224944632">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns/>
       </attributetableconfig>
-      <editform></editform>
+      <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
+      <editforminitfilepath>.</editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -1767,7 +1755,7 @@
               <prop k="joinstyle" v="bevel"/>
               <prop k="line_color" v="217,39,42,255"/>
               <prop k="line_style" v="solid"/>
-              <prop k="line_width" v="0.26"/>
+              <prop k="line_width" v="0.5"/>
               <prop k="line_width_unit" v="MM"/>
               <prop k="offset" v="0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -1807,7 +1795,7 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <annotationform></annotationform>
+      <annotationform>.</annotationform>
       <aliases>
         <alias field="osmid" index="0" name=""/>
         <alias field="u" index="1" name=""/>
@@ -1819,13 +1807,13 @@
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="1145290368">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns/>
       </attributetableconfig>
-      <editform></editform>
+      <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
+      <editforminitfilepath>.</editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -1870,15 +1858,35 @@
     </Gui>
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
-      <LayerSnappingList type="QStringList"/>
-      <LayerSnappingEnabledList type="QStringList"/>
+      <LayerSnappingList type="QStringList">
+        <value>goettingen_erweitertesNetz_2017_PIPE20180901201041834</value>
+        <value>paths20180901190112172</value>
+        <value>Hawk20181108142437675</value>
+      </LayerSnappingList>
+      <LayerSnappingEnabledList type="QStringList">
+        <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
+      </LayerSnappingEnabledList>
       <SnappingMode type="QString">current_layer</SnappingMode>
       <AvoidIntersectionsList type="QStringList"/>
-      <LayerSnappingToleranceUnitList type="QStringList"/>
-      <LayerSnapToList type="QStringList"/>
+      <LayerSnappingToleranceUnitList type="QStringList">
+        <value>2</value>
+        <value>2</value>
+        <value>2</value>
+      </LayerSnappingToleranceUnitList>
+      <LayerSnapToList type="QStringList">
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+      </LayerSnapToList>
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
-      <LayerSnappingToleranceList type="QStringList"/>
+      <LayerSnappingToleranceList type="QStringList">
+        <value>0.000000</value>
+        <value>0.000000</value>
+        <value>0.000000</value>
+      </LayerSnappingToleranceList>
     </Digitizing>
     <PositionPrecision>
       <DecimalPlaces type="int">2</DecimalPlaces>

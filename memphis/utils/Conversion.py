@@ -7,19 +7,16 @@ Created on Tue May 29 10:06:08 2018
 import numpy as np
 
 def DN_to_V(df, g=9.81, v=1.31e-6, k=15e-4):
-    '''Calculates the maximum volumestream possible in channel with
+    """Calculates the maximum volumestream possible in channel with
     nominal width DN.
 
-    Args:
+    Parameters:
     -----
     df : pandas.DataFrame()
          col DN: nominal diameter [m]
          col s_height: height of channel at inlet [m]
          col e_height: height of channel at outlet [m]
          col length: length of channel [m]
-
-    Kwargs:
-    -------
     g : float
         earth's acceleration [m/s²] \n
     v : float
@@ -31,7 +28,7 @@ def DN_to_V(df, g=9.81, v=1.31e-6, k=15e-4):
     --------
     Wastewaterflow: float
         max possible waste water flow in channel [m³ / s]
-    '''
+    """
     s_height = df['s_height']
     e_height = df['e_height']
     length = df['length']

@@ -10,7 +10,7 @@
         <property key="legend/title-label" value=""/>
       </customproperties>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="paths20180902112150048" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Edinburgh/shp/paths.shp|layerid=0|subset=&quot;DN&quot; > 200" name="paths">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="paths20180902112150048" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Edinburgh/shp/paths.shp|layerid=0|subset=&quot;DN&quot; > 150" name="paths">
       <customproperties>
         <property key="legend/title-label" value="Generic sewage network DN > 200"/>
       </customproperties>
@@ -25,10 +25,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>-356718.87892575783189386</xmin>
-      <ymin>7548367.32357967272400856</ymin>
-      <xmax>-345891.37501711247023195</xmax>
-      <ymax>7556591.07824731990695</ymax>
+      <xmin>-381034.80447598936734721</xmin>
+      <ymin>7536306.27594067621976137</ymin>
+      <xmax>-347456.77262411097763106</xmax>
+      <ymax>7560114.11123364511877298</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -92,10 +92,28 @@
           <prop k="style" v="solid"/>
         </layer>
       </symbol>
+      <ComposerLabel valign="32" marginX="1" marginY="1" labelText="Edinburgh South Queensferry WWTW" htmlState="0" halign="4">
+        <LabelFont description="Arial,22,-1,5,50,0,0,0,0,0" style=""/>
+        <FontColor red="0" blue="0" green="0"/>
+        <ComposerItem pagey="84.6435" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="29.0347" y="84.6435" visibility="1" zValue="13" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="77.8118" outlineWidth="0.3" excludeFromExports="0" uuid="{cfbb4e2c-a873-42c5-b509-eecca4328660}" height="22.1277" itemRotation="0" frame="false" pagex="29.0347">
+          <FrameColor alpha="255" red="0" blue="0" green="0"/>
+          <BackgroundColor alpha="153" red="255" blue="255" green="255"/>
+          <customproperties/>
+        </ComposerItem>
+      </ComposerLabel>
+      <ComposerLabel valign="32" marginX="1" marginY="1" labelText="Edinburgh Dalmeny WWTW" htmlState="0" halign="4">
+        <LabelFont description="Arial,22,-1,5,50,0,0,0,0,0" style=""/>
+        <FontColor red="0" blue="0" green="0"/>
+        <ComposerItem pagey="1.3123" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="24.9337" y="1.3123" visibility="1" zValue="8" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="77.8118" outlineWidth="0.3" excludeFromExports="0" uuid="{1cdd0b27-812f-4eea-9af3-f81e4842aaae}" height="22.1277" itemRotation="0" frame="false" pagex="24.9337">
+          <FrameColor alpha="255" red="0" blue="0" green="0"/>
+          <BackgroundColor alpha="153" red="255" blue="255" green="255"/>
+          <customproperties/>
+        </ComposerItem>
+      </ComposerLabel>
       <ComposerLabel valign="32" marginX="1" marginY="1" labelText="Seafield waste water treatment plant" htmlState="0" halign="4">
         <LabelFont description="Arial,22,-1,5,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="15.4408" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="214.56" y="15.4408" visibility="1" zValue="5" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="77.8118" outlineWidth="0.3" excludeFromExports="0" uuid="{9fdfeb16-5aa1-4f12-b426-62e8ea3b41b2}" height="22.1277" itemRotation="0" frame="false" pagex="214.56">
+        <ComposerItem pagey="15.4408" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="214.56" y="15.4408" visibility="1" zValue="4" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="77.8118" outlineWidth="0.3" excludeFromExports="0" uuid="{9fdfeb16-5aa1-4f12-b426-62e8ea3b41b2}" height="22.1277" itemRotation="0" frame="false" pagex="214.56">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="153" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -121,9 +139,9 @@
         </styles>
         <layer-tree-group expanded="1" checked="Qt::Checked" name="">
           <customproperties/>
-          <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="paths20180902112150048" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Edinburgh/shp/paths.shp|layerid=0|subset=&quot;DN&quot; > 200" name="paths">
+          <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="paths20180902112150048" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Edinburgh/shp/paths.shp|layerid=0|subset=&quot;DN&quot; > 150" name="paths">
             <customproperties>
-              <property key="legend/title-label" value="Generic sewage network DN > 200"/>
+              <property key="legend/title-label" value="Modelled sewage network DN > 150"/>
             </customproperties>
           </layer-tree-layer>
           <layer-tree-layer expanded="1" providerKey="" checked="Qt::Checked" id="OpenLayers_plugin_layer20180902112140357" source="C:/Users/jpelda/Documents/GitHub/memphis/examples/output/Edinburgh/fig" name="Bing Road">
@@ -132,26 +150,26 @@
             </customproperties>
           </layer-tree-layer>
         </layer-tree-group>
-        <ComposerItem pagey="190.232" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="168.872" y="190.232" visibility="1" zValue="4" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="123.5" outlineWidth="0.3" excludeFromExports="0" uuid="{040ed46c-3304-4224-bea9-2da8dea9920a}" height="15.4827" itemRotation="0" frame="false" pagex="168.872">
+        <ComposerItem pagey="190.232" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="168.872" y="190.232" visibility="1" zValue="3" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="127.3" outlineWidth="0.3" excludeFromExports="0" uuid="{040ed46c-3304-4224-bea9-2da8dea9920a}" height="13.2" itemRotation="0" frame="false" pagex="168.872">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="153" red="255" blue="255" green="255"/>
           <customproperties/>
         </ComposerItem>
       </ComposerLegend>
-      <ComposerScaleBar lineCapStyle="square" style="Single Box" numMapUnitsPerScaleBarUnit="1" segmentSizeMode="0" alignment="0" numSegments="2" segmentMillimeters="31.7318" lineJoinStyle="miter" minBarWidth="50" numUnitsPerSegment="500" units="1" labelBarSpace="3" outlineWidth="0.3" numSegmentsLeft="2" maxBarWidth="150" height="3" boxContentSpace="1" mapId="0" unitLabel="m">
+      <ComposerScaleBar lineCapStyle="square" style="Single Box" numMapUnitsPerScaleBarUnit="1" segmentSizeMode="0" alignment="0" numSegments="2" segmentMillimeters="31.6839" lineJoinStyle="miter" minBarWidth="50" numUnitsPerSegment="2000" units="1" labelBarSpace="3" outlineWidth="0.3" numSegmentsLeft="2" maxBarWidth="150" height="3" boxContentSpace="1" mapId="0" unitLabel="m">
         <scaleBarFont description="Arial,20,-1,5,50,0,0,0,0,0" style=""/>
         <fillColor alpha="255" red="0" blue="0" green="0"/>
         <fillColor2 alpha="255" red="255" blue="255" green="255"/>
         <strokeColor alpha="255" red="0" blue="0" green="0"/>
         <textColor alpha="255" red="0" blue="0" green="0"/>
-        <ComposerItem pagey="190.232" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="6.44379" y="190.232" visibility="1" zValue="3" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="123.5" outlineWidth="0.3" excludeFromExports="0" uuid="{a0de9ead-2fae-4629-9cb6-bb3eea6d62cd}" height="15.4827" itemRotation="0" frame="false" pagex="6.44379">
+        <ComposerItem pagey="190.232" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="6.44379" y="190.232" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="121.152" outlineWidth="0.3" excludeFromExports="0" uuid="{a0de9ead-2fae-4629-9cb6-bb3eea6d62cd}" height="15.4827" itemRotation="0" frame="false" pagex="6.44379">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="153" red="255" blue="255" green="255"/>
           <customproperties/>
         </ComposerItem>
       </ComposerScaleBar>
       <ComposerMap followPreset="false" mapRotation="0" keepLayerSet="false" followPresetName="" id="0" previewMode="Cache" drawCanvasItems="true">
-        <Extent ymin="7547960.62163899093866348" xmin="-356918.25254070066148415" ymax="7553912.58046223316341639" xmax="-348523.74457773106405511"/>
+        <Extent ymin="7536306.27594067621976137" xmin="-381034.80447598936734721" ymax="7560114.11123364511877298" xmax="-347456.77262411097763106"/>
         <LayerSet/>
         <Grid/>
         <ComposerMapGrid rightAnnotationDirection="0" gridFramePenColor="0,0,0,255" show="0" bottomAnnotationPosition="1" annotationPrecision="3" showAnnotation="0" topFrameDivisions="0" uuid="{80a9ca3b-ff70-4f11-b411-7f9d163486e6}" leftAnnotationDirection="0" topAnnotationPosition="1" rightAnnotationDisplay="0" offsetX="0" offsetY="0" rightFrameDivisions="0" gridStyle="0" annotationFontColor="0,0,0,255" intervalX="0" gridFrameSideFlags="15" intervalY="0" bottomAnnotationDirection="0" leftAnnotationDisplay="0" leftFrameDivisions="0" frameFillColor1="255,255,255,255" annotationExpression="" frameFillColor2="0,0,0,255" crossLength="3" gridFramePenThickness="0.5" bottomAnnotationDisplay="0" unit="0" topAnnotationDisplay="0" leftAnnotationPosition="1" blendMode="0" gridFrameStyle="0" rightAnnotationPosition="1" gridFrameWidth="2" name="Gitter 1" annotationFormat="0" bottomFrameDivisions="0" topAnnotationDirection="0" frameAnnotationDistance="1">
@@ -203,7 +221,7 @@
           <annotationFontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="-2" page="1" id="" lastValidViewScaleFactor="9.95222" positionMode="0" positionLock="false" x="-2" y="-2" visibility="1" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="299" outlineWidth="0.3" excludeFromExports="0" uuid="{8554b833-d1b8-4595-ad62-15456b9dd076}" height="212" itemRotation="0" frame="false" pagex="-2">
+        <ComposerItem pagey="-2" page="1" id="" lastValidViewScaleFactor="6.09616" positionMode="0" positionLock="false" x="-2" y="-2" visibility="1" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="299" outlineWidth="0.3" excludeFromExports="0" uuid="{8554b833-d1b8-4595-ad62-15456b9dd076}" height="212" itemRotation="0" frame="false" pagex="-2">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -298,7 +316,7 @@
               <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="outline_width_unit" v="MM"/>
               <prop k="scale_method" v="diameter"/>
-              <prop k="size" v="40"/>
+              <prop k="size" v="20"/>
               <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="size_unit" v="MM"/>
               <prop k="vertical_anchor_point" v="1"/>
@@ -480,6 +498,7 @@
       <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
         <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
           <fontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
         <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
           <layer pass="0" class="SimpleMarker" locked="0">
@@ -552,7 +571,7 @@ def my_form_open(dialog, layer, feature):
         <default field="field_1" expression=""/>
         <default field="field_2" expression=""/>
       </defaults>
-      <previewExpression></previewExpression>
+      <previewExpression>COALESCE( "field_1", '&lt;NULL>' )</previewExpression>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Line" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <extent>
@@ -562,7 +581,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>56.00067229999999796</ymax>
       </extent>
       <id>paths20180902112150048</id>
-      <datasource>../shp/paths.shp|layerid=0|subset="DN" > 200</datasource>
+      <datasource>../shp/paths.shp|layerid=0|subset="DN" > 150</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -616,7 +635,7 @@ def my_form_open(dialog, layer, feature):
               <prop k="customdash_unit" v="MM"/>
               <prop k="draw_inside_polygon" v="0"/>
               <prop k="joinstyle" v="bevel"/>
-              <prop k="line_color" v="220,142,157,255"/>
+              <prop k="line_color" v="255,0,0,255"/>
               <prop k="line_style" v="solid"/>
               <prop k="line_width" v="1"/>
               <prop k="line_width_unit" v="MM"/>

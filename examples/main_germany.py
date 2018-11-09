@@ -41,7 +41,7 @@ print("load data")
 s_time = time.time()
 
 Data = Data_IO(path + os.sep + 'examples' + os.sep + 'config' +
-               os.sep + 'graz.ini')
+               os.sep + 'goettingen.ini')
 
 graph = Data.read_from_graphml('graph')
 gdf_nodes, gdf_edges = osmnx.save_load.graph_to_gdfs(graph, nodes=True,
@@ -85,6 +85,9 @@ if Data.census != 'None':
     gdf_census['CENTROID'] = gdf_census['SHAPE']
     gdf_census['SHAPE'] = buffer(gdf_census, Data.x_min, Data.x_max,
                                  Data.y_min, Data.y_max)
+    gdf_census['inhabs'][gdf_census['inhabs'] < 0] = 0
+    print("gdf_census 1 | {}".format(gdf_census.inhabs[
+                                         gdf_census.inhabs > 0].sum()))
 else:
     points = [Point(graph.nodes[key]['x'], graph.nodes[key]['y']) for key in
               graph.nodes.keys()]
@@ -133,10 +136,8 @@ else:
         gdf_census['inhabs'] = alloc.polys_to_point(gdf_districts,
                                                     gdf_census, 'inhabs')
         gdf_census = gdf_census.set_geometry('SHAPE')
-
-
-
-
+    print("gdf_census 1 | {}".format(gdf_census.inhabs[
+                                         gdf_census.inhabs > 0].sum()))
 
 
 pipes_table = Data.read_from_sqlServer('pipes_dn_a_v_v')
@@ -188,7 +189,7 @@ gdf_census = gdf_census.set_geometry('SHAPE')
 #                                            gdf_nodes['geometry'])
 gdf_nodes['inhabs'] = alloc.polys_to_point(gdf_census, gdf_nodes, 'inhabs')
 
-print("alloc_inhabs_to_nodes | {}".format(stime - time.time()))
+print("alloc_inhabs_to_nodes | {}".format(time.time() - stime))
 
 # if Data.census != 'None':
 #     stime = time.time()
@@ -207,7 +208,7 @@ gdf_nodes['wc'] = gdf_nodes['inhabs'] *\
                             Data.country].cmPERpTIMESh.item() * 1.6
 stime = time.time()
 gdf_nodes['wc'] += alloc.alloc_wc_from_b_to_node(gdf_gis_b, gdf_nodes, graph)
-print("alloc_wc_from_b_to_node | {}".format(stime - time.time()))
+print("alloc_wc_from_b_to_node | {}".format(time.time() - stime))
 # Sets node of graph that is nearest to waste water treatment plant and
 # calculates paths from nodes where nodes['inhabs'] > 0.
 end_nodes = [osmnx.get_nearest_node(graph, (pt.y, pt.x)) for pt in Data.wwtp]
@@ -268,18 +269,10 @@ if Data.sewage_network != 'None':
                                  boxplot_length_over_V_pat,
                                  boxplot_length_over_V_sew, dis_sew_in_inh,
                                  dis_pat_in_inh, dis_cen_in_inh, area=
-                                 Polygon([[9.9336125704, 51.5358519306],
-                                          [9.9619366976, 51.5358519306],
-                                          [9.9619366976, 51.5469020742],
-                                          [9.9336125704, 51.5469020742],
-                                          [9.9336125704, 51.5358519306]]))
+                                 Data.partial_map)
 else:
     vis.memphis(Data, gdf_gis_b, gdf_gis_r, gdf_census, gdf_paths, area=
-                Polygon([[-3.1792115377, 55.9762789334],
-                         [-3.1652104067, 55.9762789334],
-                         [-3.1652104067, 55.9723886831],
-                         [-3.1792115377, 55.9723886831],
-                         [-3.1792115377, 55.9762789334]]))
+                Data.partial_map)
 ##########################
 # SAVE
 ##########################
@@ -289,7 +282,10 @@ gdf_census_copy = gdf_census.copy()
 del gdf_census_copy['CENTROID']
 Data.write_gdf_to_file(gdf_census_copy, 'census.shp')
 
-Data.write_gdf_to_file(gdf_gis_b, 'gis_b.shp')
+gdf_gis_b_copy = gdf_gis_b.copy()
+del gdf_gis_b_copy['CENTROID']
+gdf_gis_b_copy = gdf_gis_b_copy.set_geometry('SHAPE')
+Data.write_gdf_to_file(gdf_gis_b_copy, 'gis_b.shp')
 Data.write_gdf_to_file(gdf_gis_r, 'gis_r.shp')
 
 gdf_paths_copy = gdf_paths.copy()

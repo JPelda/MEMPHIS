@@ -59,15 +59,16 @@ class Data_IO:
         if self.coord_system_raster != 'None' and \
                 RASTER['inhabitants'] != 'None':
             self.inhabs = int(RASTER['inhabitants'])
+        self.partial_map = loads(RASTER['partial_map'])
 
         wwtp = [c[1].split(', ') for c in list(self.config['wwtp'].items())]
         self.wwtp = [Point(float(c[0]), float(c[1])) for c in wwtp]
 
         self.city = self.config['Files']['city']
         self.path_export = eval(self.config['Files']['path_export']) + os.sep +\
-                           self.city
-        self.path_export_fig = self.path_export + os.sep + 'fig'
-        self.path_export_shp = self.path_export + os.sep + 'shp'
+                           self.city + os.sep
+        self.path_export_fig = self.path_export + 'fig' + os.sep
+        self.path_export_shp = self.path_export + 'shp' + os.sep
         self.path_import = eval(self.config['Files']['path_import'])
 
     def write_to_sqlServer(self, table_name, df, dtype={}):
@@ -228,7 +229,7 @@ class Data_IO:
             Which values are written to file. File format is given by suffix.
         """
         if fname.endswith('shp'):
-            fname = self.path_export_shp + os.sep + fname
+            fname = self.path_export_shp + fname
         else:
             fname = self.path_export
 
@@ -248,8 +249,8 @@ class Data_IO:
         """
         if path is None:
             path = self.path_import
-        fname = eval(self.config['Files'][name])
-        df = gpd.read_file(path + os.sep + fname)
+        fname = self.config['Files'][name]
+        df = gpd.read_file(path + fname)
         return df
 
     def read_from_graphml(self, name, path=None):
@@ -302,9 +303,9 @@ class Data_IO:
             fname = "{}{}{}_{}".format(path_export, name)
         else:
             if name == '':
-                fname = self.path_export_fig + os.sep + self.city.upper()
+                fname = self.path_export_fig + self.city.upper()
             else:
-                fname = self.path_export_fig + os.sep + self.city.upper() +\
+                fname = self.path_export_fig + self.city.upper() +\
                     '_' + name
 
         fig.savefig(fname + '.pdf', filetype='pdf', bbox_inches='tight',

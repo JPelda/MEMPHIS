@@ -9,8 +9,8 @@ Created on Wed May  2 14:27:46 2018
 def sum_wc(gdf):
     """Accumulates the paths' water flows that pass along each node.
 
-    Args:
-    -----
+    Parameters:
+    -----------
     gdf: geopandas.GeoDataFrame()
         gdf['wc'], gdf['path_to_end_node']
 
